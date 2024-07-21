@@ -51,6 +51,8 @@
 		8084DBF12C4C13F5006160F9 /* rawggammers */ = {
 			isa = PBXGroup;
 			children = (
+				809AAE312C4C1883001FD6C2 /* Feature */,
+				809AAE302C4C1876001FD6C2 /* Core */,
 				8084DBF22C4C13F5006160F9 /* rawggammersApp.swift */,
 				8084DBF42C4C13F5006160F9 /* ContentView.swift */,
 				8084DBF62C4C13F7006160F9 /* Assets.xcassets */,
@@ -65,6 +67,76 @@
 				8084DBF92C4C13F7006160F9 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		809AAE302C4C1876001FD6C2 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		809AAE312C4C1883001FD6C2 /* Feature */ = {
+			isa = PBXGroup;
+			children = (
+				809AAE352C4C1AA9001FD6C2 /* Favorite */,
+				809AAE342C4C1968001FD6C2 /* Settings */,
+				809AAE332C4C1961001FD6C2 /* Home */,
+				809AAE322C4C1958001FD6C2 /* Authentication */,
+			);
+			path = Feature;
+			sourceTree = "<group>";
+		};
+		809AAE322C4C1958001FD6C2 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				809AAE382C4C1C3D001FD6C2 /* Presentation */,
+				809AAE372C4C1C34001FD6C2 /* Domain */,
+				809AAE362C4C1C2D001FD6C2 /* Data */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		809AAE332C4C1961001FD6C2 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		809AAE342C4C1968001FD6C2 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		809AAE352C4C1AA9001FD6C2 /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Favorite;
+			sourceTree = "<group>";
+		};
+		809AAE362C4C1C2D001FD6C2 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		809AAE372C4C1C34001FD6C2 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		809AAE382C4C1C3D001FD6C2 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
