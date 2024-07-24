@@ -12,24 +12,50 @@ import Combine
 class AuthenticationViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
+    @Published var errorMessage: String?
+    @Published var isLoading: Bool = false
     
-    private let repository: AuthenticationRepository = AuthenticationRepositoryImpl.shared
-    
+    private let repository: AuthenticationRepository
     private var cancellables = Set<AnyCancellable>()
     
-    init(email: String, password: String, cancellables: Set<AnyCancellable> = Set<AnyCancellable>()) {
-        self.email = email
-        self.password = password
-        self.cancellables = cancellables
+    init(repository: AuthenticationRepository = AuthenticationRepositoryImpl.shared) {
+        self.repository = repository
     }
     
-    func login() {
-        repository.login(email: email, password: password)
+    func googleSignIn() {
+//        isLoading = true
+        self.errorMessage = ""
+        repository.googleSignIn()
+            .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
                 case .finished:
+                    self.isLoading = false
+                    
                     break
                 case .failure(let error):
+                    self.isLoading = false
+                    self.errorMessage = error.localizedDescription
+                    print("Error: \(error.localizedDescription)")
+                }
+            } receiveValue: { message in
+                print("Message: \(message)")
+            }
+            .store(in: &cancellables)
+    }
+    
+    func login() {
+        isLoading = true
+        repository.login(email: email, password: password)
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    self.isLoading = false
+                    break
+                case .failure(let error):
+                    self.isLoading = false
+                    self.errorMessage = error.localizedDescription
                     print("Error: \(error.localizedDescription)")
                 }
             } receiveValue: { message in
@@ -39,13 +65,18 @@ class AuthenticationViewModel: ObservableObject {
     }
     
     func register() {
+        isLoading = true
         repository.register(email: email, password: password)
+            .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
                 case .finished:
+                    self.isLoading = false
                     break
                 case .failure(let error):
-                    print("Error: \(error.localizedDescription)")
+                    self.isLoading = false
+                    self.errorMessage = error.localizedDescription
+                    break
                 }
             } receiveValue: { message in
                 print("Message: \(message)")
@@ -55,11 +86,13 @@ class AuthenticationViewModel: ObservableObject {
     
     func logout() {
         repository.logout()
+            .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
                 case .finished:
                     break
                 case .failure(let error):
+                    self.errorMessage = error.localizedDescription
                     print("Error: \(error.localizedDescription)")
                 }
             } receiveValue: { message in
@@ -71,6 +104,7 @@ class AuthenticationViewModel: ObservableObject {
     
     func resetPassword() {
         repository.resetPassword(email: email)
+            .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
                 case .finished:
@@ -86,6 +120,7 @@ class AuthenticationViewModel: ObservableObject {
     
     func updateEmail() {
         repository.updateEmail(email: email)
+            .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
                 case .finished:
@@ -101,6 +136,7 @@ class AuthenticationViewModel: ObservableObject {
     
     func updatePassword() {
         repository.updatePassword(password: password)
+            .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
                 case .finished:
@@ -113,5 +149,7 @@ class AuthenticationViewModel: ObservableObject {
             }
             .store(in: &cancellables)
     }
+    
+    
 }
 

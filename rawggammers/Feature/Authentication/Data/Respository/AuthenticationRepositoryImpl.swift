@@ -11,11 +11,33 @@ import FirebaseAuth
 
 
 struct AuthenticationRepositoryImpl: AuthenticationRepository {
+    func googleSignIn() -> AnyPublisher<String, Error> {
+        return Future<String, Error> { promise in
+            Task {
+                do {
+                    let _: () = try await remoteDataSource.googleSignIn()
+                    promise(.success("User signed in with Google successfully"))
+                } catch {
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+    
+//    func appleSignIn() -> AnyPublisher<String, Error> {
+//        return Future<String, Error> { promise in
+//            Task {
+//                do {
+//                    let _: () = try await remoteDataSource.appleSignIn()
+//                    promise(.success("User signed in with Apple successfully"))
+//                } catch {
+//                    promise(.failure(error))
+//                }
+//            }
+//        }.eraseToAnyPublisher()
+//    }
+    
 
-    
- 
-    
-    
     static let shared = AuthenticationRepositoryImpl()
     
     private init() {}

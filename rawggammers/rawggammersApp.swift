@@ -12,10 +12,12 @@ import Firebase
 struct rawggammersApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject private var authViewModel = AuthenticationViewModel()
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LoginView()
+                .environmentObject(authViewModel)
         }
     }
 }
