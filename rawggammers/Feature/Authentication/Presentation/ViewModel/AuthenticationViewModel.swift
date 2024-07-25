@@ -13,6 +13,7 @@ class AuthenticationViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var errorMessage: String?
+    @Published var isLogged: Bool = false
     @Published var isLoading: Bool = false
     
     private let repository: AuthenticationRepository
@@ -31,10 +32,29 @@ class AuthenticationViewModel: ObservableObject {
                 switch completion {
                 case .finished:
                     self.isLoading = false
-                    
+                    self.isLogged = true
                     break
                 case .failure(let error):
                     self.isLoading = false
+                    self.isLogged = false
+                    self.errorMessage = error.localizedDescription
+                    print("Error: \(error.localizedDescription)")
+                }
+            } receiveValue: { message in
+                print("Message: \(message)")
+            }
+            .store(in: &cancellables)
+    }
+    
+    func appleSignIn() {
+        self.errorMessage = ""
+        repository.appleSignIn()
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
                     self.errorMessage = error.localizedDescription
                     print("Error: \(error.localizedDescription)")
                 }

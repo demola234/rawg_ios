@@ -18,10 +18,12 @@ protocol AuthenticationRemoteDataSource {
     func updateEmail(email: String) async throws
     func updatePassword(password: String) async throws
     func googleSignIn() async throws
-//    func appleSignIn() async throws
+    func appleSignIn() async throws
 }
 
 struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
+   
+    
     func googleSignIn() async throws {
         do {
             let signInCredentials = try await signInGoogle()
@@ -65,16 +67,17 @@ struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
         }
     }
     
-//    func appleSignIn() async throws {
-//        do {
-////            let authDataResult = try await Auth.auth().signIn(with: <#T##AuthCredential#>)
-//            print("User signed in with Apple successfully: \(authDataResult.user.uid)")
-//        } catch {
-//            print("Apple sign in error: \(error.localizedDescription)")
-//            throw error
-//        }
-//    }
-//    
+    func appleSignIn() async throws {
+        let signInWithAppleHelper = await AppleSignInHelper()
+        do {
+          let signUp =  try await signInWithAppleHelper.startSignWithAppleFlow()
+            print("User signed in with Apple successfully")
+        } catch {
+            print("Apple sign in error: \(error.localizedDescription)")
+            throw error
+        }
+    }
+    
     
     static let shared = AuthenticationRemoteDataSourceImpl()
     

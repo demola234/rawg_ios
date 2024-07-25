@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		805614382C51061000FBDFE7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 805614372C51061000FBDFE7 /* GoogleService-Info.plist */; };
+		8056143B2C513C3500FBDFE7 /* AppleSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8056143A2C513C3500FBDFE7 /* AppleSignInHelper.swift */; };
 		806A32B22C4FD36100D5BC71 /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806A32B12C4FD36100D5BC71 /* AuthenticationRepository.swift */; };
 		8084DBF32C4C13F5006160F9 /* rawggammersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8084DBF22C4C13F5006160F9 /* rawggammersApp.swift */; };
 		8084DBF52C4C13F5006160F9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8084DBF42C4C13F5006160F9 /* ContentView.swift */; };
@@ -15,7 +17,6 @@
 		80BC16822C5017FD00533E84 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BC16812C5017FD00533E84 /* RegistrationView.swift */; };
 		80BC16862C501F3300533E84 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 80BC16852C501F3300533E84 /* GoogleSignIn */; };
 		80BC16882C501F3300533E84 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 80BC16872C501F3300533E84 /* GoogleSignInSwift */; };
-		80BC168A2C5022EE00533E84 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 80BC16892C5022EE00533E84 /* GoogleService-Info.plist */; };
 		80BC168D2C50283A00533E84 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BC168C2C50283A00533E84 /* Utilities.swift */; };
 		80BC16902C507F6500533E84 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 80BC168F2C507F6500533E84 /* FirebaseAnalytics */; };
 		80BC16922C507F6500533E84 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 80BC16912C507F6500533E84 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -39,6 +40,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		805614362C51057500FBDFE7 /* rawggammers.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = rawggammers.entitlements; sourceTree = "<group>"; };
+		805614372C51061000FBDFE7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8056143A2C513C3500FBDFE7 /* AppleSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInHelper.swift; sourceTree = "<group>"; };
 		806A32B12C4FD36100D5BC71 /* AuthenticationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepository.swift; sourceTree = "<group>"; };
 		8084DBEF2C4C13F5006160F9 /* rawggammers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rawggammers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8084DBF22C4C13F5006160F9 /* rawggammersApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rawggammersApp.swift; sourceTree = "<group>"; };
@@ -47,7 +51,6 @@
 		8084DBF92C4C13F7006160F9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		80BC16802C50113B00533E84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		80BC16812C5017FD00533E84 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
-		80BC16892C5022EE00533E84 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		80BC168C2C50283A00533E84 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		80CD42502C4FD44A00CA9416 /* AuthenticationRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepositoryImpl.swift; sourceTree = "<group>"; };
 		80CD42522C4FD4A000CA9416 /* Authentication_Remote_DS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication_Remote_DS.swift; sourceTree = "<group>"; };
@@ -98,6 +101,14 @@
 			path = Repository;
 			sourceTree = "<group>";
 		};
+		805614392C512B1900FBDFE7 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				8056143A2C513C3500FBDFE7 /* AppleSignInHelper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		8084DBE62C4C13F5006160F9 = {
 			isa = PBXGroup;
 			children = (
@@ -117,13 +128,14 @@
 		8084DBF12C4C13F5006160F9 /* rawggammers */ = {
 			isa = PBXGroup;
 			children = (
+				805614362C51057500FBDFE7 /* rawggammers.entitlements */,
 				80BC16802C50113B00533E84 /* Info.plist */,
 				809AAE302C4C1876001FD6C2 /* Core */,
 				809AAE312C4C1883001FD6C2 /* Feature */,
 				80BC168B2C50281500533E84 /* Utilities */,
 				8084DBF22C4C13F5006160F9 /* rawggammersApp.swift */,
 				8084DBF42C4C13F5006160F9 /* ContentView.swift */,
-				80BC16892C5022EE00533E84 /* GoogleService-Info.plist */,
+				805614372C51061000FBDFE7 /* GoogleService-Info.plist */,
 				8084DBF62C4C13F7006160F9 /* Assets.xcassets */,
 				8084DBF82C4C13F7006160F9 /* Preview Content */,
 			);
@@ -141,6 +153,7 @@
 		809AAE302C4C1876001FD6C2 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				805614392C512B1900FBDFE7 /* Helper */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -336,8 +349,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				805614382C51061000FBDFE7 /* GoogleService-Info.plist in Resources */,
 				8084DBFA2C4C13F7006160F9 /* Preview Assets.xcassets in Resources */,
-				80BC168A2C5022EE00533E84 /* GoogleService-Info.plist in Resources */,
 				8084DBF72C4C13F7006160F9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -357,6 +370,7 @@
 				8084DBF32C4C13F5006160F9 /* rawggammersApp.swift in Sources */,
 				80BC168D2C50283A00533E84 /* Utilities.swift in Sources */,
 				80CD42512C4FD44A00CA9416 /* AuthenticationRepositoryImpl.swift in Sources */,
+				8056143B2C513C3500FBDFE7 /* AppleSignInHelper.swift in Sources */,
 				80BC16822C5017FD00533E84 /* RegistrationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -488,10 +502,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = rawggammers/rawggammers.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"rawggammers/Preview Content\"";
-				DEVELOPMENT_TEAM = 3VN32FCAR7;
+				DEVELOPMENT_TEAM = 47S9AJ962P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = rawggammers/Info.plist;
@@ -505,7 +520,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = mine.rawggammers;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rawggammers.ademola;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -518,10 +533,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = rawggammers/rawggammers.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"rawggammers/Preview Content\"";
-				DEVELOPMENT_TEAM = 3VN32FCAR7;
+				DEVELOPMENT_TEAM = 47S9AJ962P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = rawggammers/Info.plist;
@@ -535,7 +551,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = mine.rawggammers;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rawggammers.ademola;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

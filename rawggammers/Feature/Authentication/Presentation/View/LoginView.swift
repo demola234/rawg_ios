@@ -7,6 +7,8 @@
 
 import SwiftUI
 import GoogleSignInSwift
+import AuthenticationServices
+
 
 struct LoginView: View {
     @EnvironmentObject var authViewModel: AuthenticationViewModel
@@ -40,18 +42,37 @@ struct LoginView: View {
                               .frame(height: 50)
                               .padding()
                           
+                        // Apple SignIn Button
+                         
+                          
+                          Button(action: {
+                                authViewModel.appleSignIn()
+                          }, label: {
+                              SignInWithAppleButtonRepresentable(style: .black, type: .continue)
+                                  .allowsHitTesting(false)
+                                  .frame(height: 50)
+                                  .padding()
+                          })
+                         
+                          
+                          
                           if let errorMessage = authViewModel.errorMessage {
                               Text(errorMessage)
                                   .foregroundColor(.red)
                                   .padding()
                           }
                       }
-                      .alert(isPresented: .constant(authViewModel.errorMessage != nil)) {
+                      .alert(isPresented: .constant(authViewModel.isLogged)) {
+                          Alert(title: Text("Success"), message: Text("Success"), dismissButton: .default(Text("OK")))
+                      }
+                      .alert(isPresented: .constant(authViewModel.errorMessage != nil && authViewModel.errorMessage != "")) {
                           Alert(title: Text("Error"), message: Text(authViewModel.errorMessage ?? ""), dismissButton: .default(Text("OK")))
                       }
+                      
                       .padding()
                       .navigationTitle("Registration")
                   }
+                      
               }
           }
       }

@@ -13,7 +13,7 @@ final class Utilities {
     private init() {}
     
     @MainActor
-       func topViewController(controller: UIViewController? = nil) -> UIViewController? {
+    func topViewController(controller: UIViewController? = nil) -> UIViewController? {
            let keyWindow: UIWindow? = {
                if #available(iOS 15.0, *) {
                    return UIApplication.shared.connectedScenes

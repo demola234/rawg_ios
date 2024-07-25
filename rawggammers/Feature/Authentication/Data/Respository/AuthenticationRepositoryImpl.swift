@@ -24,18 +24,18 @@ struct AuthenticationRepositoryImpl: AuthenticationRepository {
         }.eraseToAnyPublisher()
     }
     
-//    func appleSignIn() -> AnyPublisher<String, Error> {
-//        return Future<String, Error> { promise in
-//            Task {
-//                do {
-//                    let _: () = try await remoteDataSource.appleSignIn()
-//                    promise(.success("User signed in with Apple successfully"))
-//                } catch {
-//                    promise(.failure(error))
-//                }
-//            }
-//        }.eraseToAnyPublisher()
-//    }
+    func appleSignIn() -> AnyPublisher<String, Error> {
+        return Future<String, Error> { promise in
+            Task {
+                do {
+                    let _: () = try await remoteDataSource.appleSignIn()
+                    promise(.success("User signed in with Apple successfully"))
+                } catch {
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
     
 
     static let shared = AuthenticationRepositoryImpl()
