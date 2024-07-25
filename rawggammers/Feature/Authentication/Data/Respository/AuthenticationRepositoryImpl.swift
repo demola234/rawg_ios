@@ -9,15 +9,14 @@ import Foundation
 import Combine
 import FirebaseAuth
 
-
 struct AuthenticationRepositoryImpl: AuthenticationRepository {
     func googleSignIn() -> AnyPublisher<String, Error> {
         return Future<String, Error> { promise in
-            Task {
-                do {
-                    let _: () = try await remoteDataSource.googleSignIn()
+            AuthenticationRemoteDataSourceImpl.shared.googleSignIn { result in
+                switch result {
+                case .success:
                     promise(.success("User signed in with Google successfully"))
-                } catch {
+                case .failure(let error):
                     promise(.failure(error))
                 }
             }
@@ -26,32 +25,30 @@ struct AuthenticationRepositoryImpl: AuthenticationRepository {
     
     func appleSignIn() -> AnyPublisher<String, Error> {
         return Future<String, Error> { promise in
-            Task {
-                do {
-                    let _: () = try await remoteDataSource.appleSignIn()
+            AuthenticationRemoteDataSourceImpl.shared.appleSignIn { result in
+                switch result {
+                case .success:
                     promise(.success("User signed in with Apple successfully"))
-                } catch {
+                case .failure(let error):
                     promise(.failure(error))
                 }
             }
         }.eraseToAnyPublisher()
     }
     
-
     static let shared = AuthenticationRepositoryImpl()
     
     private init() {}
     
     private let remoteDataSource: AuthenticationRemoteDataSource = AuthenticationRemoteDataSourceImpl.shared
     
-    
     func login(email: String, password: String) -> AnyPublisher<String, Error> {
         return Future<String, Error> { promise in
-            Task {
-                do {
-                    let _: () = try await remoteDataSource.login(email: email, password: password)
+            remoteDataSource.login(email: email, password: password) { result in
+                switch result {
+                case .success:
                     promise(.success("User logged in successfully"))
-                } catch {
+                case .failure(let error):
                     promise(.failure(error))
                 }
             }
@@ -60,11 +57,11 @@ struct AuthenticationRepositoryImpl: AuthenticationRepository {
     
     func register(email: String, password: String) -> AnyPublisher<String, Error> {
         return Future<String, Error> { promise in
-            Task {
-                do {
-                    let _: () = try await remoteDataSource.register(email: email, password: password)
+            remoteDataSource.register(email: email, password: password) { result in
+                switch result {
+                case .success:
                     promise(.success("User registered successfully"))
-                } catch {
+                case .failure(let error):
                     promise(.failure(error))
                 }
             }
@@ -73,24 +70,28 @@ struct AuthenticationRepositoryImpl: AuthenticationRepository {
     
     func logout() -> AnyPublisher<String, Error> {
         return Future<String, Error> { promise in
-            Task {
-                do {
-                    let _: () = try remoteDataSource.logout()
-                    promise(.success("User logged out successfully"))
-                } catch {
-                    promise(.failure(error))
+            do {
+                 remoteDataSource.logout { result in
+                    switch result {
+                    case .success:
+                        promise(.success("User logged out successfully"))
+                    case .failure(let error):
+                        promise(.failure(error))
+                    }
                 }
+            } catch {
+                promise(.failure(error))
             }
         }.eraseToAnyPublisher()
     }
     
     func resetPassword(email: String) -> AnyPublisher<String, Error> {
         return Future<String, Error> { promise in
-            Task {
-                do {
-                    let _: () = try await remoteDataSource.resetPassword(email: email)
+            remoteDataSource.resetPassword(email: email) { result in
+                switch result {
+                case .success:
                     promise(.success("Password reset email sent successfully"))
-                } catch {
+                case .failure(let error):
                     promise(.failure(error))
                 }
             }
@@ -99,11 +100,11 @@ struct AuthenticationRepositoryImpl: AuthenticationRepository {
     
     func updateEmail(email: String) -> AnyPublisher<String, Error> {
         return Future<String, Error> { promise in
-            Task {
-                do {
-                    let _: () = try await remoteDataSource.updateEmail(email: email)
+            remoteDataSource.updateEmail(email: email) { result in
+                switch result {
+                case .success:
                     promise(.success("Email updated successfully"))
-                } catch {
+                case .failure(let error):
                     promise(.failure(error))
                 }
             }
@@ -112,16 +113,14 @@ struct AuthenticationRepositoryImpl: AuthenticationRepository {
     
     func updatePassword(password: String) -> AnyPublisher<String, Error> {
         return Future<String, Error> { promise in
-            Task {
-                do {
-                    let _: () = try await remoteDataSource.updatePassword(password: password)
+            remoteDataSource.updatePassword(password: password) { result in
+                switch result {
+                case .success:
                     promise(.success("Password updated successfully"))
-                } catch {
+                case .failure(let error):
                     promise(.failure(error))
                 }
             }
         }.eraseToAnyPublisher()
     }
 }
-
-

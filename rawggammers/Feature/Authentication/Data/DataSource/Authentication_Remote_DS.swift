@@ -11,35 +11,37 @@ import GoogleSignIn
 
 
 protocol AuthenticationRemoteDataSource {
-    func login(email: String, password: String) async throws
-    func register(email: String, password: String) async throws
-    func logout() throws
-    func resetPassword(email: String) async throws
-    func updateEmail(email: String) async throws
-    func updatePassword(password: String) async throws
-    func googleSignIn() async throws
-    func appleSignIn() async throws
+    func login(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void)
+    func register(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void)
+    func logout(completion: @escaping (Result<Void, Error>) -> Void)
+    func resetPassword(email: String, completion: @escaping (Result<Void, Error>) -> Void)
+    func updateEmail(email: String, completion: @escaping (Result<Void, Error>) -> Void)
+    func updatePassword(password: String, completion: @escaping (Result<Void, Error>) -> Void)
+    func googleSignIn(completion: @escaping (Result<Void, Error>) -> Void)
+    func appleSignIn(completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
-   
-    
-    func googleSignIn() async throws {
-        do {
-            let signInCredentials = try await signInGoogle()
-            let authDataResult = try await Auth.auth().signIn(with: signInCredentials)
-            print("User signed in with Google successfully: \(authDataResult.user.uid)")
-        } catch {
-            print("Google sign in error: \(error.localizedDescription)")
-            throw error
+
+    func googleSignIn(completion: @escaping (Result<Void, Error>) -> Void) {
+        Task {
+            do {
+                let signInCredentials = try await signInGoogle()
+                let authDataResult = try await Auth.auth().signIn(with: signInCredentials)
+                print("User signed in with Google successfully: \(authDataResult.user.uid)")
+                completion(.success(()))
+            } catch {
+                print("Google sign in error: \(error.localizedDescription)")
+                completion(.failure(error))
+            }
         }
     }
     
     func signInGoogle() async throws -> AuthCredential {
-        // Ensure topViewController is accessed on the main thread
-        guard let topVC = await Utilities.shared.topViewController() else { throw URLError(.cannotFindHost) }
+        guard let topVC = await Utilities.shared.topViewController() else {
+            throw URLError(.cannotFindHost)
+        }
         
-        // Ensure GIDSignIn is called on the main thread
         return try await withCheckedThrowingContinuation { continuation in
             DispatchQueue.main.async {
                 GIDSignIn.sharedInstance.signIn(withPresenting: topVC) { result, error in
@@ -67,87 +69,107 @@ struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
         }
     }
     
-    func appleSignIn() async throws {
-        let signInWithAppleHelper = await AppleSignInHelper()
-        do {
-          let signUp =  try await signInWithAppleHelper.startSignWithAppleFlow()
-            print("User signed in with Apple successfully")
-        } catch {
-            print("Apple sign in error: \(error.localizedDescription)")
-            throw error
+    func appleSignIn(completion: @escaping (Result<Void, Error>) -> Void) {
+        Task {
+            let signInWithAppleHelper = await AppleSignInHelper()
+            do {
+                _ = try await signInWithAppleHelper.startSignWithAppleFlow()
+                print("User signed in with Apple successfully")
+                completion(.success(()))
+            } catch {
+                print("Apple sign in error: \(error.localizedDescription)")
+                completion(.failure(error))
+            }
         }
     }
-    
     
     static let shared = AuthenticationRemoteDataSourceImpl()
     
     private init() {}
     
-    func login(email: String, password: String) async throws {
-        do {
-            let authDataResult = try await Auth.auth().signIn(withEmail: email, password: password)
-            print("User logged in successfully: \(authDataResult.user.uid)")
-        } catch {
-            print("Login error: \(error.localizedDescription)")
-            throw error
+    func login(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        Task {
+            do {
+                let authDataResult = try await Auth.auth().signIn(withEmail: email, password: password)
+                print("User logged in successfully: \(authDataResult.user.uid)")
+                completion(.success(()))
+            } catch {
+                print("Login error: \(error.localizedDescription)")
+                completion(.failure(error))
+            }
         }
     }
     
-    func register(email: String, password: String) async throws {
-        do {
-            let authDataResult = try await Auth.auth().createUser(withEmail: email, password: password)
-            print("User registered successfully: \(authDataResult.user.uid)")
-        } catch {
-            print("Registration error: \(error.localizedDescription)")
-            throw error
+    func register(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        Task {
+            do {
+                let authDataResult = try await Auth.auth().createUser(withEmail: email, password: password)
+                print("User registered successfully: \(authDataResult.user.uid)")
+                completion(.success(()))
+            } catch {
+                print("Registration error: \(error.localizedDescription)")
+                completion(.failure(error))
+            }
         }
     }
     
-    func logout() throws {
+    func logout(completion: @escaping (Result<Void, Error>) -> Void) {
         do {
             try Auth.auth().signOut()
             print("User logged out successfully")
+            completion(.success(()))
         } catch {
             print("Logout error: \(error.localizedDescription)")
-            throw error
+            completion(.failure(error))
         }
     }
     
-    func resetPassword(email: String) async throws {
-        do {
-            try await Auth.auth().sendPasswordReset(withEmail: email)
-            print("Password reset email sent successfully")
-        } catch {
-            print("Password reset error: \(error.localizedDescription)")
-            throw error
+    func resetPassword(email: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        Task {
+            do {
+                try await Auth.auth().sendPasswordReset(withEmail: email)
+                print("Password reset email sent successfully")
+                completion(.success(()))
+            } catch {
+                print("Password reset error: \(error.localizedDescription)")
+                completion(.failure(error))
+            }
         }
     }
     
-    func updateEmail(email: String) async throws {
-        guard let user = Auth.auth().currentUser else {
-            throw NSError(domain: "AuthErrorDomain", code: -1, userInfo: [NSLocalizedDescriptionKey: "No authenticated user found."])
-        }
-        
-        do {
-            try await user.sendEmailVerification()
-            print("Email updated successfully")
-        } catch {
-            print("Update email error: \(error.localizedDescription)")
-            throw error
+    func updateEmail(email: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        Task {
+            guard let user = Auth.auth().currentUser else {
+                completion(.failure(NSError(domain: "AuthErrorDomain", code: -1, userInfo: [NSLocalizedDescriptionKey: "No authenticated user found."])))
+                return
+            }
+            
+            do {
+                try await user.sendEmailVerification()
+                print("Email updated successfully")
+                completion(.success(()))
+            } catch {
+                print("Update email error: \(error.localizedDescription)")
+                completion(.failure(error))
+            }
         }
     }
     
-    func updatePassword(password: String) async throws {
-        guard let user = Auth.auth().currentUser else {
-            throw NSError(domain: "AuthErrorDomain", code: -1, userInfo: [NSLocalizedDescriptionKey: "No authenticated user found."])
-        }
-        
-        do {
-            try await user.updatePassword(to: password)
-            print("Password updated successfully")
-        } catch {
-            print("Update password error: \(error.localizedDescription)")
-            throw error
+    func updatePassword(password: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        Task {
+            guard let user = Auth.auth().currentUser else {
+                completion(.failure(NSError(domain: "AuthErrorDomain", code: -1, userInfo: [NSLocalizedDescriptionKey: "No authenticated user found."])))
+                return
+            }
+            
+            do {
+                try await user.updatePassword(to: password)
+                print("Password updated successfully")
+                completion(.success(()))
+            } catch {
+                print("Update password error: \(error.localizedDescription)")
+                completion(.failure(error))
+            }
         }
     }
 }

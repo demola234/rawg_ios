@@ -132,7 +132,6 @@
 				80BC16802C50113B00533E84 /* Info.plist */,
 				809AAE302C4C1876001FD6C2 /* Core */,
 				809AAE312C4C1883001FD6C2 /* Feature */,
-				80BC168B2C50281500533E84 /* Utilities */,
 				8084DBF22C4C13F5006160F9 /* rawggammersApp.swift */,
 				8084DBF42C4C13F5006160F9 /* ContentView.swift */,
 				805614372C51061000FBDFE7 /* GoogleService-Info.plist */,
@@ -153,6 +152,7 @@
 		809AAE302C4C1876001FD6C2 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				80BC168B2C50281500533E84 /* Utilities */,
 				805614392C512B1900FBDFE7 /* Helper */,
 			);
 			path = Core;

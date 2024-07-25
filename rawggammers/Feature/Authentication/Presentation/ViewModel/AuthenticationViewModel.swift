@@ -24,7 +24,6 @@ class AuthenticationViewModel: ObservableObject {
     }
     
     func googleSignIn() {
-//        isLoading = true
         self.errorMessage = ""
         repository.googleSignIn()
             .receive(on: DispatchQueue.main)
@@ -53,8 +52,12 @@ class AuthenticationViewModel: ObservableObject {
             .sink { completion in
                 switch completion {
                 case .finished:
+                    self.isLoading = false
+                    self.isLogged = true
                     break
                 case .failure(let error):
+                    self.isLoading = false
+                    self.isLogged = false
                     self.errorMessage = error.localizedDescription
                     print("Error: \(error.localizedDescription)")
                 }
