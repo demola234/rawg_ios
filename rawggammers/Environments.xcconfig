@@ -1,0 +1,11 @@
+//
+//  Environments.xcconfig
+//  rawggammers
+//
+//  Created by Ademola Kolawole on 26/07/2024.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+API_BASE_URL = "https://api.rawg.io/api/"
+API_KEY = "9dcf90cb8a5345c38a4af3771fa6c29b"

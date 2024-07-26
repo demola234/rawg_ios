@@ -21,6 +21,12 @@
 	<string>656297918676-i2dipp1alp6bkm1d0bknrvr30stf7bu1.apps.googleusercontent.com</string>
 	<key>GoogleUtilitiesAppDelegateProxyEnabled</key>
 	<false/>
+	<key>CFBundleIdentifier</key>
+	<string></string>
+	<key>API_KEY</key>
+	<string>9dcf90cb8a5345c38a4af3771fa6c29b</string>
+	<key>API_BASE_URL</key>
+	<string>https://api.rawg.io/api/</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Orbitron.ttf</string>
