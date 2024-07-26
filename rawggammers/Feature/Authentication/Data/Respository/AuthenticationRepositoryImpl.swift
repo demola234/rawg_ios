@@ -10,6 +10,19 @@ import Combine
 import FirebaseAuth
 
 struct AuthenticationRepositoryImpl: AuthenticationRepository {
+    func getUserRegistrationType() -> AnyPublisher<String, Error> {
+        return Future<String, Error> { promise in
+            AuthenticationRemoteDataSourceImpl.shared.getUserRegistrationType { result in
+                switch result {
+                case .success(let registrationType):
+                    promise(.success(registrationType))
+                case .failure(let error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+    
     func googleSignIn() -> AnyPublisher<String, Error> {
         return Future<String, Error> { promise in
             AuthenticationRemoteDataSourceImpl.shared.googleSignIn { result in
@@ -79,8 +92,6 @@ struct AuthenticationRepositoryImpl: AuthenticationRepository {
                         promise(.failure(error))
                     }
                 }
-            } catch {
-                promise(.failure(error))
             }
         }.eraseToAnyPublisher()
     }

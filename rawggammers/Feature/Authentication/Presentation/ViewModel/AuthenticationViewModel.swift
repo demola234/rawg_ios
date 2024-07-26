@@ -23,6 +23,23 @@ class AuthenticationViewModel: ObservableObject {
         self.repository = repository
     }
     
+    
+    func getUserRegistrationType() {
+        repository.getUserRegistrationType()
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                }
+            } receiveValue: { message in
+                print("Message: \(message)")
+            }
+            .store(in: &cancellables)
+    }
+    
     func googleSignIn() {
         self.errorMessage = ""
         repository.googleSignIn()

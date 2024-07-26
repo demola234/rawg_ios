@@ -6,28 +6,23 @@
 //
 
 import SwiftUI
-import Firebase
 
 @main
 struct rawggammersApp: App {
     
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     @StateObject private var authViewModel = AuthenticationViewModel()
+    @State private var isShowingLaunchView = true
     
     var body: some Scene {
         WindowGroup {
-            LoginView()
-                .environmentObject(authViewModel)
+            if isShowingLaunchView {
+                LaunchView(showLaunchView: $isShowingLaunchView)
+            } else {
+                LoginView()
+                    .environmentObject(authViewModel)
+            }
         }
     }
-}
-
-
-class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-
-    return true
-  }
 }

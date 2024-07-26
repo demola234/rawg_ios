@@ -21,5 +21,24 @@
 	<string>656297918676-i2dipp1alp6bkm1d0bknrvr30stf7bu1.apps.googleusercontent.com</string>
 	<key>GoogleUtilitiesAppDelegateProxyEnabled</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Orbitron.ttf</string>
+		<string>Orbitron-Black.ttf</string>
+		<string>Orbitron-Bold.ttf</string>
+		<string>Orbitron-ExtraBold.ttf</string>
+		<string>Orbitron-Medium.ttf</string>
+		<string>Orbitron-SemiBold.ttf</string>
+		<string>Orbitron-Regular.ttf</string>
+		<string>Poppins-Medium</string>
+	</array>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UILaunchScreen</key>
+		<dict>
+			<key>New item</key>
+			<string></string>
+		</dict>
+	</dict>
 </dict>
 </plist>

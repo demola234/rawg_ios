@@ -19,9 +19,19 @@ protocol AuthenticationRemoteDataSource {
     func updatePassword(password: String, completion: @escaping (Result<Void, Error>) -> Void)
     func googleSignIn(completion: @escaping (Result<Void, Error>) -> Void)
     func appleSignIn(completion: @escaping (Result<Void, Error>) -> Void)
+    func getUserRegistrationType(completion: @escaping (Result<String, Error>) -> Void)
 }
 
 struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
+    func getUserRegistrationType(completion: @escaping (Result<String, Error>) -> Void) {
+        guard let user = Auth.auth().currentUser else {
+            completion(.failure(NSError(domain: "AuthErrorDomain", code: -1, userInfo: [NSLocalizedDescriptionKey: "No authenticated user found."])))
+            return
+        }
+        
+        completion(.success(user.providerData.first?.providerID ?? ""))
+    }
+    
 
     func googleSignIn(completion: @escaping (Result<Void, Error>) -> Void) {
         Task {

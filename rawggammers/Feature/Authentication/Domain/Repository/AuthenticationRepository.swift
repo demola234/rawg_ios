@@ -19,4 +19,5 @@ protocol AuthenticationRepository {
     func updatePassword(password: String) -> AnyPublisher<String, Error>
     func googleSignIn() -> AnyPublisher<String, Error>
     func appleSignIn() -> AnyPublisher<String, Error>
+    func getUserRegistrationType() -> AnyPublisher<String, Error>
 }

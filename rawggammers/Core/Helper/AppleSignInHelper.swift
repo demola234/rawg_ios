@@ -11,23 +11,6 @@ import AuthenticationServices
 import FirebaseAuth
 import SwiftUI
 
-struct SignInWithAppleButtonRepresentable: UIViewRepresentable {
-   
-    
-    let style: ASAuthorizationAppleIDButton.Style
-    let type: ASAuthorizationAppleIDButton.ButtonType
-    
-    func makeUIView(context: Context) -> ASAuthorizationAppleIDButton {
-        let button = ASAuthorizationAppleIDButton(type: type, style: style)
-        return button
-    }
-    
-    func updateUIView(_ uiView: ASAuthorizationAppleIDButton, context: Context) {
-        
-    }
-    
-}
-
 struct SignInWithAppleResult {
     let token: String
     let nonce: String
