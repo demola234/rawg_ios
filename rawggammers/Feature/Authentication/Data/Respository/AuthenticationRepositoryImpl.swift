@@ -10,6 +10,19 @@ import Combine
 import FirebaseAuth
 
 struct AuthenticationRepositoryImpl: AuthenticationRepository {
+    func getUserIsLoggedIn() -> AnyPublisher<Bool, Error> {
+        return Future<Bool, Error> { promise in
+            AuthenticationRemoteDataSourceImpl.shared.getUserIsLoggedIn { result in
+                switch result {
+                case .success(let isLoggedIn):
+                    promise(.success(isLoggedIn))
+                case .failure(let error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+    
     func getUserRegistrationType() -> AnyPublisher<String, Error> {
         return Future<String, Error> { promise in
             AuthenticationRemoteDataSourceImpl.shared.getUserRegistrationType { result in

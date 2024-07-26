@@ -10,13 +10,14 @@ import SwiftUI
 struct CustomButton: View {
     var action: () -> Void
     var title: String
+    var isEnable: Bool = true
     var imageName: String? = nil
     var backgroundColor: Color
     var borderColor: Color? = Color.clear
     var textColor: Color = .theme.textFieldColor
     
     var body: some View {
-        Button(action: action) {
+        Button(action: isEnable ? action : {}) {
             HStack {
                 if let imageName = imageName {
                     Image(imageName)
@@ -30,11 +31,11 @@ struct CustomButton: View {
                 Text(title)
                     .customFont(CustomFont.orbitronBold.copyWith(size: 13))
                     .fontWeight(.bold)
-                    .foregroundColor(textColor)
+                    .foregroundColor(isEnable ? textColor : .theme.accentTextColor)
             }
             .padding(EdgeInsets(top: 12, leading: 10, bottom: 12, trailing: 10))
             .frame(width: 400, height: 45)
-            .background(backgroundColor)
+            .background(isEnable ? backgroundColor : Color.theme.textFieldColor)
             .cornerRadius(5)
             .overlay(
                 RoundedRectangle(cornerRadius: 5)

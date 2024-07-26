@@ -1,9 +1,3 @@
-//
-//  LaunchView.swift
-//  rawggammers
-//
-//  Created by Ademola Kolawole on 25/07/2024.
-//
 import SwiftUI
 
 struct LaunchView: View {
@@ -17,6 +11,9 @@ struct LaunchView: View {
             Color.launch.background
                 .ignoresSafeArea()
             
+            VStack {
+                Spacer()
+                
                 HStack(spacing: 0) {
                     ForEach(rawgLogo.indices, id: \.self) { index in
                         Text(rawgLogo[index])
@@ -30,9 +27,12 @@ struct LaunchView: View {
                             .animation(.interpolatingSpring(stiffness: 50, damping: 5).delay(Double(rawgLogo.count) * 0.2), value: bounceUp)
                     }
                 }
-                .padding(.top, 50)
-                .offset(y: 50)
+                
+                Spacer()
             }
+//            .padding(.bottom, 50)
+//            .offset(y: 50)
+        }
         .onAppear {
             animateText()
         }
@@ -49,7 +49,7 @@ struct LaunchView: View {
                 bounceUp = true
             }
         }
-//        toogle showLaunchView to false after 3 seconds
+        // Toggle showLaunchView to false after 3 seconds
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             showLaunchView = false
         }

@@ -8,7 +8,6 @@
 import Foundation
 import Combine
 
-
 class AuthenticationViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
@@ -16,13 +15,50 @@ class AuthenticationViewModel: ObservableObject {
     @Published var isLogged: Bool = false
     @Published var isLoading: Bool = false
     
+    
     private let repository: AuthenticationRepository
     private var cancellables = Set<AnyCancellable>()
     
     init(repository: AuthenticationRepository = AuthenticationRepositoryImpl.shared) {
         self.repository = repository
+        getUserIsLoggedIn()
     }
     
+    // Validate email
+    var isValidEmail: Bool {
+        let emailRegex = "^[A-Z0-9a-z._%+-]+@[A-Z0-9a-z.-]+\\.[A-Za-z]{2,64}$"
+        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegex)
+        return emailPredicate.evaluate(with: email)
+    }
+    
+    // Validate password
+    var isValidPassword: Bool {
+        let passwordRegex = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$"
+        let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
+        return passwordPredicate.evaluate(with: password)
+    }
+    
+    
+    func getUserIsLoggedIn() {
+        repository.getUserIsLoggedIn()
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                    self.errorMessage = error.localizedDescription
+                }
+            } receiveValue: { isLoggedIn in
+               if isLoggedIn {
+                    self.isLogged = true
+                } else {
+                    self.isLogged = false
+                }
+            }
+            .store(in: &cancellables)
+    }
     
     func getUserRegistrationType() {
         repository.getUserRegistrationType()
@@ -112,9 +148,11 @@ class AuthenticationViewModel: ObservableObject {
                 switch completion {
                 case .finished:
                     self.isLoading = false
+                    self.isLogged = true
                     break
                 case .failure(let error):
                     self.isLoading = false
+                    self.isLogged = false
                     self.errorMessage = error.localizedDescription
                     break
                 }
@@ -140,7 +178,6 @@ class AuthenticationViewModel: ObservableObject {
             }
             .store(in: &cancellables)
     }
-    
     
     func resetPassword() {
         repository.resetPassword(email: email)
@@ -189,7 +226,4 @@ class AuthenticationViewModel: ObservableObject {
             }
             .store(in: &cancellables)
     }
-    
-    
 }
-

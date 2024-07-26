@@ -20,9 +20,26 @@ protocol AuthenticationRemoteDataSource {
     func googleSignIn(completion: @escaping (Result<Void, Error>) -> Void)
     func appleSignIn(completion: @escaping (Result<Void, Error>) -> Void)
     func getUserRegistrationType(completion: @escaping (Result<String, Error>) -> Void)
+    func getUserIsLoggedIn(completion: @escaping (Result<Bool, Error>) -> Void)
 }
 
 struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
+    func getUserIsLoggedIn(completion: @escaping (Result<Bool, Error>) -> Void) {
+        Task {
+            guard let user = Auth.auth().currentUser else {
+                completion(.failure(NSError(domain: "AuthErrorDomain", code: -1, userInfo: [NSLocalizedDescriptionKey: "No authenticated user found."])))
+                return
+            }
+            do {
+                let user: Void? = try await Auth.auth().currentUser?.reload()
+                completion(.success(user != nil ? true : false))
+            } catch {
+                print("Registration error: \(error.localizedDescription)")
+                completion(.failure(error))
+            }
+        }
+    }
+    
     func getUserRegistrationType(completion: @escaping (Result<String, Error>) -> Void) {
         guard let user = Auth.auth().currentUser else {
             completion(.failure(NSError(domain: "AuthErrorDomain", code: -1, userInfo: [NSLocalizedDescriptionKey: "No authenticated user found."])))

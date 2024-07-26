@@ -10,6 +10,15 @@
 		805614382C51061000FBDFE7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 805614372C51061000FBDFE7 /* GoogleService-Info.plist */; };
 		8056143B2C513C3500FBDFE7 /* AppleSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8056143A2C513C3500FBDFE7 /* AppleSignInHelper.swift */; };
 		806A32B22C4FD36100D5BC71 /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806A32B12C4FD36100D5BC71 /* AuthenticationRepository.swift */; };
+		807B9D582C53D9940086A3C3 /* HomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807B9D572C53D9940086A3C3 /* HomeRepository.swift */; };
+		807B9D5A2C53DDA60086A3C3 /* GameEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807B9D592C53DDA60086A3C3 /* GameEntity.swift */; };
+		807B9D5C2C53DF9B0086A3C3 /* HomeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807B9D5B2C53DF9B0086A3C3 /* HomeRepositoryImpl.swift */; };
+		807B9D5E2C53E0120086A3C3 /* HomeRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807B9D5D2C53E0120086A3C3 /* HomeRemoteDataSource.swift */; };
+		807B9D602C53E25F0086A3C3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807B9D5F2C53E25F0086A3C3 /* NetworkManager.swift */; };
+		807B9D632C53E57A0086A3C3 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807B9D622C53E57A0086A3C3 /* NetworkError.swift */; };
+		807B9D662C53ECB00086A3C3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807B9D652C53ECB00086A3C3 /* HomeViewModel.swift */; };
+		807B9D682C53EEEC0086A3C3 /* HepticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807B9D672C53EEEC0086A3C3 /* HepticManager.swift */; };
+		807B9D6A2C53EF0E0086A3C3 /* LocalFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807B9D692C53EF0E0086A3C3 /* LocalFileManager.swift */; };
 		8084DBF32C4C13F5006160F9 /* rawggammersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8084DBF22C4C13F5006160F9 /* rawggammersApp.swift */; };
 		8084DBF72C4C13F7006160F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8084DBF62C4C13F7006160F9 /* Assets.xcassets */; };
 		8084DBFA2C4C13F7006160F9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8084DBF92C4C13F7006160F9 /* Preview Assets.xcassets */; };
@@ -29,6 +38,13 @@
 		809E0E5F2C52DEC200F59101 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 809E0E5E2C52DE9100F59101 /* Poppins-Medium.ttf */; };
 		809E0E612C52E4A600F59101 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E0E602C52E4A600F59101 /* AppDelegate.swift */; };
 		809E0E652C52F82F00F59101 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 809E0E642C52F82F00F59101 /* LaunchScreen.storyboard */; };
+		809E0E7C2C53C79D00F59101 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 809E0E7B2C53C79D00F59101 /* GoogleSignIn */; };
+		809E0E7E2C53C79D00F59101 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 809E0E7D2C53C79D00F59101 /* GoogleSignInSwift */; };
+		809E0E812C53C8DD00F59101 /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E0E802C53C8DD00F59101 /* TabView.swift */; };
+		809E0E832C53C90400F59101 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E0E822C53C90400F59101 /* HomeView.swift */; };
+		809E0E852C53CA9400F59101 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E0E842C53CA9400F59101 /* ProfileView.swift */; };
+		809E0E872C53CAE600F59101 /* FavoriteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E0E862C53CAE500F59101 /* FavoriteScreen.swift */; };
+		809E0E892C53CB3C00F59101 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E0E882C53CB3C00F59101 /* SearchView.swift */; };
 		80BC16822C5017FD00533E84 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BC16812C5017FD00533E84 /* RegistrationView.swift */; };
 		80BC16862C501F3300533E84 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 80BC16852C501F3300533E84 /* GoogleSignIn */; };
 		80BC16882C501F3300533E84 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 80BC16872C501F3300533E84 /* GoogleSignInSwift */; };
@@ -56,6 +72,15 @@
 		805614372C51061000FBDFE7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8056143A2C513C3500FBDFE7 /* AppleSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInHelper.swift; sourceTree = "<group>"; };
 		806A32B12C4FD36100D5BC71 /* AuthenticationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepository.swift; sourceTree = "<group>"; };
+		807B9D572C53D9940086A3C3 /* HomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepository.swift; sourceTree = "<group>"; };
+		807B9D592C53DDA60086A3C3 /* GameEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEntity.swift; sourceTree = "<group>"; };
+		807B9D5B2C53DF9B0086A3C3 /* HomeRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepositoryImpl.swift; sourceTree = "<group>"; };
+		807B9D5D2C53E0120086A3C3 /* HomeRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRemoteDataSource.swift; sourceTree = "<group>"; };
+		807B9D5F2C53E25F0086A3C3 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		807B9D622C53E57A0086A3C3 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		807B9D652C53ECB00086A3C3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		807B9D672C53EEEC0086A3C3 /* HepticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HepticManager.swift; sourceTree = "<group>"; };
+		807B9D692C53EF0E0086A3C3 /* LocalFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFileManager.swift; sourceTree = "<group>"; };
 		8084DBEF2C4C13F5006160F9 /* rawggammers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rawggammers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8084DBF22C4C13F5006160F9 /* rawggammersApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rawggammersApp.swift; sourceTree = "<group>"; };
 		8084DBF62C4C13F7006160F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -69,6 +94,11 @@
 		809E0E5E2C52DE9100F59101 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		809E0E602C52E4A600F59101 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		809E0E642C52F82F00F59101 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		809E0E802C53C8DD00F59101 /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
+		809E0E822C53C90400F59101 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		809E0E842C53CA9400F59101 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		809E0E862C53CAE500F59101 /* FavoriteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteScreen.swift; sourceTree = "<group>"; };
+		809E0E882C53CB3C00F59101 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		80BC16802C50113B00533E84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		80BC16812C5017FD00533E84 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		80BC168C2C50283A00533E84 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -95,11 +125,13 @@
 				80BC16A22C507F6500533E84 /* FirebaseDatabaseSwift in Frameworks */,
 				80BC16862C501F3300533E84 /* GoogleSignIn in Frameworks */,
 				80BC16A82C507F6500533E84 /* FirebaseFirestoreCombine-Community in Frameworks */,
+				809E0E7C2C53C79D00F59101 /* GoogleSignIn in Frameworks */,
 				80BC16882C501F3300533E84 /* GoogleSignInSwift in Frameworks */,
 				80BC16902C507F6500533E84 /* FirebaseAnalytics in Frameworks */,
 				80BC169C2C507F6500533E84 /* FirebaseAuth in Frameworks */,
 				80BC16922C507F6500533E84 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				80BC16942C507F6500533E84 /* FirebaseAnalyticsSwift in Frameworks */,
+				809E0E7E2C53C79D00F59101 /* GoogleSignInSwift in Frameworks */,
 				80BC16AA2C507F6500533E84 /* FirebaseStorageCombine-Community in Frameworks */,
 				80BC16A02C507F6500533E84 /* FirebaseDatabase in Frameworks */,
 				80BC169E2C507F6500533E84 /* FirebaseAuthCombine-Community in Frameworks */,
@@ -133,6 +165,22 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		807B9D612C53E5680086A3C3 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				807B9D622C53E57A0086A3C3 /* NetworkError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		807B9D642C53EC960086A3C3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				807B9D652C53ECB00086A3C3 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		8084DBE62C4C13F5006160F9 = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +204,7 @@
 				809E0E602C52E4A600F59101 /* AppDelegate.swift */,
 				80BC16802C50113B00533E84 /* Info.plist */,
 				80CD2CE22C522C9D007BC0E7 /* Fonts */,
+				80CD2CDB2C51FB65007BC0E7 /* Launch */,
 				809AAE302C4C1876001FD6C2 /* Core */,
 				809AAE312C4C1883001FD6C2 /* Feature */,
 				8084DBF22C4C13F5006160F9 /* rawggammersApp.swift */,
@@ -187,6 +236,7 @@
 		809AAE302C4C1876001FD6C2 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				807B9D612C53E5680086A3C3 /* Error */,
 				8099DF4D2C52953E00A9A24F /* Components */,
 				80CD2CDF2C51FCAC007BC0E7 /* Extensions */,
 				80BC168B2C50281500533E84 /* Utilities */,
@@ -198,9 +248,9 @@
 		809AAE312C4C1883001FD6C2 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
-				80CD2CDB2C51FB65007BC0E7 /* Launch */,
 				809AAE322C4C1958001FD6C2 /* Authentication */,
 				809AAE332C4C1961001FD6C2 /* Home */,
+				809E0E762C53C35700F59101 /* Search */,
 				809AAE352C4C1AA9001FD6C2 /* Favorite */,
 				809AAE342C4C1968001FD6C2 /* Settings */,
 			);
@@ -220,6 +270,9 @@
 		809AAE332C4C1961001FD6C2 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				809E0E732C53C30A00F59101 /* Data */,
+				809E0E742C53C31100F59101 /* Domain */,
+				809E0E752C53C31A00F59101 /* Presentation */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -265,10 +318,91 @@
 			path = Presentation;
 			sourceTree = "<group>";
 		};
+		809E0E732C53C30A00F59101 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				809E0E782C53C3AE00F59101 /* DataSource */,
+				809E0E772C53C38400F59101 /* Repository */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		809E0E742C53C31100F59101 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				809E0E7A2C53C3CB00F59101 /* Repository */,
+				809E0E792C53C3BF00F59101 /* Entity */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		809E0E752C53C31A00F59101 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				807B9D642C53EC960086A3C3 /* ViewModel */,
+				809E0E7F2C53C8C900F59101 /* Views */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		809E0E762C53C35700F59101 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		809E0E772C53C38400F59101 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				807B9D5B2C53DF9B0086A3C3 /* HomeRepositoryImpl.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		809E0E782C53C3AE00F59101 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				807B9D5D2C53E0120086A3C3 /* HomeRemoteDataSource.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
+		809E0E792C53C3BF00F59101 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				807B9D592C53DDA60086A3C3 /* GameEntity.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		809E0E7A2C53C3CB00F59101 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				807B9D572C53D9940086A3C3 /* HomeRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		809E0E7F2C53C8C900F59101 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				809E0E802C53C8DD00F59101 /* TabView.swift */,
+				809E0E822C53C90400F59101 /* HomeView.swift */,
+				809E0E862C53CAE500F59101 /* FavoriteScreen.swift */,
+				809E0E882C53CB3C00F59101 /* SearchView.swift */,
+				809E0E842C53CA9400F59101 /* ProfileView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		80BC168B2C50281500533E84 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				80BC168C2C50283A00533E84 /* Utilities.swift */,
+				807B9D692C53EF0E0086A3C3 /* LocalFileManager.swift */,
+				807B9D672C53EEEC0086A3C3 /* HepticManager.swift */,
+				807B9D5F2C53E25F0086A3C3 /* NetworkManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -378,6 +512,8 @@
 				80BC16A52C507F6500533E84 /* FirebaseFirestore */,
 				80BC16A72C507F6500533E84 /* FirebaseFirestoreCombine-Community */,
 				80BC16A92C507F6500533E84 /* FirebaseStorageCombine-Community */,
+				809E0E7B2C53C79D00F59101 /* GoogleSignIn */,
+				809E0E7D2C53C79D00F59101 /* GoogleSignInSwift */,
 			);
 			productName = rawggammers;
 			productReference = 8084DBEF2C4C13F5006160F9 /* rawggammers.app */;
@@ -447,24 +583,38 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				809E0E852C53CA9400F59101 /* ProfileView.swift in Sources */,
+				807B9D632C53E57A0086A3C3 /* NetworkError.swift in Sources */,
 				80CD42572C4FDB0600CA9416 /* AuthenticationViewModel.swift in Sources */,
 				8099DF4C2C52936F00A9A24F /* PlaceHolder.swift in Sources */,
 				8099DF432C524D3600A9A24F /* String.swift in Sources */,
+				807B9D5A2C53DDA60086A3C3 /* GameEntity.swift in Sources */,
 				8099DF412C52453900A9A24F /* Colors.swift in Sources */,
 				80CD2CE12C51FFD7007BC0E7 /* LaunchView.swift in Sources */,
 				80CD425B2C4FDC7C00CA9416 /* LoginView.swift in Sources */,
+				809E0E872C53CAE600F59101 /* FavoriteScreen.swift in Sources */,
 				806A32B22C4FD36100D5BC71 /* AuthenticationRepository.swift in Sources */,
 				80CD42532C4FD4A000CA9416 /* Authentication_Remote_DS.swift in Sources */,
 				8084DBF32C4C13F5006160F9 /* rawggammersApp.swift in Sources */,
+				807B9D662C53ECB00086A3C3 /* HomeViewModel.swift in Sources */,
+				807B9D5C2C53DF9B0086A3C3 /* HomeRepositoryImpl.swift in Sources */,
+				807B9D5E2C53E0120086A3C3 /* HomeRemoteDataSource.swift in Sources */,
 				80BC168D2C50283A00533E84 /* Utilities.swift in Sources */,
 				80CD42512C4FD44A00CA9416 /* AuthenticationRepositoryImpl.swift in Sources */,
+				809E0E892C53CB3C00F59101 /* SearchView.swift in Sources */,
 				80CD2CE52C522D4E007BC0E7 /* Fonts.swift in Sources */,
 				809E0E612C52E4A600F59101 /* AppDelegate.swift in Sources */,
+				807B9D582C53D9940086A3C3 /* HomeRepository.swift in Sources */,
+				809E0E832C53C90400F59101 /* HomeView.swift in Sources */,
+				807B9D6A2C53EF0E0086A3C3 /* LocalFileManager.swift in Sources */,
 				8099DF4F2C52956E00A9A24F /* CustomTextFieldComponent.swift in Sources */,
+				807B9D682C53EEEC0086A3C3 /* HepticManager.swift in Sources */,
 				8056143B2C513C3500FBDFE7 /* AppleSignInHelper.swift in Sources */,
 				8099DF512C529D0000A9A24F /* CustomBotton.swift in Sources */,
+				807B9D602C53E25F0086A3C3 /* NetworkManager.swift in Sources */,
 				80BC16822C5017FD00533E84 /* RegistrationView.swift in Sources */,
 				8099DF532C52A8F900A9A24F /* SignInWithAppleButton.swift in Sources */,
+				809E0E812C53C8DD00F59101 /* TabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,7 +755,7 @@
 				INFOPLIST_FILE = rawggammers/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = RAWG;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -635,7 +785,7 @@
 				INFOPLIST_FILE = rawggammers/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = RAWG;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -693,6 +843,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		809E0E7B2C53C79D00F59101 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 80BC16842C501F3200533E84 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		809E0E7D2C53C79D00F59101 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 80BC16842C501F3200533E84 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
 		80BC16852C501F3300533E84 /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 80BC16842C501F3200533E84 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;

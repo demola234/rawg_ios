@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         
         let launchView = LaunchView(showLaunchView: .constant(true))
-        let loginView = LoginView().environmentObject(AuthenticationViewModel())
+        _ = LoginView().environmentObject(AuthenticationViewModel())
         
         window?.rootViewController = UIHostingController(rootView: launchView)
         window?.makeKeyAndVisible()

@@ -20,8 +20,13 @@ struct rawggammersApp: App {
             if isShowingLaunchView {
                 LaunchView(showLaunchView: $isShowingLaunchView)
             } else {
-                LoginView()
-                    .environmentObject(authViewModel)
+                if authViewModel.isLogged {
+                    FancyTabView()
+                        .environmentObject(authViewModel)
+                } else {
+                    LoginView()
+                        .environmentObject(authViewModel)
+                }
             }
         }
     }

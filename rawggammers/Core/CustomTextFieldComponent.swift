@@ -14,14 +14,16 @@ struct CustomTextFieldComponent: View {
     var imageName: String
     var isSecure: Bool
     var label: String
+    var keyboardType: UIKeyboardType = .default
     
-    init(text: Binding<String>, placeholder: String, imageName: String, isSecure: Bool, label: String) {
+    init(text: Binding<String>, placeholder: String, imageName: String, isSecure: Bool, label: String, keyboardType: UIKeyboardType = .default) {
         self._text = text
         self.placeholder = placeholder
         self.imageName = imageName
         self.isSecure = isSecure
         self._isObscured = State(initialValue: isSecure)
         self.label = label
+        self.keyboardType = isSecure ? .default : .emailAddress
     }
     
     private var textField: some View {
@@ -43,9 +45,8 @@ struct CustomTextFieldComponent: View {
         .background(Color.theme.textFieldColor)
         .accentColor(Color.theme.accentTextColor)
         .cornerRadius(8)
-        .onChange(of: text) { newValue in
-            text = newValue.lowercased()
-        }
+        .autocapitalization(.none)
+        .keyboardType(keyboardType)
         
     }
     
