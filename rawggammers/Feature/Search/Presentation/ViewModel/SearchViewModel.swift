@@ -26,14 +26,13 @@ class SearchViewModel: ObservableObject {
         self.errorMessage = errorMessage
         self.searchData = searchData
         self.isSearchLoading = isSearchLoading
+        getAllSavedSearches()
     }
     
     func searchGames() {
-//        guard searchText.isEmpty else {
-//                    // Handle empty search text case if needed
-//                    return
-//                }
-        
+        guard searchText.isEmpty else {
+                    return
+                }
         isSearchLoading = true
         repository.searchGames(query: searchText)
             .receive(on: DispatchQueue.main)
@@ -52,6 +51,72 @@ class SearchViewModel: ObservableObject {
                 self?.searchData = searchData
                 self?.isSearchLoading = false
                 print("Search Data: \(searchData)")
+            }
+            .store(in: &cancellables)
+    }
+    
+    func saveSearch(index: Int) {
+        guard let searchData = searchData else { return }
+        let search = SearchDataEntity(
+            slug: searchData.results?[index].slug,
+            name: searchData.results?[index].name,
+            backgroundImage: searchData.results?[index].backgroundImage,
+            updated: searchData.results?[index].updated,
+            id: searchData.results?[index].id
+        )
+        
+        repository.saveSearch(query: search)
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                }
+            } receiveValue: { _ in
+                print("Search saved successfully")
+            }
+            .store(in: &cancellables)
+    }
+    
+    func getAllSavedSearches() {
+        repository.getAllSavedSearches()
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                }
+            } receiveValue: { searches in
+                print("Saved Searches: \(searches)")
+            }
+            .store(in: &cancellables)
+    }
+    
+    func deleteSearch(index: Int) {
+        guard let searchData = searchData else { return }
+        let search = SearchDataEntity(
+            slug: searchData.results?[index].slug,
+            name: searchData.results?[index].name,
+            backgroundImage: searchData.results?[index].backgroundImage,
+            updated: searchData.results?[index].updated,
+            id: searchData.results?[index].id
+        )
+        
+        repository.deleteSearch(query: search)
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                }
+            } receiveValue: { _ in
+                print("Search deleted successfully")
             }
             .store(in: &cancellables)
     }

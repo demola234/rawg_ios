@@ -9,9 +9,6 @@ import Foundation
 import Combine
 
 class SearchRepositoryImpl: SearchRepository {
-   
-    
-    
     static let shared = SearchRepositoryImpl()
     
     func searchGames(query: String) -> AnyPublisher<SearchEntity, Error> {
@@ -27,4 +24,46 @@ class SearchRepositoryImpl: SearchRepository {
             }
         }.eraseToAnyPublisher()
     }
+    
+    func saveSearch(query: SearchDataEntity) -> AnyPublisher<Bool, Error> {
+        return Future<Bool, Error> { promise in
+            SearchLocalDataSourceImpl.shared.saveSearch(query: query) { result in
+                switch result {
+                case .success(let search):
+                    promise(.success(search))
+                case .failure(let error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+    
+    func getAllSavedSearches() -> AnyPublisher<[SearchDataEntity], Error> {
+        return Future<[SearchDataEntity], Error> { promise in
+            SearchLocalDataSourceImpl.shared.getAllSavedSearches { result in
+                switch result {
+                case .success(let searches):
+                    promise(.success(searches))
+                case .failure(let error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+    
+    
+    func deleteSearch(query: SearchDataEntity) -> AnyPublisher<Bool, Error> {
+        return Future<Bool, Error> { promise in
+            SearchLocalDataSourceImpl.shared.deleteSearch(query: query) { result in
+                switch result {
+                case .success(let search):
+                    promise(.success(search))
+                case .failure(let error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+    
+   
 }

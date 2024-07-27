@@ -57,7 +57,6 @@ struct RelatedTag: Codable {
     }
 }
 
-
 // MARK: - Tag
 struct Tag: Codable {
     let id: Int?
