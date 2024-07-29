@@ -11,6 +11,6 @@
         <attribute name="reviewsCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="slug" optional="YES" attributeType="String"/>
         <attribute name="suggestionsCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="updated" optional="YES" attributeType="String"/>
+        <attribute name="updatedAt" optional="YES" attributeType="String"/>
     </entity>
 </model>

@@ -32,7 +32,6 @@ class FavoriteLocalDataSourceImpl: FavoriteLocalDataSource {
         favorite.name = favorite.name
         favorite.slug = favorite.slug
         favorite.backgroundImage = favorite.backgroundImage
-        favorite.updated = favorite.updated
         
         do {
             try context.save()
@@ -56,7 +55,7 @@ class FavoriteLocalDataSourceImpl: FavoriteLocalDataSource {
                     ratingTop:  Int(favorite.reviewsCount),
                     playtime: Int(favorite.rating),
                     suggestionsCount: Int(favorite.ratingTop),
-                    updated: favorite.updated,
+                    updated: favorite.updatedAt,
                     reviewsCount: Int(favorite.suggestionsCount)
                 )
             }

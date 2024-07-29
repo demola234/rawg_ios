@@ -35,8 +35,8 @@ class HomeViewModel: ObservableObject {
         self.movies = movies
         self.gameDetails = gameDetails
         self.bestGames = bestGames
-        //        getPlatForms()
-        //        getBestGames()
+                getPlatForms()
+                getBestGames()
         getGames()
     }
     
@@ -54,7 +54,15 @@ class HomeViewModel: ObservableObject {
                     self.isGamesLoading = false
                 }
             } receiveValue: { [weak self] bestGames in
-                self?.bestGames = bestGames.results ?? []
+                
+                
+                if self?.currentPage == 1 {
+                    self?.bestGames = bestGames.results ?? []
+                } else {
+                    self?.bestGames.append(contentsOf: bestGames.results ?? [])
+                }
+                self?.isGamesLoading = false
+                self?.canLoadMore = (bestGames.results?.count ?? 0) > 0
             }
             .store(in: &cancellables)
     }
@@ -62,7 +70,7 @@ class HomeViewModel: ObservableObject {
     func loadMoreGames() {
         guard canLoadMore else { return }
         currentPage += 1
-        getGames()
+        getBestGames()
     }
     
     

@@ -9,7 +9,25 @@ import SwiftUI
 
 struct PlatformCardDetails: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Image("Games")
+                .resizable()
+                .scaledToFill()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 210, height: 60)
+                .cornerRadius(10)
+                .overlay {
+                    Rectangle()
+                        .foregroundColor(.black.opacity(0.37))
+                        .cornerRadius(10)
+                }
+            
+            Text("Action")
+                .font(Font.custom("Orbitron", size: 14).weight(.medium))
+                .foregroundColor(.white)
+        }
+        .frame(width: 210, height: 60)
+        .cornerRadius(10)
     }
 }
 

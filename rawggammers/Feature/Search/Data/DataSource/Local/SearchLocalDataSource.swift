@@ -32,7 +32,7 @@ class SearchLocalDataSourceImpl: SearchLocalDataSource {
         search.name = query.name
         search.slug = query.slug
         search.backgroundImage = query.backgroundImage
-        search.updated = query.updated
+        search.updatedAt = query.updated
         
         do {
             try context.save()
@@ -51,7 +51,7 @@ class SearchLocalDataSourceImpl: SearchLocalDataSource {
                         slug: search.slug,
                         name: search.name,
                         backgroundImage: search.backgroundImage,
-                        updated: search.updated,
+                        updated: search.updatedAt,
                         id: Int(search.id)
                     )
                 }

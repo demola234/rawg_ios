@@ -9,3 +9,5 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 API_BASE_URL = "https://api.rawg.io/api/"
 API_KEY = "9dcf90cb8a5345c38a4af3771fa6c29b"
+MIXPANEL_API_TOKEN = "24fec749ea897c4d5af553a6e22e7115"
+

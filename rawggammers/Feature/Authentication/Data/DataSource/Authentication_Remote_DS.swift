@@ -21,9 +21,15 @@ protocol AuthenticationRemoteDataSource {
     func appleSignIn(completion: @escaping (Result<Void, Error>) -> Void)
     func getUserRegistrationType(completion: @escaping (Result<String, Error>) -> Void)
     func getUserIsLoggedIn(completion: @escaping (Result<Bool, Error>) -> Void)
+    func twitterSignIn(completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
+    
+    static let shared = AuthenticationRemoteDataSourceImpl()
+    
+    private init() {}
+    
     func getUserIsLoggedIn(completion: @escaping (Result<Bool, Error>) -> Void) {
         Task {
             guard let user = Auth.auth().currentUser else {
@@ -110,10 +116,6 @@ struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
         }
     }
     
-    static let shared = AuthenticationRemoteDataSourceImpl()
-    
-    private init() {}
-    
     func login(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void) {
         Task {
             do {
@@ -195,6 +197,21 @@ struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
                 completion(.success(()))
             } catch {
                 print("Update password error: \(error.localizedDescription)")
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func twitterSignIn(completion: @escaping (Result<Void, Error>) -> Void) {
+        Task {
+            let twitterSignInHelper = await XSignInHelper()
+            
+            do {
+                _ = try await twitterSignInHelper.signInWithTwitter()
+                print("User signed in with Twitter successfully")
+                completion(.success(()))
+            } catch {
+                print("Twitter sign in error: \(error.localizedDescription)")
                 completion(.failure(error))
             }
         }

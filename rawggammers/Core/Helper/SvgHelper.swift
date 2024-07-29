@@ -6,10 +6,22 @@
 //
 
 import SwiftUI
+import UIKit
+import SVGKit
 
-struct SvgHelper: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+struct SvgHelper: UIViewRepresentable {
+    var svgName: String
+
+    func makeUIView(context: Context) -> SVGView {
+        let svgView = SVGView()
+        svgView.backgroundColor = UIColor(white: 1.0, alpha: 0.0)   // otherwise the background is black
+        svgView.fileName = self.svgName
+        svgView.contentMode = .scaleToFill
+        return svgView
+    }
+
+    func updateUIView(_ uiView: SVGView, context: Context) {
+
     }
 }
 

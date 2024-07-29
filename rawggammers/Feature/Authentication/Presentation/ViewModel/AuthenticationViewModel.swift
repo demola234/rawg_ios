@@ -39,6 +39,7 @@ class AuthenticationViewModel: ObservableObject {
     }
     
     
+    
     func getUserIsLoggedIn() {
         repository.getUserIsLoggedIn()
             .receive(on: DispatchQueue.main)
@@ -79,6 +80,28 @@ class AuthenticationViewModel: ObservableObject {
     func googleSignIn() {
         self.errorMessage = ""
         repository.googleSignIn()
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    self.isLoading = false
+                    self.isLogged = true
+                    break
+                case .failure(let error):
+                    self.isLoading = false
+                    self.isLogged = false
+                    self.errorMessage = error.localizedDescription
+                    print("Error: \(error.localizedDescription)")
+                }
+            } receiveValue: { message in
+                print("Message: \(message)")
+            }
+            .store(in: &cancellables)
+    }
+    
+    func twitterSignIn() {
+        self.errorMessage = ""
+        repository.twitterSignIn()
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {

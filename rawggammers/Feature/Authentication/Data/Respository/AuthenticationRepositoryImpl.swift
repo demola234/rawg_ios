@@ -10,6 +10,14 @@ import Combine
 import FirebaseAuth
 
 struct AuthenticationRepositoryImpl: AuthenticationRepository {
+    
+    static let shared = AuthenticationRepositoryImpl()
+    
+    private init() {}
+    
+    private let remoteDataSource: AuthenticationRemoteDataSource = AuthenticationRemoteDataSourceImpl.shared
+
+    
     func getUserIsLoggedIn() -> AnyPublisher<Bool, Error> {
         return Future<Bool, Error> { promise in
             AuthenticationRemoteDataSourceImpl.shared.getUserIsLoggedIn { result in
@@ -61,12 +69,6 @@ struct AuthenticationRepositoryImpl: AuthenticationRepository {
             }
         }.eraseToAnyPublisher()
     }
-    
-    static let shared = AuthenticationRepositoryImpl()
-    
-    private init() {}
-    
-    private let remoteDataSource: AuthenticationRemoteDataSource = AuthenticationRemoteDataSourceImpl.shared
     
     func login(email: String, password: String) -> AnyPublisher<String, Error> {
         return Future<String, Error> { promise in
@@ -141,6 +143,19 @@ struct AuthenticationRepositoryImpl: AuthenticationRepository {
                 switch result {
                 case .success:
                     promise(.success("Password updated successfully"))
+                case .failure(let error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+    
+    func twitterSignIn() -> AnyPublisher<String, Error> {
+        return Future<String, Error> { promise in
+            remoteDataSource.twitterSignIn{ result in
+                switch result {
+                case .success:
+                    promise(.success("User signed in with Twitter successfully"))
                 case .failure(let error):
                     promise(.failure(error))
                 }

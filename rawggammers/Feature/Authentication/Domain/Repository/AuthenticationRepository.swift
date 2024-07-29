@@ -21,4 +21,5 @@ protocol AuthenticationRepository {
     func appleSignIn() -> AnyPublisher<String, Error>
     func getUserRegistrationType() -> AnyPublisher<String, Error>
     func getUserIsLoggedIn() -> AnyPublisher<Bool, Error>
+    func twitterSignIn() -> AnyPublisher<String, Error>
 }

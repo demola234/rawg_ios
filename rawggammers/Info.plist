@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>API_BASE_URL</key>
+	<string>https://api.rawg.io/api/</string>
+	<key>API_KEY</key>
+	<string>9dcf90cb8a5345c38a4af3771fa6c29b</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -14,6 +18,16 @@
 				<string>com.googleusercontent.apps.656297918676-i2dipp1alp6bkm1d0bknrvr30stf7bu1</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>Rawg Twitter</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>https://rawggamers.firebaseapp.com/__/auth/handler</string>
+			</array>
+		</dict>
 	</array>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<false/>
@@ -21,12 +35,6 @@
 	<string>656297918676-i2dipp1alp6bkm1d0bknrvr30stf7bu1.apps.googleusercontent.com</string>
 	<key>GoogleUtilitiesAppDelegateProxyEnabled</key>
 	<false/>
-	<key>CFBundleIdentifier</key>
-	<string></string>
-	<key>API_KEY</key>
-	<string>9dcf90cb8a5345c38a4af3771fa6c29b</string>
-	<key>API_BASE_URL</key>
-	<string>https://api.rawg.io/api/</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Orbitron.ttf</string>
