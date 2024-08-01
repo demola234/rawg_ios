@@ -18,5 +18,5 @@ struct SectionTitleView: View {
 }
 
 #Preview {
-    SectionTitleView()
+    SectionTitleView(title: "")
 }

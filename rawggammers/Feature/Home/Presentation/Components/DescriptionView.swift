@@ -42,5 +42,5 @@ struct DescriptionView: View {
 }
 
 #Preview {
-    DescriptionView()
+    DescriptionView(showFullDescription: .constant(false))
 }

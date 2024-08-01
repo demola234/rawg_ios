@@ -24,21 +24,19 @@ struct CustomButton: View {
                         .font(.headline)
                         .scaledToFit()
                         .frame(width: 20, height: 20)
-                        
-                    
                 }
                 
                 Text(title)
                     .customFont(CustomFont.orbitronBold.copyWith(size: 13))
                     .fontWeight(.bold)
-                    .foregroundColor(isEnable ? textColor : .theme.accentTextColor)
+                    .foregroundColor(isEnable ? textColor : .theme.background)
             }
             .padding(EdgeInsets(top: 12, leading: 10, bottom: 12, trailing: 10))
             .frame(width: 400, height: 45)
-            .background(isEnable ? backgroundColor : Color.theme.textFieldColor)
-            .cornerRadius(5)
+            .background(isEnable ? backgroundColor : Color.theme.accentTextColor)
+            .cornerRadius(10)
             .overlay(
-                RoundedRectangle(cornerRadius: 5)
+                RoundedRectangle(cornerRadius: 10)
                     .stroke(borderColor ?? Color.clear, lineWidth: 1) // Use Color.clear if borderColor is nil
             )
         }

@@ -10,7 +10,7 @@ import Combine
 import FirebaseAuth
 
 struct AuthenticationRepositoryImpl: AuthenticationRepository {
-    
+
     static let shared = AuthenticationRepositoryImpl()
     
     private init() {}
@@ -18,8 +18,8 @@ struct AuthenticationRepositoryImpl: AuthenticationRepository {
     private let remoteDataSource: AuthenticationRemoteDataSource = AuthenticationRemoteDataSourceImpl.shared
 
     
-    func getUserIsLoggedIn() -> AnyPublisher<Bool, Error> {
-        return Future<Bool, Error> { promise in
+    func getUserIsLoggedIn() -> AnyPublisher<UsersDataEntity, Error> {
+        return Future<UsersDataEntity, Error> { promise in
             AuthenticationRemoteDataSourceImpl.shared.getUserIsLoggedIn { result in
                 switch result {
                 case .success(let isLoggedIn):

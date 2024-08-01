@@ -4,7 +4,6 @@
 //
 //  Created by Ademola Kolawole on 25/07/2024.
 //
-
 import SwiftUI
 
 struct CustomTextFieldComponent: View {
@@ -14,16 +13,19 @@ struct CustomTextFieldComponent: View {
     var imageName: String
     var isSecure: Bool
     var label: String
+    var border: Bool = false
     var keyboardType: UIKeyboardType = .default
+    @Environment(\.colorScheme) var colorScheme
     
-    init(text: Binding<String>, placeholder: String, imageName: String, isSecure: Bool, label: String, keyboardType: UIKeyboardType = .default) {
+    init(text: Binding<String>, placeholder: String, imageName: String, isSecure: Bool, label: String, keyboardType: UIKeyboardType = .default, border: Bool = false) {
         self._text = text
         self.placeholder = placeholder
         self.imageName = imageName
         self.isSecure = isSecure
         self._isObscured = State(initialValue: isSecure)
         self.label = label
-        self.keyboardType = isSecure ? .default : .emailAddress
+        self.keyboardType = keyboardType
+        self.border = border
     }
     
     private var textField: some View {
@@ -42,18 +44,14 @@ struct CustomTextFieldComponent: View {
         .placeholder(when: text.isEmpty, placeholder: Text(placeholder))
         .foregroundColor(Color.theme.primaryTextColor)
         .padding(12)
-        .background(Color.theme.textFieldColor)
-        .accentColor(Color.theme.accentTextColor)
-        .cornerRadius(8)
-        .autocapitalization(.none)
         .keyboardType(keyboardType)
-        
+        .autocapitalization(.none)
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading) {
             Text(label)
-                .foregroundColor(Color.theme.accentTextColor)
+                .foregroundColor(Color.theme.primaryTextColor)
                 .customFont(CustomFont.poppinsRegualr.copyWith(size: 14))
             
             HStack {
@@ -61,38 +59,53 @@ struct CustomTextFieldComponent: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 20, height: 20)
-                    .foregroundColor(Color.theme.accentTextColor)
-                    .padding(.leading, 9)
+                    .foregroundColor(Color.theme.primaryTextColor)
+                    .padding(.leading, 20)
                 
                 textField
-                    .padding(.trailing, 12)
+                    .padding(.trailing, 10)
                 
                 if isSecure {
                     Button(action: {
                         isObscured.toggle()
                     }) {
                         Image(systemName: !isObscured ? "eye.slash" : "eye")
-                            .foregroundColor(Color.theme.accentTextColor)
+                            .foregroundColor(Color.theme.primaryTextColor)
                             .padding(.trailing, 12)
                     }
                 }
             }
             .background(Color.theme.textFieldColor)
-            .cornerRadius(8)
+            .cornerRadius(10)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(colorScheme == .dark ? Color.clear : Color.theme.accentTextColor, lineWidth: border ? 1 : 0)
+            )
         }
     }
 }
 
 #Preview {
     Group {
-        CustomTextFieldComponent(text: .constant(""), placeholder: "Email address", imageName: "envelope", isSecure: false, label: "Email")
+        CustomTextFieldComponent(text: .constant(""), placeholder: "Email address", imageName: "envelope", isSecure: false, label: "Email", border: true)
             .previewLayout(.sizeThatFits)
             .preferredColorScheme(.dark)
             .padding()
         
-        CustomTextFieldComponent(text: .constant(""), placeholder: "Password", imageName: "lock", isSecure: true, label: "Password")
+        CustomTextFieldComponent(text: .constant(""), placeholder: "Password", imageName: "lock", isSecure: true, label: "Password", border: true)
             .previewLayout(.sizeThatFits)
             .preferredColorScheme(.dark)
             .padding()
+        
+        CustomTextFieldComponent(text: .constant(""), placeholder: "Email address", imageName: "envelope", isSecure: false, label: "Email", border: true)
+            .previewLayout(.sizeThatFits)
+            .preferredColorScheme(.light)
+            .padding()
+        
+        CustomTextFieldComponent(text: .constant(""), placeholder: "Password", imageName: "lock", isSecure: true, label: "Password", border: true)
+            .previewLayout(.sizeThatFits)
+            .preferredColorScheme(.light)
+            .padding()
     }
 }
+ 

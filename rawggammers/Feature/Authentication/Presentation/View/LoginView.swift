@@ -4,9 +4,8 @@
 //
 //  Created by Ademola Kolawole on 23/07/2024.
 //
+
 import SwiftUI
-import GoogleSignInSwift
-import AuthenticationServices
 
 struct LoginView: View {
     @EnvironmentObject var authViewModel: AuthenticationViewModel
@@ -14,6 +13,7 @@ struct LoginView: View {
     @State private var showAlert = false
     @State private var alertMessage = ""
     @State private var alertTitle = ""
+    @State private var showForgetPasswordSheet = false
     
     var body: some View {
         NavigationView {
@@ -23,77 +23,134 @@ struct LoginView: View {
                 if authViewModel.isLoading {
                     ProgressView()
                 } else {
-                    ScrollView {
+                    VStack {
+                        
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("Sign in to RAWG")
-                                .customFont(CustomFont.orbitronBold.copyWith(size: 32))
+                            Text("Sign In")
+                                .customFont(CustomFont.orbitronBold.copyWith(size: 24))
                                 .lineSpacing(30)
                                 .foregroundColor(Color.theme.primaryTextColor)
+                                .padding(.vertical, 5)
                             
                             Text("Enter your account details to continue experiencing the best games content.")
                                 .customFont(CustomFont.poppinsRegualr.copyWith(size: 14))
                                 .lineLimit(2)
                                 .foregroundColor(Color.theme.accentTextColor)
-                                .padding(.bottom, 10)
+                                .padding(.bottom, 24)
                             
                             VStack(alignment: .leading, spacing: 16) {
-                                CustomTextFieldComponent(text: $authViewModel.email, placeholder: "Enter your email", imageName: "envelope", isSecure: false, label: "Email address", keyboardType: .emailAddress)
-                                    .submitLabel(.next)
-                                    .padding(.bottom, 1)
+                                CustomTextFieldComponent(
+                                    text: $authViewModel.email,
+                                    placeholder: "sample@gmail.com",
+                                    imageName: "envelope",
+                                    isSecure: false,
+                                    label: "Email address",
+                                    keyboardType: .emailAddress,
+                                    border: true
+                                )
+                                .submitLabel(.next)
+                                .padding(.bottom, 1)
                                 
-                                if !authViewModel.isValidEmail {
+                                if !authViewModel.isValidEmail && !authViewModel.email.isEmpty {
                                     Text("Please enter a valid email address.")
                                         .customFont(CustomFont.poppinsRegualr.copyWith(size: 12))
                                         .foregroundColor(Color.theme.error)
                                         .padding(.bottom, 10)
                                 }
                                 
-                                CustomTextFieldComponent(text: $authViewModel.password, placeholder: "Enter your password", imageName: "lock", isSecure: true, label: "Password")
-                                    .submitLabel(.done)
-                                    .padding(.bottom, 1)
+                                CustomTextFieldComponent(
+                                    text: $authViewModel.password,
+                                    placeholder: "Create a unique password",
+                                    imageName: "lock",
+                                    isSecure: true,
+                                    label: "Password",
+                                    border: true
+                                )
+                                .submitLabel(.done)
+                                .padding(.bottom, 1)
                                 
-                                if !authViewModel.isValidPassword {
-                                    Text("Password must be at least 8 characters, contain at least one number and one special character.")
+                                if authViewModel.isValidPassword != "" && !authViewModel.password.isEmpty {
+                                    Text(authViewModel.isValidPassword)
                                         .customFont(CustomFont.poppinsRegualr.copyWith(size: 12))
                                         .foregroundColor(Color.theme.error)
                                         .padding(.bottom, 10)
                                 }
                             }
-                            .padding(.vertical, 20)
+                            .padding(.vertical, 10)
                             
+                            // Keep me logged in
                             HStack {
-                                Text("Don't have an account?")
+                                Toggle("", isOn: $authViewModel.keepMeLoggedIn)
                                     .customFont(CustomFont.poppinsRegualr.copyWith(size: 14))
                                     .foregroundColor(Color.theme.accentTextColor)
-                                    .padding(.bottom, 10)
+                                    .toggleStyle(CheckboxToggleStyle())
+                                    .padding(.trailing, 5)
                                 
-                                NavigationLink(destination: RegistrationView()) {
-                                    Text("Create Account")
+                                Text("Keep me logged in")
+                                    .customFont(CustomFont.poppinsRegualr.copyWith(size: 14))
+                                    .foregroundColor(Color.theme.primaryTextColor)
+                                
+                                Spacer()
+                                
+                                // Forget Password Sheet
+                                Button(action: {
+                                    showForgetPasswordSheet.toggle()
+                                }) {
+                                    Text("Forget Password?")
                                         .customFont(CustomFont.poppinsRegualr.copyWith(size: 14))
                                         .foregroundColor(Color.theme.primaryTextColor)
-                                        .padding(.bottom, 10)
                                 }
-                                .navigationBarBackButtonHidden(true)
                             }
+                        }
+                        .padding(.horizontal, 24)
+                        
+                        Spacer()
+                        
+                        
+                        NavigationLink {
+                            RegistrationView()
+                        } label: {
+                            HStack (alignment: .center) {
+                                Text("New to Rawg?")
+                                    .customFont(CustomFont.orbitronMedium.copyWith(size: 16))
+                                
+                                    .foregroundColor(.theme.primaryTextColor)
+                                Text("Sign up")
+                                    .customFont(CustomFont.orbitronBold.copyWith(size: 16))
+                                    .foregroundColor(.theme.goldColor)
+                                
+                            }
+                        }
+                        .padding(.bottom, 20)
+                        
+                        
+                        HStack {
+                            AuthButton(action: {
+                                authViewModel.googleSignIn()
+                            }, imageName: "GoogleLogo")
                             
                             Spacer()
                             
-                            VStack(spacing: 16) {
-                                CustomButton(action: {
-                                    authViewModel.login()
-                                }, title: "Login", isEnable: !authViewModel.email.isEmpty && !authViewModel.password.isEmpty, backgroundColor: Color.theme.primaryTextColor)
-                                
-                                CustomButton(action: {
-                                    authViewModel.googleSignIn()
-                                }, title: "Continue with Google", imageName: "GoogleLogo", backgroundColor: Color.theme.background, borderColor: Color.theme.primaryTextColor, textColor: .theme.primaryTextColor)
-                                
-                                CustomButton(action: {
-                                    authViewModel.appleSignIn()
-                                }, title: "Continue with Apple", imageName: "AppleLogo", backgroundColor: Color.theme.primaryTextColor, borderColor: Color.theme.background)
-                            }
-                            .padding(.bottom, 20)
+                            AuthButton(action: {
+                                authViewModel.twitterSignIn()
+                            }, imageName: "TwitterLogo")
+                            
+                            
+                            Spacer()
+                            
+                            AuthButton(action: {
+                                authViewModel.appleSignIn()
+                            }, imageName: "AppleLogo")
                         }
-                        .padding(.horizontal, 20)
+                        .padding(.horizontal, 24)
+                        .padding(.bottom, 20)
+                        
+                        CustomButton(action: {
+                            authViewModel.login()
+                        }, title: "Login with Email", isEnable: !authViewModel.email.isEmpty && !authViewModel.password.isEmpty, backgroundColor: Color.theme.primaryTextColor)
+                        .padding(.horizontal, 24)
+                        .padding(.bottom, 20)
+                        
                     }
                     .alert(isPresented: $showAlert) {
                         Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
@@ -114,6 +171,9 @@ struct LoginView: View {
                     }
                 }
             }
+            .sheet(isPresented: $showForgetPasswordSheet) {
+                ForgetPasswordView()
+            }
         }
         .navigationBarBackButtonHidden(true)
     }
@@ -122,5 +182,4 @@ struct LoginView: View {
 #Preview {
     LoginView()
         .environmentObject(AuthenticationViewModel())
-        .preferredColorScheme(.dark)
 }

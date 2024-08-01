@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+
         window = UIWindow(frame: UIScreen.main.bounds)
         
         let launchView = LaunchView(showLaunchView: .constant(true))
@@ -21,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.rootViewController = UIHostingController(rootView: launchView)
         window?.makeKeyAndVisible()
+        
         return true
     }
 }

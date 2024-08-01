@@ -8,29 +8,35 @@
 import SwiftUI
 
 struct PlatformCardDetails: View {
+    var platformDetails: PlatformResult
+    
     var body: some View {
         ZStack {
-            Image("Games")
-                .resizable()
-                .scaledToFill()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 210, height: 60)
-                .cornerRadius(10)
-                .overlay {
-                    Rectangle()
-                        .foregroundColor(.black.opacity(0.37))
-                        .cornerRadius(10)
-                }
+            if let imageUrl = URL(string: platformDetails.platforms?.first.map({ $0.imageBackground ?? "" }) ?? "") {
+                NetworkImageView(imageURL: imageUrl)
+                    .scaledToFill()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 210, height: 60)
+                    .cornerRadius(10)
+                    .overlay {
+                        Rectangle()
+                            .foregroundColor(.black.opacity(0.37))
+                            .cornerRadius(10)
+                    }
+            }
             
-            Text("Action")
-                .font(Font.custom("Orbitron", size: 14).weight(.medium))
-                .foregroundColor(.white)
+            Text(platformDetails.name ?? "Unknown")
+                .customFont(CustomFont.orbitronMedium.copyWith(size: 14))
+                .foregroundColor(.theme.background)
+
         }
         .frame(width: 210, height: 60)
         .cornerRadius(10)
     }
 }
 
-#Preview {
-    PlatformCardDetails()
+struct PlatformCardDetails_Previews: PreviewProvider {
+    static var previews: some View {
+        PlatformCardDetails(platformDetails: dev.platform.results![0])
+    }
 }

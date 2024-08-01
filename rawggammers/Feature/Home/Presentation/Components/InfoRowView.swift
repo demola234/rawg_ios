@@ -27,5 +27,5 @@ struct InfoRowView: View {
 }
 
 #Preview {
-    InfoRowView()
+    InfoRowView(title: "TestTitle", value: "TestValue")
 }

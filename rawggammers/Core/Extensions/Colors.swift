@@ -18,6 +18,8 @@ struct ColorTheme {
     let primaryTextColor = Color("PrimaryTextColor")
     let accentTextColor = Color("AccentTextColor")
     let textFieldColor = Color("TextFieldColor")
+    let goldColor = Color("GoldColor")
+    let cardColor = Color("CardColor")
     let error = Color("ErrorColor")
     let success = Color("SuccessColor")
 }

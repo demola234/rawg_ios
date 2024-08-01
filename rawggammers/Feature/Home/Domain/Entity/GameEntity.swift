@@ -12,7 +12,7 @@ import Foundation
 struct GamesEntity: Codable {
     let count: Int?
     let next, previous: String?
-    let results: [ResultData]?
+    let results: [ResultData]
     let gamesCount, reviewsCount, recommendationsCount: Int?
     
     enum CodingKeys: String, CodingKey {
@@ -44,7 +44,7 @@ struct ResultData: Codable {
     let tags: [Genre]?
     let shortScreenshots: [ShortScreenshot]?
     let communityRating: Int?
-
+    
     enum CodingKeys: String, CodingKey {
         case id, slug, name, released
         case backgroundImage = "background_image"
@@ -71,7 +71,7 @@ struct Genre: Codable {
     let imageBackground: String?
     let domain: String?
     let language: String?
-
+    
     enum CodingKeys: String, CodingKey {
         case id, name, slug
         case gamesCount = "games_count"
@@ -85,8 +85,8 @@ struct Genre: Codable {
 struct PlatformElement: Codable {
     let platform: PlatformPlatform?
     let releasedAt: String?
-
-
+    
+    
     enum CodingKeys: String, CodingKey {
         case platform
         case releasedAt = "released_at"
@@ -101,14 +101,49 @@ struct PlatformPlatform : Codable{
     let slug: String?
     let image: String?
     let imageBackground: String?
-
+    
     enum CodingKeys: String, CodingKey {
         case id, name, slug, image
         case imageBackground = "image_background"
     }
+    
+    
+    func getImages(platform: String) -> String {
+        if platform == "pc" {
+            return "pc"
+        } else if platform == "playstation" {
+            return "ps"
+        }  else if platform == "ps" {
+            return "ps"
+        }
+        else if platform == "psp" {
+            return "ps"
+        }
+        
+        else if platform == "xbox" {
+            return "xbox"
+        } else if platform == "ios" {
+            return "ios"
+        } else if platform == "android" {
+            return "android"
+        } else if platform == "mac" {
+            return "mac"
+        } else if platform == "macos" {
+            return "mac"
+        } else if platform == "apple" {
+            return "mac"
+        }  else if platform == "classic" {
+            return "mac"
+        }
+        else if platform == "linux" {
+            return "linux"
+        } else if platform == "nintendo" {
+            return "nintendo"
+        } else {
+            return ""
+        }
+    }
 }
-
-
 
 // MARK: - Rating
 struct Rating: Codable {
@@ -116,7 +151,7 @@ struct Rating: Codable {
     let title: String?
     let count: Int?
     let percent: Double?
-
+    
     enum CodingKeys: String, CodingKey {
         case id, title, count, percent
     }
@@ -126,7 +161,7 @@ struct Rating: Codable {
 struct ShortScreenshot: Codable {
     let id: Int?
     let image: String?
-
+    
     enum CodingKeys: String, CodingKey {
         case id, image
     }
@@ -137,7 +172,7 @@ struct ShortScreenshot: Codable {
 struct Store: Codable {
     let id: Int?
     let store: Genre?
-
+    
     enum CodingKeys: String, CodingKey {
         case id, store
     }

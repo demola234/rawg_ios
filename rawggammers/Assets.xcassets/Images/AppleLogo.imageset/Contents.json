@@ -1,23 +1,23 @@
 {
   "images" : [
     {
-      "filename" : "apple-173-svgrepo-com 1.png",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
       "filename" : "Apple.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "apple-173-svgrepo-com 1@2x.png",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "apple-173-svgrepo-com 1.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Apple@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -28,12 +28,12 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Apple@2x.png",
+      "filename" : "apple-173-svgrepo-com 1@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "apple-173-svgrepo-com 1@3x.png",
+      "filename" : "Apple@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -44,7 +44,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Apple@3x.png",
+      "filename" : "apple-173-svgrepo-com 1@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

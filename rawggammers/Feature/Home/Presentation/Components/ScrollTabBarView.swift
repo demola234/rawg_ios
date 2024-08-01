@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct ScrollTabBarView: View {
-    @State private var selectedTab: Tab = .trending
+    @Binding var selectedTab: Tab
     @State private var textWidths: [CGFloat] = Array(repeating: 0, count: Tab.allCases.count)
+    @EnvironmentObject var homeViewModel: HomeViewModel
     
     var body: some View {
         ScrollViewReader { proxy in
@@ -18,7 +19,7 @@ struct ScrollTabBarView: View {
                     ForEach(Tab.allCases.indices, id: \.self) { index in
                         let tab = Tab.allCases[index]
                         Text(tab.rawValue)
-                            .font(.callout)
+                            .customFont(CustomFont.poppinsRegualr.copyWith(size: 12))
                             .padding()
                             .background(
                                 GeometryReader { textGeoWidth -> Color in
@@ -30,8 +31,8 @@ struct ScrollTabBarView: View {
                             )
                             .id(index)
                             .frame(minWidth: textWidths.max() ?? 0, alignment: .center)
-                            .foregroundColor(selectedTab == tab ? .white : .gray)
-                            .background(selectedTab == tab ? Color.black : Color.clear)
+                            .foregroundColor(selectedTab == tab ? .theme.background : .theme.accentTextColor)
+                            .background(selectedTab == tab ? Color.theme.primaryTextColor : Color.clear)
                             .overlay(
                                 Capsule()
                                     .stroke(selectedTab == tab ? Color.clear : Color.gray, lineWidth: 1)
@@ -40,6 +41,9 @@ struct ScrollTabBarView: View {
                             .onTapGesture {
                                 withAnimation(.spring) {
                                     selectedTab = tab
+                                    homeViewModel.selectNewTab(tab: selectedTab)
+                                   
+                                    
                                 }
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                     withAnimation {
@@ -61,7 +65,7 @@ struct ScrollTabBarView: View {
 }
 
 #Preview {
-    ScrollTabBarView()
+    ScrollTabBarView(selectedTab: .constant(.trending))
         .previewLayout(.sizeThatFits)
         .padding()
 }

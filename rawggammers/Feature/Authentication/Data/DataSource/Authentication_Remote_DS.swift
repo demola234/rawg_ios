@@ -20,7 +20,7 @@ protocol AuthenticationRemoteDataSource {
     func googleSignIn(completion: @escaping (Result<Void, Error>) -> Void)
     func appleSignIn(completion: @escaping (Result<Void, Error>) -> Void)
     func getUserRegistrationType(completion: @escaping (Result<String, Error>) -> Void)
-    func getUserIsLoggedIn(completion: @escaping (Result<Bool, Error>) -> Void)
+    func getUserIsLoggedIn(completion: @escaping (Result<UsersDataEntity, Error>) -> Void)
     func twitterSignIn(completion: @escaping (Result<Void, Error>) -> Void)
 }
 
@@ -30,21 +30,41 @@ struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
     
     private init() {}
     
-    func getUserIsLoggedIn(completion: @escaping (Result<Bool, Error>) -> Void) {
+    func getUserIsLoggedIn(completion: @escaping (Result<UsersDataEntity, Error>) -> Void) {
         Task {
-            guard let user = Auth.auth().currentUser else {
+            guard let currentUser = Auth.auth().currentUser else {
                 completion(.failure(NSError(domain: "AuthErrorDomain", code: -1, userInfo: [NSLocalizedDescriptionKey: "No authenticated user found."])))
                 return
             }
+            
             do {
-                let user: Void? = try await Auth.auth().currentUser?.reload()
-                completion(.success(user != nil ? true : false))
+                let user: Void? = try await currentUser.reload()
+                
+                let uid = currentUser.uid
+                let email = currentUser.email ?? ""
+                let username = currentUser.displayName ?? ""
+                let profileImageURL = currentUser.photoURL?.absoluteString ?? ""
+                let providerData = currentUser.providerData.first
+                let provider = providerData?.providerID ?? ""
+                let isLoggedIn = user != nil
+        
+                let usersDataEntity = UsersDataEntity(
+                    uid: uid,
+                    email: email,
+                    username: username,
+                    profileImageURL: profileImageURL,
+                    isLoggedIn: isLoggedIn,
+                    provider: provider
+                )
+                
+                completion(.success(usersDataEntity))
             } catch {
-                print("Registration error: \(error.localizedDescription)")
+                print("Reload error: \(error.localizedDescription)")
                 completion(.failure(error))
             }
         }
     }
+
     
     func getUserRegistrationType(completion: @escaping (Result<String, Error>) -> Void) {
         guard let user = Auth.auth().currentUser else {
@@ -144,9 +164,27 @@ struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
     
     func logout(completion: @escaping (Result<Void, Error>) -> Void) {
         do {
-            try Auth.auth().signOut()
-            print("User logged out successfully")
-            completion(.success(()))
+//            check if its oauth provider
+            let user = Auth.auth().currentUser
+            print("User provider: \(String(describing: user?.providerData.first?.providerID))")
+            if user?.providerData.first?.providerID == "apple.com" {
+                try Auth.auth().signOut()
+                completion(.success(()))
+                return
+            } else if user?.providerData.first?.providerID == "google.com" {
+                 GIDSignIn.sharedInstance.signOut()
+                completion(.success(()))
+                return
+            } else if user?.providerData.first?.providerID == "twitter.com" {
+                try Auth.auth().signOut()
+                completion(.success(()))
+                return
+            } else  {
+                try Auth.auth().signOut()
+                print("User logged out successfully")
+                completion(.success(()))
+            }
+            
         } catch {
             print("Logout error: \(error.localizedDescription)")
             completion(.failure(error))

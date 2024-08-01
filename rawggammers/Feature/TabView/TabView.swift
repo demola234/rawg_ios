@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct FancyTabView: View {
+    @Environment(\.hideTabBar) var hideTabBar
+    
     @State private var selectedTab = 0
     let tabBarImageNames = ["house.fill", "magnifyingglass", "heart.fill", "person.fill"]
     let tabBarTitles = ["Home", "Search", "Favourites", "Profile"]
-
+    
+    
     var body: some View {
         VStack {
             ZStack {
@@ -31,12 +34,17 @@ struct FancyTabView: View {
             }
             Spacer()
             CustomTabBar(selectedTab: $selectedTab, tabBarImageNames: tabBarImageNames, tabBarTitles: tabBarTitles)
-                .frame(height: 80)
                 .background(Color.white)
-                .cornerRadius(20)
-                .shadow(color: .gray, radius: 10, x: 0, y: 5)
+                .frame(height: 60)
                 .padding()
+                .onAppear {
+                    UITabBar.appearance().isHidden = hideTabBar
+                }
+                .onChange(of: hideTabBar) { hide in
+                    UITabBar.appearance().isHidden = hide
+                }
         }
+        
     }
 }
 
@@ -44,7 +52,7 @@ struct CustomTabBar: View {
     @Binding var selectedTab: Int
     let tabBarImageNames: [String]
     let tabBarTitles: [String]
-
+    
     var body: some View {
         HStack {
             ForEach(0..<tabBarImageNames.count, id: \.self) { index in

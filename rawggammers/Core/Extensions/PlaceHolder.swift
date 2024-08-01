@@ -13,7 +13,7 @@ extension View {
         ZStack(alignment: .leading) {
             if shouldShow {
                 placeholder
-                    .padding(.leading, 12)
+                    .padding(.leading, 8)
                     .foregroundColor(Color.theme.accentTextColor)
             }
             self

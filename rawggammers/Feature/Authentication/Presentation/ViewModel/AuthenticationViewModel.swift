@@ -11,10 +11,11 @@ import Combine
 class AuthenticationViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
+    @Published var keepMeLoggedIn: Bool = false
+    @Published var userDetails: UsersDataEntity?
     @Published var errorMessage: String?
     @Published var isLogged: Bool = false
     @Published var isLoading: Bool = false
-    
     
     private let repository: AuthenticationRepository
     private var cancellables = Set<AnyCancellable>()
@@ -31,14 +32,22 @@ class AuthenticationViewModel: ObservableObject {
         return emailPredicate.evaluate(with: email)
     }
     
-    // Validate password
-    var isValidPassword: Bool {
-        let passwordRegex = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$"
-        let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
-        return passwordPredicate.evaluate(with: password)
+    var isValidPassword: String {
+        if password.isEmpty {
+            return "Password cannot be empty."
+        } else if password.count < 6 {
+            return "Password must be at least 6 characters long."
+        } else if !password.contains(where: { $0.isUppercase }) {
+            return "Password must contain at least one uppercase letter."
+        } else if !password.contains(where: { $0.isLowercase }) {
+            return "Password must contain at least one lowercase letter."
+        } else if !password.contains(where: { $0.isNumber }) {
+            return "Password must contain at least one number."
+        } else if !password.contains(where: { "!@#$%^&*()_+=-".contains($0) }) {
+            return "Password must contain at least one special character."
+        }
+        return ""
     }
-    
-    
     
     func getUserIsLoggedIn() {
         repository.getUserIsLoggedIn()
@@ -48,11 +57,13 @@ class AuthenticationViewModel: ObservableObject {
                 case .finished:
                     break
                 case .failure(let error):
-                    print("Error: \(error.localizedDescription)")
+                    print("Error Authentication 🔥: \(error.localizedDescription)")
                     self.errorMessage = error.localizedDescription
+                    
                 }
-            } receiveValue: { isLoggedIn in
-               if isLoggedIn {
+            } receiveValue: { userDetails in
+                self.userDetails = userDetails
+                if userDetails.isLoggedIn {
                     self.isLogged = true
                 } else {
                     self.isLogged = false
@@ -151,9 +162,11 @@ class AuthenticationViewModel: ObservableObject {
                 switch completion {
                 case .finished:
                     self.isLoading = false
+                    self.isLogged = true
                     break
                 case .failure(let error):
                     self.isLoading = false
+                    self.isLogged = false
                     self.errorMessage = error.localizedDescription
                     print("Error: \(error.localizedDescription)")
                 }
@@ -197,6 +210,7 @@ class AuthenticationViewModel: ObservableObject {
                     print("Error: \(error.localizedDescription)")
                 }
             } receiveValue: { message in
+                self.isLogged = false
                 print("Message: \(message)")
             }
             .store(in: &cancellables)
