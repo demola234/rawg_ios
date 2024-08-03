@@ -11,10 +11,10 @@ import Combine
 class SearchRepositoryImpl: SearchRepository {
     static let shared = SearchRepositoryImpl()
     
-    func searchGames(query: String) -> AnyPublisher<SearchEntity, Error> {
+    func searchGames(query: String, page: Int) -> AnyPublisher<SearchEntity, Error> {
         
         return Future<SearchEntity, Error> { promise in
-            SearchRemoteDataSourceImpl.shared.searchGames(query: query) { result in
+            SearchRemoteDataSourceImpl.shared.searchGames(query: query, page: page) { result in
                 switch result {
                 case .success(let search):
                     promise(.success(search))
@@ -40,7 +40,7 @@ class SearchRepositoryImpl: SearchRepository {
     
     func getAllSavedSearches() -> AnyPublisher<[SearchDataEntity], Error> {
         return Future<[SearchDataEntity], Error> { promise in
-            SearchLocalDataSourceImpl.shared.getAllSavedSearches { result in
+            SearchLocalDataSourceImpl.shared.getAllSavedSearches() { result in
                 switch result {
                 case .success(let searches):
                     promise(.success(searches))

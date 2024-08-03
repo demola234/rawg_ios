@@ -10,6 +10,8 @@ import Combine
 
 
 class HomeRepositoryImpl: HomeRepository {
+
+    
     static let shared = HomeRepositoryImpl()
     
     func getGames(discover: Bool, ordering: String, filter: Bool, page: Int) -> AnyPublisher<GamesEntity, Error> {
@@ -97,6 +99,32 @@ class HomeRepositoryImpl: HomeRepository {
                 switch result {
                 case .success(let game):
                     promise(.success(game))
+                case .failure(let error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+    
+    func getScreenShots(game: String) -> AnyPublisher<GameScreenShotsEntity, Error> {
+        return Future<GameScreenShotsEntity, Error> { promise in
+            HomeRemoteDataSourceImpl.shared.getScreenShots(game: game) { result in
+                switch result {
+                case .success(let screenshots):
+                    promise(.success(screenshots))
+                case .failure(let error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+    
+    func getGameSeries(game: String) -> AnyPublisher<GamesEntity, Error> {
+        return Future<GamesEntity, Error> { promise in
+            HomeRemoteDataSourceImpl.shared.getGameSeries(game: game) { result in
+                switch result {
+                case .success(let gameSeries):
+                    promise(.success(gameSeries))
                 case .failure(let error):
                     promise(.failure(error))
                 }

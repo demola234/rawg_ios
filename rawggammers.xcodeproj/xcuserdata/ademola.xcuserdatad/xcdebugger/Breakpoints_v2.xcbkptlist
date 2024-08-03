@@ -20,5 +20,68 @@
             landmarkType = "37">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "67E8F0A7-0F86-4982-A1A0-93FDC97CA754"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "rawggammers/Feature/Search/Domain/Entity/SearchDataEntity.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "SearchDataEntity"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "67E8F0A7-0F86-4982-A1A0-93FDC97CA754 - b9bb72bccd45e01c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "rawggammers.SearchDataEntity.init() -&gt; rawggammers.SearchDataEntity"
+                  moduleName = "rawggammers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ademola/Desktop/SwiftUi/rawggammers/rawggammers/Feature/Search/Domain/Entity/SearchDataEntity.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  uuid = "67E8F0A7-0F86-4982-A1A0-93FDC97CA754 - aba251bbc40eeb68"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "rawggammers.SearchDataEntity.init(name: Swift.Optional&lt;Swift.String&gt;, id: Foundation.UUID) -&gt; rawggammers.SearchDataEntity"
+                  moduleName = "rawggammers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ademola/Desktop/SwiftUi/rawggammers/rawggammers/Feature/Search/Domain/Entity/SearchDataEntity.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "67E8F0A7-0F86-4982-A1A0-93FDC97CA754 - 6115091b07e510ad"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "rawggammers.SearchDataEntity.init(id: Foundation.UUID, name: Swift.Optional&lt;Swift.String&gt;) -&gt; rawggammers.SearchDataEntity"
+                  moduleName = "rawggammers"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ademola/Desktop/SwiftUi/rawggammers/rawggammers/Feature/Search/Domain/Entity/SearchDataEntity.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

@@ -9,9 +9,7 @@ import Foundation
 
 
 // MARK: - SearchDataEntity
-struct SearchDataEntity {
-    let slug, name: String?
-    let backgroundImage: String?
-    let updated: String?
-    let id: Int?
+struct SearchDataEntity: Identifiable {
+    var id: UUID = .init()
+    var name: String?
 }

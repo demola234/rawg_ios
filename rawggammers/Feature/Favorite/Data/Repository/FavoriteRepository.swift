@@ -31,7 +31,7 @@ class FavoriteRepositoryImpl: FavoriterRepository {
         
         func getAllFavorites() -> AnyPublisher<[FavoriteEntity], Error> {
             return Future<[FavoriteEntity], Error> { completion in
-                self.favoriteLocalDataSource.getAllFavorites { result in
+                self.favoriteLocalDataSource.getAllFavorites() { result in
                     switch result {
                     case .success(let favorites):
                         completion(.success(favorites))

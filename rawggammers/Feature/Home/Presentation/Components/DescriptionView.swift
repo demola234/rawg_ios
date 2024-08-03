@@ -9,32 +9,39 @@ import SwiftUI
 
 struct DescriptionView: View {
     @Binding var showFullDescription: Bool
+    var description: String
     
     var body: some View {
         ZStack {
             VStack(alignment: .leading) {
-                Text("S.T.A.L.K.E.R. 2 is a brand-new entry in the legendary series, enjoyed by millions of players worldwide. The explosive combination of first-person shooter, immersive sim and horror is back. It’s the ultimate S.T.A.L.K.E.R. experience of unprecedented scale, advanced graphics, freedom of choices")
+                
+                Text("About")
+                    .customFont(CustomFont.orbitronBold.copyWith(size: 16))
+                    .foregroundColor(Color.theme.accentTextColor)
+                    .padding(.bottom, 5)
+                
+                Text(description.removingHTMLOccurances)
+                    .customFont(CustomFont.orbitronRegular.copyWith(size: 14))
                     .lineLimit(showFullDescription ? nil : 5)
-                    .font(.callout)
                 
                 Button(action: {
-                    withAnimation(.spring) {
+                    withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.8, blendDuration: 0.8)) {
                         showFullDescription.toggle()
                     }
                 }) {
                     Rectangle()
                         .foregroundColor(.clear)
-                        .frame(width: 70, height: 20)
-                        .background(Color(red: 0.85, green: 0.85, blue: 0.85))
+                        .frame(width: 90, height: 20)
+                        .background(Color.theme.accentTextColor)
                         .overlay(
                             Text(showFullDescription ? "Less" : "Read more...")
-                                .font(.caption)
-                                .padding(.vertical, 4)
-                                .foregroundColor(Color.theme.background)
+                                .customFont(CustomFont.orbitronSemiBold.copyWith(size: 7))
+                                .padding(.vertical, 6)
+                                .foregroundColor(Color.theme.primaryTextColor)
                         )
                         .cornerRadius(5)
                 }
-                .accentColor(.blue)
+                .accentColor(.theme.primaryTextColor)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
@@ -42,5 +49,5 @@ struct DescriptionView: View {
 }
 
 #Preview {
-    DescriptionView(showFullDescription: .constant(false))
+    DescriptionView(showFullDescription: .constant(false), description:  "")
 }

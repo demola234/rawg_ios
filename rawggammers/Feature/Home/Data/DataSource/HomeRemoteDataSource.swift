@@ -18,10 +18,14 @@ protocol HomeRemoteDataSource {
     func getBestGameLastYear(year: Int, discover: Bool, ordering: String, page: Int, completion: @escaping (Result<GamesEntity, Error>) -> Void)
     func getGamesByPlatform(platform: Int, page: Int, completion: @escaping (Result<GamesEntity, Error>) -> Void)
     func getBestGames(year: Int, discover: Bool, ordering: String, page: Int, completion: @escaping (Result<GamesEntity, Error>) -> Void)
+    func getScreenShots(game: String, completion: @escaping (Result<GameScreenShotsEntity, Error>) -> Void)
+    func getGameSeries(game: String, completion: @escaping (Result<GamesEntity, Error>) -> Void)
 }
 
 
 class HomeRemoteDataSourceImpl: HomeRemoteDataSource {
+
+    
     static let shared = HomeRemoteDataSourceImpl()
     private var cancellables = Set<AnyCancellable>()
     
@@ -216,6 +220,48 @@ class HomeRemoteDataSourceImpl: HomeRemoteDataSource {
             } receiveValue: { games in
                 print("Games: \(games)")
                 completion(.success(games))
+            }
+            .store(in: &cancellables)
+    }
+    
+    func getScreenShots(game: String, completion: @escaping (Result<GameScreenShotsEntity, Error>) -> Void) {
+        let request = URLRequest(url: URL(string: "\(apiBaseURL)games/\(game)/screenshots?key=\(apiKey)&filter=true")!)
+        
+        NetworkManager.getRequest(url: request)
+            .decode(type: GameScreenShotsEntity.self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main)
+            .sink { completionResponse in
+                switch completionResponse {
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                    completion(.failure(error as? NetworkError ?? .invalidResponse))
+                case .finished:
+                    break
+                }
+            } receiveValue: { screenshots in
+                print("Screenshots: \(screenshots)")
+                completion(.success(screenshots))
+            }
+            .store(in: &cancellables)
+    }
+    
+    func getGameSeries(game: String, completion: @escaping (Result<GamesEntity, Error>) -> Void) {
+        let request = URLRequest(url: URL(string: "\(apiBaseURL)games/\(game)/game-series?key=\(apiKey)&filter=true")!)
+        
+        NetworkManager.getRequest(url: request)
+            .decode(type: GamesEntity.self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main)
+            .sink { completionResponse in
+                switch completionResponse {
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                    completion(.failure(error as? NetworkError ?? .invalidResponse))
+                case .finished:
+                    break
+                }
+            } receiveValue: { gameSeries in
+                print("Game Series: \(gameSeries)")
+                completion(.success(gameSeries))
             }
             .store(in: &cancellables)
     }

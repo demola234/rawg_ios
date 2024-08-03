@@ -10,7 +10,7 @@ import Combine
 
 
 protocol SearchRemoteDataSource {
-    func searchGames(query: String, completion: @escaping (Result<SearchEntity, Error>) -> Void)
+    func searchGames(query: String, page: Int, completion: @escaping (Result<SearchEntity, Error>) -> Void)
 }
 
 
@@ -34,13 +34,13 @@ class SearchRemoteDataSourceImpl: SearchRemoteDataSource {
       }
 
     
-    func searchGames(query: String, completion: @escaping (Result<SearchEntity, Error>) -> Void) {
+    func searchGames(query: String, page: Int, completion: @escaping (Result<SearchEntity, Error>) -> Void) {
 //        URL: https://api.rawg.io/api/games?key=8a275dde2a4f416e8931d049b981d6c4&filter=true&search=one+piece&page=1
         
         var urlComponents = URLComponents(string: "\(apiBaseURL)games")
         urlComponents?.queryItems = [
 //                   URLQueryItem(name: "filter", value: String(filter)),
-//                   URLQueryItem(name: "page", value: String(page)),
+                   URLQueryItem(name: "page", value: String(page)),
                     URLQueryItem(name: "key", value: apiKey),
                     URLQueryItem(name: "search", value: query.replacingOccurrences(of: " ", with: "+"))
                ]

@@ -9,33 +9,28 @@ import Foundation
 import CoreData
 import Combine
 
-
 protocol SearchLocalDataSource {
     func saveSearch(query: SearchDataEntity, completion: @escaping (Result<Bool, Error>) -> Void)
     func getAllSavedSearches(completion: @escaping (Result<[SearchDataEntity], Error>) -> Void)
+    func deleteSearch(query: SearchDataEntity, completion: @escaping (Result<Bool, Error>) -> Void)
 }
-
 
 class SearchLocalDataSourceImpl: SearchLocalDataSource {
     
     static let shared = SearchLocalDataSourceImpl(context: CoreDataStack.shared.context)
     private let context: NSManagedObjectContext
-        
-        init(context: NSManagedObjectContext) {
-            self.context = context
-        }
     
+    init(context: NSManagedObjectContext) {
+        self.context = context
+    }
     
     func saveSearch(query: SearchDataEntity, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let search = SearchDataEntry(context: context)
-        search.id = Int32(query.id ?? 0)
+        let search = SearchData(context: context)
         search.name = query.name
-        search.slug = query.slug
-        search.backgroundImage = query.backgroundImage
-        search.updatedAt = query.updated
+        search.id = query.id
         
         do {
-            try context.save()
+            try self.context.save()
             completion(.success(true))
         } catch {
             completion(.failure(error))
@@ -43,37 +38,36 @@ class SearchLocalDataSourceImpl: SearchLocalDataSource {
     }
     
     func getAllSavedSearches(completion: @escaping (Result<[SearchDataEntity], Error>) -> Void) {
-            let request: NSFetchRequest<SearchDataEntry> = SearchDataEntry.fetchRequest()
-            do {
-                let searches = try context.fetch(request)
-                let searchEntities = searches.map { search in
-                    SearchDataEntity(
-                        slug: search.slug,
-                        name: search.name,
-                        backgroundImage: search.backgroundImage,
-                        updated: search.updatedAt,
-                        id: Int(search.id)
-                    )
-                }
-                completion(.success(searchEntities))
-            } catch {
-                completion(.failure(error))
-            }
-    }
-    
-    func deleteSearch(query: SearchDataEntity, completion: @escaping (Result<Bool, Error>) -> Void) {
-        let request: NSFetchRequest<SearchDataEntry> = SearchDataEntry.fetchRequest()
-        request.predicate = NSPredicate(format: "id == %d", query.id ?? 0)
+        let request: NSFetchRequest<SearchData> = SearchData.fetchRequest()
         
         do {
-            let search = try context.fetch(request)
-            search.forEach { context.delete($0) }
-            try context.save()
+            let searches = try self.context.fetch(request)
+            
+            // Logging the fetched data for debugging
+            print("Fetched searches: \(searches)")
+            
+            let searchEntities = searches.map({ SearchDataEntity(id: $0.id!, name: $0.name!) })
+            
+            print("Search Entities: \(searchEntities)")
+            completion(.success(searchEntities))
+        } catch {
+            completion(.failure(error))
+        }
+    }
+
+
+    
+    func deleteSearch(query: SearchDataEntity, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let request: NSFetchRequest<SearchData> = SearchData.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", query.id as CVarArg)
+        
+        do {
+            let searches = try self.context.fetch(request)
+            searches.forEach { context.delete($0) }
+            try self.context.save()
             completion(.success(true))
         } catch {
             completion(.failure(error))
         }
     }
-    
-    
 }

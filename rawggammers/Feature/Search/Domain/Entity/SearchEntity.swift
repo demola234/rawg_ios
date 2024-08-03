@@ -10,7 +10,7 @@ import Foundation
 // MARK: - SearchEntity
 struct SearchEntity: Codable {
     let count: Int?
-    let results: [SearchResult]?
+    let results: [ResultData]?
     
     enum CodingKeys: String, CodingKey {
         case count
@@ -25,6 +25,7 @@ struct SearchResult: Codable {
     let released: String?
     let backgroundImage: String?
     let updated: String?
+    let platforms: [PlatformElement]?
     let stores: [SearchStore]?
     let id: Int?
     let score: String?
@@ -34,6 +35,7 @@ struct SearchResult: Codable {
         case slug, name, playtime, released
         case backgroundImage = "background_image"
         case updated, stores, id, score
+        case platforms
         case reviewsCount = "reviews_count"
         case communityRating = "community_rating"
     }

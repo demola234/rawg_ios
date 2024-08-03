@@ -29,6 +29,7 @@ class DeveloperPreview {
                 slug: "vampire-the-masquerade-bloodlines-2",
                 name: "Vampire: The Masquerade - Bloodlines 2",
                 released: "2024-11-30",
+                description: "Vampire: The Masquerade - Bloodlines 2 is the successor to the iconic RPG Vampire: The Masquerade - Bloodlines. Set in a Seattle faithfully reimagined in the World of Darkness, Vampire: The Masquerade - Bloodlines 2 features reactive storytelling, fast-paced melee combat, and intriguing characters with their own hidden motives. Created in an act of vampiric insurrection, players start the game as a fledgling Thinblood whose existence ignites a war among the vampire factions in Seattle. To survive in vampire society, players will enter into uneasy alliances with Seattle’s factions and join one of the full-blood vampire clans while stalking the city streets for prey, maneuvering complex political relationships, and balancing the need for power with the desire for moral code.",
                 backgroundImage: "https://media.rawg.io/media/games/fb5/fb5e0fdb1f6bb0e8b5da5d08bb83a5fc.jpg",
                 rating: 3.91,
                 ratingTop: 5,
@@ -41,10 +42,12 @@ class DeveloperPreview {
                 ratingsCount: 244,
                 reviewsTextCount: 8,
                 added: 2101,
+                parentsCount: 5,
                 playtime: 329,
                 suggestionsCount: 544,
                 updated: "2024-07-20T01:24:37",
                 reviewsCount: 253,
+                website: "https://www.bloodlines2.com/",
                 platforms: [
                     PlatformElement(
                         platform: PlatformPlatform(
@@ -153,6 +156,15 @@ class DeveloperPreview {
                             domain: "store.steampowered.com",
                             language: nil
                         )
+                    )
+                ],
+                developers: [
+                    Developers(
+                        id: 3498,
+                        name: "Hardsuit Labs",
+                        slug: "hardsuit-labs",
+                        gamesCount: 1,
+                        imageBackground: "https://media.rawg.io/media/games/9f1/9f1891779cb20f44de93cef33b067e50.jpg"
                     )
                 ],
                 tags: [

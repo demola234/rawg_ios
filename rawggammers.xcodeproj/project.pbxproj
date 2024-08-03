@@ -32,8 +32,7 @@
 		806BEF2D2C5B83D900EA340F /* HomePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806BEF2C2C5B83D900EA340F /* HomePreview.swift */; };
 		806BEF2F2C5BCF7000EA340F /* ShimmerLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806BEF2E2C5BCF7000EA340F /* ShimmerLoading.swift */; };
 		806BEF312C5C071B00EA340F /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806BEF302C5C071B00EA340F /* TabBar.swift */; };
-		806BEF332C5C16DD00EA340F /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806BEF322C5C16DD00EA340F /* CustomTabView.swift */; };
-		806BEF352C5C1DFA00EA340F /* TabCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806BEF342C5C1DFA00EA340F /* TabCurve.swift */; };
+		806BEF382C5CAFCD00EA340F /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = 806BEF372C5CAFCD00EA340F /* RiveRuntime */; };
 		807B9D582C53D9940086A3C3 /* HomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807B9D572C53D9940086A3C3 /* HomeRepository.swift */; };
 		807B9D5A2C53DDA60086A3C3 /* GameEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807B9D592C53DDA60086A3C3 /* GameEntity.swift */; };
 		807B9D5C2C53DF9B0086A3C3 /* HomeRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807B9D5B2C53DF9B0086A3C3 /* HomeRepositoryImpl.swift */; };
@@ -105,6 +104,10 @@
 		80CD42532C4FD4A000CA9416 /* Authentication_Remote_DS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CD42522C4FD4A000CA9416 /* Authentication_Remote_DS.swift */; };
 		80CD42572C4FDB0600CA9416 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CD42562C4FDB0600CA9416 /* AuthenticationViewModel.swift */; };
 		80CD425B2C4FDC7C00CA9416 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CD425A2C4FDC7C00CA9416 /* LoginView.swift */; };
+		80CFB3A82C5D3B58009D8F26 /* SimilarProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CFB3A72C5D3B58009D8F26 /* SimilarProjectView.swift */; };
+		80CFB3AA2C5DAE3A009D8F26 /* GameScreenShotsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CFB3A92C5DAE3A009D8F26 /* GameScreenShotsEntity.swift */; };
+		80CFB3AC2C5DD91E009D8F26 /* SearchTextFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CFB3AB2C5DD91E009D8F26 /* SearchTextFieldComponent.swift */; };
+		80CFB3AF2C5DE239009D8F26 /* SearchCardComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CFB3AE2C5DE239009D8F26 /* SearchCardComponent.swift */; };
 		80D118D22C578CF900C5FE4A /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 80D118D12C578CF900C5FE4A /* FirebaseAnalytics */; };
 		80D118D42C578CF900C5FE4A /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 80D118D32C578CF900C5FE4A /* FirebaseAnalyticsOnDeviceConversion */; };
 		80D118D62C578CF900C5FE4A /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 80D118D52C578CF900C5FE4A /* FirebaseAnalyticsSwift */; };
@@ -118,7 +121,7 @@
 		80D118EE2C57989600C5FE4A /* InfoRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D118ED2C57989600C5FE4A /* InfoRowView.swift */; };
 		80D118F02C5798B200C5FE4A /* SectionTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D118EF2C5798B200C5FE4A /* SectionTitleView.swift */; };
 		80D118F32C57B81400C5FE4A /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80D118F22C57B81400C5FE4A /* AVKit.framework */; };
-		80D48CE42C55232200986AA4 /* SearchDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 80D48CE22C55232200986AA4 /* SearchDataContainer.xcdatamodeld */; };
+		80D48CE42C55232200986AA4 /* SearchData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 80D48CE22C55232200986AA4 /* SearchData.xcdatamodeld */; };
 		80D48CE72C55274200986AA4 /* SearchCoreDataImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D48CE62C55274200986AA4 /* SearchCoreDataImpl.swift */; };
 		80D48CE92C5527D800986AA4 /* SearchDataEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D48CE82C5527D800986AA4 /* SearchDataEntity.swift */; };
 		80D48CF22C552CA000986AA4 /* FavoriteEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D48CF12C552CA000986AA4 /* FavoriteEntity.swift */; };
@@ -149,8 +152,6 @@
 		806BEF2C2C5B83D900EA340F /* HomePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePreview.swift; sourceTree = "<group>"; };
 		806BEF2E2C5BCF7000EA340F /* ShimmerLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerLoading.swift; sourceTree = "<group>"; };
 		806BEF302C5C071B00EA340F /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
-		806BEF322C5C16DD00EA340F /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
-		806BEF342C5C1DFA00EA340F /* TabCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCurve.swift; sourceTree = "<group>"; };
 		807B9D572C53D9940086A3C3 /* HomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepository.swift; sourceTree = "<group>"; };
 		807B9D592C53DDA60086A3C3 /* GameEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEntity.swift; sourceTree = "<group>"; };
 		807B9D5B2C53DF9B0086A3C3 /* HomeRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepositoryImpl.swift; sourceTree = "<group>"; };
@@ -208,6 +209,11 @@
 		80CD42522C4FD4A000CA9416 /* Authentication_Remote_DS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication_Remote_DS.swift; sourceTree = "<group>"; };
 		80CD42562C4FDB0600CA9416 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		80CD425A2C4FDC7C00CA9416 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		80CFB3A62C5CF861009D8F26 /* AnimatedIcon */ = {isa = PBXFileReference; lastKnownFileType = file; path = AnimatedIcon; sourceTree = "<group>"; };
+		80CFB3A72C5D3B58009D8F26 /* SimilarProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimilarProjectView.swift; sourceTree = "<group>"; };
+		80CFB3A92C5DAE3A009D8F26 /* GameScreenShotsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScreenShotsEntity.swift; sourceTree = "<group>"; };
+		80CFB3AB2C5DD91E009D8F26 /* SearchTextFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextFieldComponent.swift; sourceTree = "<group>"; };
+		80CFB3AE2C5DE239009D8F26 /* SearchCardComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCardComponent.swift; sourceTree = "<group>"; };
 		80D118E52C57976B00C5FE4A /* GameHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHeaderView.swift; sourceTree = "<group>"; };
 		80D118E72C57981400C5FE4A /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		80D118E92C57983F00C5FE4A /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
@@ -246,6 +252,7 @@
 				80D118D22C578CF900C5FE4A /* FirebaseAnalytics in Frameworks */,
 				808B65792C59E5DC000548F6 /* FirebaseAuth in Frameworks */,
 				80D118D42C578CF900C5FE4A /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				806BEF382C5CAFCD00EA340F /* RiveRuntime in Frameworks */,
 				808B65772C59E5DC000548F6 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				808B65672C59E0AA000548F6 /* FirebaseAuthCombine-Community in Frameworks */,
 				80D118D62C578CF900C5FE4A /* FirebaseAnalyticsSwift in Frameworks */,
@@ -274,8 +281,6 @@
 			isa = PBXGroup;
 			children = (
 				809E0E802C53C8DD00F59101 /* TabView.swift */,
-				806BEF322C5C16DD00EA340F /* CustomTabView.swift */,
-				806BEF342C5C1DFA00EA340F /* TabCurve.swift */,
 			);
 			path = TabView;
 			sourceTree = "<group>";
@@ -289,6 +294,7 @@
 				80D118EF2C5798B200C5FE4A /* SectionTitleView.swift */,
 				80AC73FB2C56597B00BC8E65 /* PlatformCardDetails.swift */,
 				80AC73FD2C565B9D00BC8E65 /* LatestGamesCardView.swift */,
+				80CFB3A72C5D3B58009D8F26 /* SimilarProjectView.swift */,
 				80AC73F42C564D6700BC8E65 /* GamesCardView.swift */,
 				80B3C1ED2C592A2A00F15254 /* HomeHeaderView.swift */,
 				80D118E52C57976B00C5FE4A /* GameHeaderView.swift */,
@@ -373,6 +379,7 @@
 		807B9D742C542D610086A3C3 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				80CFB3AD2C5DE222009D8F26 /* Component */,
 				807B9D762C5432A60086A3C3 /* ViewModel */,
 				807B9D752C5432980086A3C3 /* View */,
 			);
@@ -426,7 +433,7 @@
 			children = (
 				807B9D7D2C54331F0086A3C3 /* SearchEntity.swift */,
 				80D48CE82C5527D800986AA4 /* SearchDataEntity.swift */,
-				80D48CE22C55232200986AA4 /* SearchDataContainer.xcdatamodeld */,
+				80D48CE22C55232200986AA4 /* SearchData.xcdatamodeld */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -477,6 +484,7 @@
 				8084DBF22C4C13F5006160F9 /* rawggammersApp.swift */,
 				805614372C51061000FBDFE7 /* GoogleService-Info.plist */,
 				807B9D6D2C5401640086A3C3 /* Environments.xcconfig */,
+				80CFB3A52C5CF84D009D8F26 /* RiveAsset */,
 				8084DBF62C4C13F7006160F9 /* Assets.xcassets */,
 				8084DBF82C4C13F7006160F9 /* Preview Content */,
 			);
@@ -498,6 +506,7 @@
 				8099DF502C529D0000A9A24F /* CustomBotton.swift */,
 				8099DF522C52A8F900A9A24F /* SignInWithAppleButton.swift */,
 				80169C6B2C5A8B2E00935FBA /* AuthButton.swift */,
+				80CFB3AB2C5DD91E009D8F26 /* SearchTextFieldComponent.swift */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -652,6 +661,7 @@
 			isa = PBXGroup;
 			children = (
 				807B9D592C53DDA60086A3C3 /* GameEntity.swift */,
+				80CFB3A92C5DAE3A009D8F26 /* GameScreenShotsEntity.swift */,
 				807B9D6E2C54075C0086A3C3 /* MoviesEntity.swift */,
 				807B9D6B2C53FE1B0086A3C3 /* PlatformsEntity.swift */,
 			);
@@ -764,6 +774,22 @@
 				80BC16812C5017FD00533E84 /* RegistrationView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		80CFB3A52C5CF84D009D8F26 /* RiveAsset */ = {
+			isa = PBXGroup;
+			children = (
+				80CFB3A62C5CF861009D8F26 /* AnimatedIcon */,
+			);
+			path = RiveAsset;
+			sourceTree = "<group>";
+		};
+		80CFB3AD2C5DE222009D8F26 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				80CFB3AE2C5DE239009D8F26 /* SearchCardComponent.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 		80D118F12C57B81400C5FE4A /* Frameworks */ = {
@@ -930,6 +956,7 @@
 				808B65782C59E5DC000548F6 /* FirebaseAuth */,
 				808B657A2C59E5DC000548F6 /* FirebaseAuthCombine-Community */,
 				808B659E2C59E5DC000548F6 /* FirebaseStorage */,
+				806BEF372C5CAFCD00EA340F /* RiveRuntime */,
 			);
 			productName = rawggammers;
 			productReference = 8084DBEF2C4C13F5006160F9 /* rawggammers.app */;
@@ -962,6 +989,7 @@
 			packageReferences = (
 				80BC16842C501F3200533E84 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				80BC168E2C507F6500533E84 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				806BEF362C5CAFCB00EA340F /* XCRemoteSwiftPackageReference "rive-ios" */,
 			);
 			productRefGroup = 8084DBF02C4C13F5006160F9 /* Products */;
 			projectDirPath = "";
@@ -1014,7 +1042,7 @@
 				8099DF412C52453900A9A24F /* Colors.swift in Sources */,
 				806BEF272C5B6D3200EA340F /* ImageManager.swift in Sources */,
 				806BEF252C5B6CFF00EA340F /* ImageDownloadManager.swift in Sources */,
-				80D48CE42C55232200986AA4 /* SearchDataContainer.xcdatamodeld in Sources */,
+				80D48CE42C55232200986AA4 /* SearchData.xcdatamodeld in Sources */,
 				80CD2CE12C51FFD7007BC0E7 /* LaunchView.swift in Sources */,
 				80CD425B2C4FDC7C00CA9416 /* LoginView.swift in Sources */,
 				80D48CF92C552E3B00986AA4 /* FavoriteRepository.swift in Sources */,
@@ -1022,7 +1050,6 @@
 				809E0E872C53CAE600F59101 /* FavoriteView.swift in Sources */,
 				8029513B2C55FA6B0061B38B /* GameDetailsView.swift in Sources */,
 				806A32B22C4FD36100D5BC71 /* AuthenticationRepository.swift in Sources */,
-				806BEF332C5C16DD00EA340F /* CustomTabView.swift in Sources */,
 				80CD42532C4FD4A000CA9416 /* Authentication_Remote_DS.swift in Sources */,
 				8084DBF32C4C13F5006160F9 /* rawggammersApp.swift in Sources */,
 				806BEF292C5B6D6900EA340F /* NetworkImageView.swift in Sources */,
@@ -1037,15 +1064,19 @@
 				80D48CF52C552CB700986AA4 /* FavoriteDataContainer.xcdatamodeld in Sources */,
 				80D48CE92C5527D800986AA4 /* SearchDataEntity.swift in Sources */,
 				807B9D862C543B920086A3C3 /* SearchViewModel.swift in Sources */,
+				80CFB3AF2C5DE239009D8F26 /* SearchCardComponent.swift in Sources */,
 				807B9D6F2C54075C0086A3C3 /* MoviesEntity.swift in Sources */,
+				80CFB3AA2C5DAE3A009D8F26 /* GameScreenShotsEntity.swift in Sources */,
 				80CD42512C4FD44A00CA9416 /* AuthenticationRepositoryImpl.swift in Sources */,
 				809E0E892C53CB3C00F59101 /* SearchView.swift in Sources */,
 				806BEF212C5B508C00EA340F /* ForgetPasswordView.swift in Sources */,
 				80CD2CE52C522D4E007BC0E7 /* Fonts.swift in Sources */,
+				80CFB3AC2C5DD91E009D8F26 /* SearchTextFieldComponent.swift in Sources */,
 				809E0E612C52E4A600F59101 /* AppDelegate.swift in Sources */,
 				807B9D582C53D9940086A3C3 /* HomeRepository.swift in Sources */,
 				807B9D842C5439010086A3C3 /* SearchRemoteDataSource.swift in Sources */,
 				809E0E832C53C90400F59101 /* HomeView.swift in Sources */,
+				80CFB3A82C5D3B58009D8F26 /* SimilarProjectView.swift in Sources */,
 				807B9D802C5436850086A3C3 /* SearchRepositoryImpl.swift in Sources */,
 				80D118EA2C57983F00C5FE4A /* DescriptionView.swift in Sources */,
 				80D118F02C5798B200C5FE4A /* SectionTitleView.swift in Sources */,
@@ -1070,7 +1101,6 @@
 				80BC16822C5017FD00533E84 /* RegistrationView.swift in Sources */,
 				80AC73FE2C565B9D00BC8E65 /* LatestGamesCardView.swift in Sources */,
 				806BEF312C5C071B00EA340F /* TabBar.swift in Sources */,
-				806BEF352C5C1DFA00EA340F /* TabCurve.swift in Sources */,
 				80AC73F92C56577E00BC8E65 /* UnevenRoundedRectangle.swift in Sources */,
 				80AC73F52C564D6700BC8E65 /* GamesCardView.swift in Sources */,
 				807B9D7C2C5433030086A3C3 /* SearchRepository.swift in Sources */,
@@ -1285,6 +1315,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		806BEF362C5CAFCB00EA340F /* XCRemoteSwiftPackageReference "rive-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rive-app/rive-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 		80BC16842C501F3200533E84 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
@@ -1343,6 +1381,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 80BC16842C501F3200533E84 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		806BEF372C5CAFCD00EA340F /* RiveRuntime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 806BEF362C5CAFCB00EA340F /* XCRemoteSwiftPackageReference "rive-ios" */;
+			productName = RiveRuntime;
 		};
 		808B65582C59E0AA000548F6 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1462,13 +1505,13 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		80D48CE22C55232200986AA4 /* SearchDataContainer.xcdatamodeld */ = {
+		80D48CE22C55232200986AA4 /* SearchData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				80D48CE32C55232200986AA4 /* SearchDataContainer.xcdatamodel */,
 			);
 			currentVersion = 80D48CE32C55232200986AA4 /* SearchDataContainer.xcdatamodel */;
-			path = SearchDataContainer.xcdatamodeld;
+			path = SearchData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

@@ -30,17 +30,21 @@ struct GamesEntity: Codable {
 struct ResultData: Codable {
     let id: Int?
     let slug, name, released: String?
+    let description: String?
     let backgroundImage: String?
     let rating: Double?
     let ratingTop: Int?
     let ratings: [Rating]?
     let ratingsCount, reviewsTextCount, added: Int?
+    let parentsCount: Int?
     let playtime, suggestionsCount: Int?
     let updated: String?
     let reviewsCount: Int?
+    let website: String?
     let platforms: [PlatformElement]?
     let genres: [Genre]?
     let stores: [Store]?
+    let developers: [Developers]?
     let tags: [Genre]?
     let shortScreenshots: [ShortScreenshot]?
     let communityRating: Int?
@@ -48,8 +52,9 @@ struct ResultData: Codable {
     enum CodingKeys: String, CodingKey {
         case id, slug, name, released
         case backgroundImage = "background_image"
-        case rating
+        case description, rating
         case ratingTop = "rating_top"
+        case parentsCount = "parents_count"
         case ratings
         case ratingsCount = "ratings_count"
         case reviewsTextCount = "reviews_text_count"
@@ -57,9 +62,24 @@ struct ResultData: Codable {
         case suggestionsCount = "suggestions_count"
         case updated
         case reviewsCount = "reviews_count"
-        case platforms, genres, stores, tags
+        case website
+        case platforms, genres, stores, tags, developers
         case shortScreenshots = "short_screenshots"
         case communityRating = "community_rating"
+    }
+}
+
+// MARK: - Developers
+struct Developers: Codable {
+    let id: Int?
+    let name, slug: String?
+    let gamesCount: Int?
+    let imageBackground: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id, name, slug
+        case gamesCount = "games_count"
+        case imageBackground = "image_background"
     }
 }
 

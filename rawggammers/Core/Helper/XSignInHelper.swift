@@ -16,10 +16,10 @@ final class XSignInHelper {
     init() {}
     
     func signInWithTwitter() async throws {
-        var provider = OAuthProvider(providerID: "twitter.com")
+        let provider = OAuthProvider(providerID: "twitter.com")
         
             provider.getCredentialWith(nil) { credential, error in
-                if let error = error {
+                if error != nil {
                 } else if let credential = credential {
                 Auth.auth().signIn(with: credential)
                    

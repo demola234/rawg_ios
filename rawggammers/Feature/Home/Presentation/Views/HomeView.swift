@@ -4,7 +4,6 @@
 //
 //  Created by Ademola Kolawole on 26/07/2024.
 //
-
 import SwiftUI
 
 struct HomeView: View {
@@ -12,6 +11,8 @@ struct HomeView: View {
     @EnvironmentObject var authViewModel: AuthenticationViewModel
     @State private var scrollAnimation: Bool = false
     @State private var showScrollToTopButton: Bool = false
+    @State private var selectedDetails: ResultData? = nil
+    @State private var showDetailsView = false
     @Namespace private var namespace
     
     var body: some View {
@@ -25,12 +26,16 @@ struct HomeView: View {
                     
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack(spacing: 16) {
-                            // searchBar
                             ScrollTabBarView(selectedTab: $homeViewModel.selectedTab)
                                 .padding(.horizontal, 16)
                                 .padding(.vertical, 10)
                             content
                         }
+                    }
+                }
+                .navigationDestination(isPresented: $showDetailsView) {
+                    if selectedDetails != nil {
+                        GameDetailsView(gameDetails: $selectedDetails)
                     }
                 }
             }
@@ -42,56 +47,39 @@ struct HomeView: View {
         }
     }
     
-    private var searchBar: some View {
-        HStack(alignment: .center, spacing: 8) { }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 11)
-            .frame(width: 396, height: 50, alignment: .leading)
-            .background(Color.white)
-            .cornerRadius(5)
-            .overlay(
-                RoundedRectangle(cornerRadius: 5)
-                    .inset(by: 0.5)
-                    .stroke(Color(red: 0.75, green: 0.76, blue: 0.79), lineWidth: 1)
-            )
-    }
-    
     private var content: some View {
         VStack(alignment: .leading) {
-            
             sectionTitle(homeViewModel.scrollTitle)
             if !homeViewModel.isGamesLoading {
                 horizontalScrollView(items: homeViewModel.games, id: \.id) { game in
                     GeometryReader { geometry in
-                        NavigationLink(destination: GameDetailsView(gameId: game.slug ?? "").hideTabBar(true)) {
-                            GamesCardView(gameData: game)
-                                .rotation3DEffect(
-                                    Angle(degrees: Double((geometry.frame(in: .global).minX - 30) / -20)),
-                                    axis: (x: 0, y: 10, z: 0)
-                                )
-                                .frame(width: 210, height: 250)
-                        }
+                        GamesCardView(gameData: game)
+                            .rotation3DEffect(
+                                Angle(degrees: Double((geometry.frame(in: .global).minX - 30) / -20)),
+                                axis: (x: 0, y: 10, z: 0)
+                            )
+                            .frame(width: 210, height: 250)
+                            .onTapGesture {
+                                segue(gameDetails: game)
+                            }
                     }
                     .frame(width: 210, height: 270)
                 }
             } else {
-                
                 ProgressView()
-                
             }
             
             sectionTitle("Platforms")
             horizontalScrollView(items: homeViewModel.platforms?.results ?? [], id: \.id) { platform in
-                NavigationLink(destination: GameDetailsView(gameId: platform.slug ?? "").hideTabBar(true)) {
-                    PlatformCardDetails(platformDetails: platform)
-                }
+                PlatformCardDetails(platformDetails: platform)
             }
             
             sectionTitle("Latest Games")
             verticalScrollView(items: homeViewModel.bestGames, id: \.id) { bestGame in
-                NavigationLink(destination: GameDetailsView(gameId: bestGame.slug ?? "").hideTabBar(true)) {
-                    LatestGamesCardView(gameDetails: bestGame)
-                }
+                LatestGamesCardView(gameDetails: bestGame)
+                    .onTapGesture {
+                        segue(gameDetails: bestGame)
+                    }
             }
             
             if homeViewModel.isGamesLoading {
@@ -109,6 +97,15 @@ struct HomeView: View {
                 .frame(height: 50)
             }
         }
+    }
+    
+    private func fetchDataIfNeeded() {
+       
+    }
+    
+    private func segue(gameDetails: ResultData) {
+        selectedDetails = gameDetails
+        showDetailsView.toggle()
     }
     
     private func sectionTitle(_ title: String) -> some View {

@@ -9,12 +9,12 @@ import SwiftUI
 
 struct FancyTabView: View {
     @Environment(\.hideTabBar) var hideTabBar
-    
+
     @State private var selectedTab = 0
-    let tabBarImageNames = ["house.fill", "magnifyingglass", "heart.fill", "person.fill"]
+    let tabBarImageNames = ["home", "search", "favorite", "person.fill"]
     let tabBarTitles = ["Home", "Search", "Favourites", "Profile"]
-    
-    
+
+
     var body: some View {
         VStack {
             ZStack {
@@ -34,16 +34,10 @@ struct FancyTabView: View {
             }
             Spacer()
             CustomTabBar(selectedTab: $selectedTab, tabBarImageNames: tabBarImageNames, tabBarTitles: tabBarTitles)
-                .background(Color.white)
-                .frame(height: 60)
-                .padding()
-                .onAppear {
-                    UITabBar.appearance().isHidden = hideTabBar
-                }
-                .onChange(of: hideTabBar) { hide in
-                    UITabBar.appearance().isHidden = hide
-                }
+                .frame(height: 80)
+            
         }
+        .edgesIgnoringSafeArea(.bottom)
         
     }
 }
@@ -52,7 +46,7 @@ struct CustomTabBar: View {
     @Binding var selectedTab: Int
     let tabBarImageNames: [String]
     let tabBarTitles: [String]
-    
+
     var body: some View {
         HStack {
             ForEach(0..<tabBarImageNames.count, id: \.self) { index in
@@ -63,7 +57,7 @@ struct CustomTabBar: View {
                     }
                 }) {
                     VStack {
-                        Image(systemName: tabBarImageNames[index])
+                        Image(tabBarImageNames[index])
                             .font(.system(size: 24, weight: .bold))
                             .foregroundColor(selectedTab == index ? .blue : .gray)
                             .scaleEffect(selectedTab == index ? 1.2 : 1.0)

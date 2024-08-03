@@ -14,11 +14,14 @@ class HomeViewModel: ObservableObject {
     @Published var platforms: PlatformsEntity?
     @Published var movies: MoviesEntity?
     @Published var gameDetails: ResultData?
+    @Published var gameSeries: [ResultData]?
     @Published var isGamesLoading: Bool = false
+    @Published var isDetailsLoading: Bool = false
     @Published var selectedTab: Tab = .trending
     @Published var scrollTitle: String = "New and Trending Games"
     @Published var isPlatformsLoading: Bool
     @Published var errorMessage: String
+    @Published var screenShots: GameScreenShotsEntity?
     private var currentPage: Int = 1
     private var canLoadMore: Bool = true
     private var ordering: String = "-relevance"
@@ -28,7 +31,7 @@ class HomeViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     
-    init(repository: HomeRepository = HomeRepositoryImpl.shared, errorMessage: String = "", games: [ResultData] = [], isGamesLoading: Bool = false, platforms: PlatformsEntity? = nil, isPlatformsLoading: Bool = false, movies: MoviesEntity? = nil, gameDetails: ResultData? = nil, bestGames: [ResultData] = [], selectedTab: Tab = .trending) {
+    init(repository: HomeRepository = HomeRepositoryImpl.shared, errorMessage: String = "", games: [ResultData] = [], isGamesLoading: Bool = false, platforms: PlatformsEntity? = nil, isPlatformsLoading: Bool = false, movies: MoviesEntity? = nil, gameDetails: ResultData? = nil, bestGames: [ResultData] = [], selectedTab: Tab = .trending, isDetailsLoading: Bool = false) {
         self.repository = repository
         self.errorMessage = errorMessage
         self.games = games
@@ -39,9 +42,20 @@ class HomeViewModel: ObservableObject {
         self.gameDetails = gameDetails
         self.bestGames = bestGames
         self.selectedTab = selectedTab
-        getGames()
-        getPlatForms()
-        getBestGames()
+        self.isDetailsLoading = isDetailsLoading
+        
+        if games.isEmpty {
+            getGames()
+        }
+        if platforms?.results?.isEmpty ?? true {
+         getPlatForms()
+        }
+        if bestGames.isEmpty {
+           getBestGames()
+        }
+//        getGames()
+//        getPlatForms()
+//        getBestGames()
        
     }
     
@@ -130,6 +144,7 @@ class HomeViewModel: ObservableObject {
     
     
     func getGameDetails(game: String) {
+        self.isDetailsLoading = true
         repository.getGameDetails(game: game)
             .receive(on: DispatchQueue.main)
             .sink { completion in
@@ -138,10 +153,12 @@ class HomeViewModel: ObservableObject {
                     break
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")
+                    self.isDetailsLoading = false
                     self.errorMessage = error.localizedDescription
                 }
             } receiveValue: { [weak self] gameDetails in
                 self?.gameDetails = gameDetails
+                self?.isDetailsLoading = false
             }
             .store(in: &cancellables)
     }
@@ -224,6 +241,40 @@ class HomeViewModel: ObservableObject {
                 }
             } receiveValue: { [weak self] platforms in
                 self?.platforms = platforms
+            }
+            .store(in: &cancellables)
+    }
+    
+    func getScreenshots(game: String) {
+        repository.getScreenShots(game: game)
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                    self.errorMessage = error.localizedDescription
+                }
+            } receiveValue: { [weak self] screenshots in
+               self?.screenShots = screenshots
+            }
+            .store(in: &cancellables)
+    }
+    
+    func getSimilarGames(game: String) {
+        repository.getGameSeries(game: game)
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                    self.errorMessage = error.localizedDescription
+                }
+            } receiveValue: { [weak self] gameSeries in
+                self?.gameSeries = gameSeries.results
             }
             .store(in: &cancellables)
     }

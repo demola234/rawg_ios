@@ -10,16 +10,29 @@ import SwiftUI
 struct InfoRowView: View {
     let title: String
     let value: String
+    var isLink: Bool = false
+    
+    let defaultUrl = URL(string:"https://rawgclone.olarotimi.dev/").unsafelyUnwrapped
     
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
                 Text(title)
-                    .font(Font.custom("Orbitron", size: 12).weight(.bold))
-                    .foregroundColor(.white)
+                    .customFont(CustomFont.orbitronSemiBold.copyWith(size: 12))
+                    .foregroundColor(.theme.primaryTextColor)
+                    .padding(.vertical, 5)
+                
                 Text(value)
-                    .font(Font.custom("Orbitron", size: 10).weight(.medium))
-                    .foregroundColor(Color(red: 0.75, green: 0.76, blue: 0.79))
+                    .customFont(CustomFont.orbitronNormal.copyWith(size: 10))
+                    .foregroundColor(isLink ? .theme.goldColor :.theme.primaryTextColor)
+                    .underline(isLink, color: .theme.goldColor)
+                    .onTapGesture {
+                        if isLink {
+                            let url = URL(string: value)
+                            UIApplication.shared.open(url ?? defaultUrl, options: [:], completionHandler: nil)
+                        }
+                    }
+                    .padding(.vertical, 5)
             }
             Spacer()
         }

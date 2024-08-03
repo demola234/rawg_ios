@@ -31,5 +31,6 @@ protocol HomeRepository {
     func getBestGameLastYear(year: Int, discover: Bool, ordering: String, page: Int) -> AnyPublisher<GamesEntity, Error>
     func getMovies(game: String) -> AnyPublisher<MoviesEntity, Error>
     func getGameDetails(game: String) -> AnyPublisher<ResultData, Error>
-    
+    func getScreenShots(game: String) -> AnyPublisher<GameScreenShotsEntity, Error>
+    func getGameSeries(game: String) -> AnyPublisher<GamesEntity, Error>
 }

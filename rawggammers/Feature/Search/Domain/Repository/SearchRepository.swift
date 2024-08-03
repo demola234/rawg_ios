@@ -10,7 +10,7 @@ import Combine
 
 
 protocol SearchRepository {
-    func searchGames(query: String) -> AnyPublisher<SearchEntity, Error>
+    func searchGames(query: String, page: Int) -> AnyPublisher<SearchEntity, Error>
     func saveSearch(query: SearchDataEntity) -> AnyPublisher<Bool, Error>
     func getAllSavedSearches() -> AnyPublisher<[SearchDataEntity], Error>
     func deleteSearch(query: SearchDataEntity) -> AnyPublisher<Bool, Error>

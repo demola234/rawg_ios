@@ -27,7 +27,7 @@ struct PlatformCardDetails: View {
             
             Text(platformDetails.name ?? "Unknown")
                 .customFont(CustomFont.orbitronMedium.copyWith(size: 14))
-                .foregroundColor(.theme.background)
+                .foregroundColor(.white)
 
         }
         .frame(width: 210, height: 60)
