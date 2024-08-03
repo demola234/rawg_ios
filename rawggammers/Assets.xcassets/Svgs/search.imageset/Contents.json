@@ -12,7 +12,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "search-normal.svg",
+      "filename" : "Frame (2) 1.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -48,5 +48,9 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true,
+    "template-rendering-intent" : "template"
   }
 }

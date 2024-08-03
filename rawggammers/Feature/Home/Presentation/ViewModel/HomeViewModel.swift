@@ -84,6 +84,8 @@ class HomeViewModel: ObservableObject {
     }
     
     
+    
+    
     func getLastDays() {
         isGamesLoading = true
         repository.getBestGames(year: 2024, discover: true, ordering: ordering, page: currentPage)

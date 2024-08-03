@@ -9,16 +9,12 @@ import Foundation
 import Combine
 
 class FavoriteRepositoryImpl: FavoriterRepository {
-        
-        private let favoriteLocalDataSource: FavoriteLocalDataSource
-        
-        init(favoriteLocalDataSource: FavoriteLocalDataSource) {
-            self.favoriteLocalDataSource = favoriteLocalDataSource
-        }
+    static let shared = FavoriteRepositoryImpl()
+    
         
         func saveFavorite(favorite: FavoriteEntity) -> AnyPublisher<FavoriteEntity, Error> {
             return Future<FavoriteEntity, Error> { completion in
-                self.favoriteLocalDataSource.saveFavorite(favorite: favorite) { result in
+                FavoriteLocalDataSourceImpl.shared.saveFavorite(favorite: favorite) { result in
                     switch result {
                     case .success:
                         completion(.success(favorite))
@@ -31,7 +27,7 @@ class FavoriteRepositoryImpl: FavoriterRepository {
         
         func getAllFavorites() -> AnyPublisher<[FavoriteEntity], Error> {
             return Future<[FavoriteEntity], Error> { completion in
-                self.favoriteLocalDataSource.getAllFavorites() { result in
+                FavoriteLocalDataSourceImpl.shared.getAllFavorites() { result in
                     switch result {
                     case .success(let favorites):
                         completion(.success(favorites))
@@ -44,7 +40,7 @@ class FavoriteRepositoryImpl: FavoriterRepository {
         
         func deleteFavorite(favorite: FavoriteEntity) -> AnyPublisher<FavoriteEntity, Error> {
             return Future<FavoriteEntity, Error> { completion in
-                self.favoriteLocalDataSource.deleteFavorite(favorite: favorite) { result in
+                FavoriteLocalDataSourceImpl.shared.deleteFavorite(favorite: favorite) { result in
                     switch result {
                     case .success:
                         completion(.success(favorite))
@@ -54,4 +50,18 @@ class FavoriteRepositoryImpl: FavoriterRepository {
                 }
             }.eraseToAnyPublisher()
         }
+    
+    func checkIfFavorite(name: String) -> AnyPublisher<Bool, Error> {
+        return Future<Bool, Error> { completion in
+            FavoriteLocalDataSourceImpl.shared.checkIfFavorite(name: name) { result in
+                switch result {
+                case .success(let isFavorite):
+                    completion(.success(isFavorite))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+    
 }

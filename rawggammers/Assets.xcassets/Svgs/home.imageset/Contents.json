@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Auto Layout Vertical.svg",
+      "filename" : "home 1.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -48,5 +48,9 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true,
+    "template-rendering-intent" : "template"
   }
 }

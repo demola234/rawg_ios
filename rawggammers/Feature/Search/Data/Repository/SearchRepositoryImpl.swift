@@ -40,7 +40,7 @@ class SearchRepositoryImpl: SearchRepository {
     
     func getAllSavedSearches() -> AnyPublisher<[SearchDataEntity], Error> {
         return Future<[SearchDataEntity], Error> { promise in
-            SearchLocalDataSourceImpl.shared.getAllSavedSearches() { result in
+            SearchLocalDataSourceImpl.shared.getAllSavedSearches { result in
                 switch result {
                 case .success(let searches):
                     promise(.success(searches))

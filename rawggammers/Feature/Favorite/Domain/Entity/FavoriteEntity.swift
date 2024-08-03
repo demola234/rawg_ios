@@ -7,14 +7,13 @@
 
 import Foundation
 
-
-struct FavoriteEntity {
-        let id: Int?
-        let slug, name, released: String?
-        let backgroundImage: String?
-        let rating: Double?
-        let ratingTop: Int?
-        let playtime, suggestionsCount: Int?
-        let updated: String?
-        let reviewsCount: Int?
+struct FavoriteEntity: Identifiable {
+        var id: UUID = .init()
+        var slug, name, released: String?
+        var backgroundImage: String?
+        var rating: Double?
+        var ratingTop: Int?
+        var playtime, suggestionsCount: Int?
+        var updated: String?
+        var reviewsCount: Int?
 }

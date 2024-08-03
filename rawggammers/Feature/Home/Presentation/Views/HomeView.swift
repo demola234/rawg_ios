@@ -104,6 +104,7 @@ struct HomeView: View {
     }
     
     private func segue(gameDetails: ResultData) {
+        HepticManager().impact(style: .medium)
         selectedDetails = gameDetails
         showDetailsView.toggle()
     }

@@ -39,11 +39,11 @@ struct ProfileView: View {
                             .foregroundColor(Color.theme.accentTextColor)
                         
                         Text("Logout")
-                            .foregroundColor(Color.theme.accentTextColor)
+                            .foregroundColor(Color.theme.background)
                             .customFont(CustomFont.poppinsRegualr.copyWith(size: 16))
                     }
                     .padding(12)
-                    .background(Color.theme.accentTextColor)
+                    .background(Color.theme.primaryTextColor)
                     .cornerRadius(8)
                 }
                 .padding(.top, 16)

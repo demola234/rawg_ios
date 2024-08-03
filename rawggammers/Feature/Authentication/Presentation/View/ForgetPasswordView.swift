@@ -40,6 +40,7 @@ struct ForgetPasswordView: View {
                     .padding(.bottom, 1)
                     
                     CustomButton(action: {
+                        HepticManager().impact(style: .medium)
                         if isValidEmail(email) {
                             // Trigger forget password action
                             alertMessage = "Password reset instructions have been sent to \(email)."

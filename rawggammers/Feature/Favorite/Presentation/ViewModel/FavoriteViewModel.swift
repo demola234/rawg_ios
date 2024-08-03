@@ -13,14 +13,32 @@ class FavoriteViewModel: ObservableObject {
     
     private let favoriteRepository: FavoriterRepository
     private var cancellables: Set<AnyCancellable> = []
-    
-    @Published var favorite: [FavoriteEntity] = []
+    @Published var favoritePick: Bool = false
+    @Published var favorites: [FavoriteEntity] = []
+    @Published var selectedFavorites: FavoriteEntity?
     @Published var errorMessage: String = ""
     @Published var isLoading: Bool = false
     
-    init(favoriteRepository: FavoriterRepository) {
+    init(favoriteRepository: FavoriterRepository = FavoriteRepositoryImpl.shared) {
         self.favoriteRepository = favoriteRepository
         getAllFavorites()
+    }
+    
+    func checkIfFavorite(name: String) {
+        favoriteRepository.checkIfFavorite(name: name)
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    self.errorMessage = error.localizedDescription
+                }
+            } receiveValue: { isFavorite in
+                print("Is Favorite: \(isFavorite)")
+                self.favoritePick = isFavorite
+            }
+            .store(in: &cancellables)
     }
     
     func saveFavorite(favorite: FavoriteEntity) {
@@ -34,6 +52,7 @@ class FavoriteViewModel: ObservableObject {
                     self.errorMessage = error.localizedDescription
                 }
             } receiveValue: { _ in
+                self.checkIfFavorite(name: favorite.name ?? "")
                 self.getAllFavorites()
             }
             .store(in: &cancellables)
@@ -52,7 +71,7 @@ class FavoriteViewModel: ObservableObject {
                 }
             } receiveValue: { [weak self] favorite in
                 guard let self = self else { return }
-                self.favorite = favorite
+                self.favorites = favorite
             }
             .store(in: &cancellables)
     }
@@ -65,9 +84,11 @@ class FavoriteViewModel: ObservableObject {
                 case .finished:
                     break
                 case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
                     self.errorMessage = error.localizedDescription
                 }
             } receiveValue: { _ in
+                self.checkIfFavorite(name: favorite.name ?? "")
                 self.getAllFavorites()
             }
             .store(in: &cancellables)

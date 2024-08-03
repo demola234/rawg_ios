@@ -28,6 +28,7 @@ struct GameDetailsView: View {
 struct DetailsView: View {
     let gameDetail: ResultData
     @StateObject private var homeViewModel: HomeViewModel
+    @ObservedObject private var favoriteViewModel = FavoriteViewModel()
     @State private var showFullDescription: Bool = false
     @State private var selectedScreenshot: ShortScreenshot? = nil
     @State private var showFullScreenVideo = false
@@ -66,6 +67,7 @@ struct DetailsView: View {
                     VStack {
                         HStack {
                             Button(action: {
+                                HepticManager().prepareSoft()
                                 dismiss()
                             }) {
                                 HStack(alignment: .center, spacing: 0) {
@@ -83,16 +85,30 @@ struct DetailsView: View {
                             
                             Spacer()
                             
-                            HStack(alignment: .center, spacing: 0) {
-                                Image("favorite")
-                                    .font(.system(size: 24, weight: .bold))
-                                    .foregroundColor(Color.theme.primaryTextColor)
-                                    .padding(8)
+                            Button(action: {
+                                HepticManager().prepareMedium()
+                                let favorite = FavoriteEntity(slug: gameDetail.slug, name: gameDetail.name, released: gameDetail.released, backgroundImage: gameDetail.backgroundImage, rating: gameDetail.rating, ratingTop: gameDetail.ratingTop, playtime: gameDetail.playtime, suggestionsCount: gameDetail.suggestionsCount, updated: gameDetail.updated, reviewsCount: gameDetail.reviewsCount)
+                                if favoriteViewModel.favoritePick {
+                                        favoriteViewModel.deleteFavorite(favorite: favorite)
+                                    } else {
+                                        favoriteViewModel.saveFavorite(favorite: favorite)
+                                    }
+                                    favoriteViewModel.checkIfFavorite(name: gameDetail.name ?? "")
+//
+                                
+                            }) {
+                                HStack(alignment: .center, spacing: 0) {
+                                    Image("favorite")
+                                        .font(.system(size: 24, weight: .bold))
+                                        .foregroundColor(Color.theme.primaryTextColor)
+                                        .padding(8)
+                                }
+                                .padding(8)
+                                .frame(width: 50, height: 50, alignment: .center)
+                               
+                                .background(favoriteViewModel.favoritePick ? Color.theme.goldColor : Color.theme.background)
+                                .clipShape(Circle())
                             }
-                            .padding(8)
-                            .frame(width: 50, height: 50, alignment: .center)
-                            .background(Color.theme.background)
-                            .clipShape(Circle())
                         }
                         
                         Text("\(gameDetail.name ?? "")")
@@ -292,6 +308,7 @@ struct DetailsView: View {
             homeViewModel.getMovies(game: gameDetail.slug ?? "")
             homeViewModel.getScreenshots(game: gameDetail.slug ?? "")
             homeViewModel.getSimilarGames(game: gameDetail.slug ?? "")
+            favoriteViewModel.checkIfFavorite(name: gameDetail.name ?? "")
         }
     }
 }

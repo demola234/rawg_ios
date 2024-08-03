@@ -146,6 +146,7 @@ struct LoginView: View {
                         .padding(.bottom, 20)
                         
                         CustomButton(action: {
+                            HepticManager().impact(style: .medium)
                             authViewModel.login()
                         }, title: "Login with Email", isEnable: !authViewModel.email.isEmpty && !authViewModel.password.isEmpty, backgroundColor: Color.theme.primaryTextColor)
                         .padding(.horizontal, 24)
