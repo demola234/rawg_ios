@@ -279,6 +279,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		801E5A4E2C5F6B4D00F11106 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		801E5A4F2C5F6B5500F11106 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		801E5A502C5F6B5D00F11106 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				801E5A532C5F6B7E00F11106 /* Components */,
+				801E5A522C5F6B7300F11106 /* ViewModel */,
+				801E5A512C5F6B6D00F11106 /* View */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		801E5A512C5F6B6D00F11106 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				809E0E842C53CA9400F59101 /* ProfileView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		801E5A522C5F6B7300F11106 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		801E5A532C5F6B7E00F11106 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		802951392C55FA430061B38B /* TabView */ = {
 			isa = PBXGroup;
 			children = (
@@ -563,7 +609,9 @@
 		809AAE342C4C1968001FD6C2 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				809E0E842C53CA9400F59101 /* ProfileView.swift */,
+				801E5A4F2C5F6B5500F11106 /* Domain */,
+				801E5A4E2C5F6B4D00F11106 /* Data */,
+				801E5A502C5F6B5D00F11106 /* Presentation */,
 			);
 			path = Settings;
 			sourceTree = "<group>";

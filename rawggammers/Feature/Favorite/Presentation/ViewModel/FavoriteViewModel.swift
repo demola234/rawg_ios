@@ -52,7 +52,7 @@ class FavoriteViewModel: ObservableObject {
                     self.errorMessage = error.localizedDescription
                 }
             } receiveValue: { _ in
-                self.checkIfFavorite(name: favorite.name ?? "")
+                self.favoritePick = true
                 self.getAllFavorites()
             }
             .store(in: &cancellables)
@@ -88,7 +88,7 @@ class FavoriteViewModel: ObservableObject {
                     self.errorMessage = error.localizedDescription
                 }
             } receiveValue: { _ in
-                self.checkIfFavorite(name: favorite.name ?? "")
+                self.favoritePick = false
                 self.getAllFavorites()
             }
             .store(in: &cancellables)

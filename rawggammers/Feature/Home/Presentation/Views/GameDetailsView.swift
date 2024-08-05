@@ -89,11 +89,13 @@ struct DetailsView: View {
                                 HepticManager().prepareMedium()
                                 let favorite = FavoriteEntity(slug: gameDetail.slug, name: gameDetail.name, released: gameDetail.released, backgroundImage: gameDetail.backgroundImage, rating: gameDetail.rating, ratingTop: gameDetail.ratingTop, playtime: gameDetail.playtime, suggestionsCount: gameDetail.suggestionsCount, updated: gameDetail.updated, reviewsCount: gameDetail.reviewsCount)
                                 if favoriteViewModel.favoritePick {
+                                    print("Delete")
                                         favoriteViewModel.deleteFavorite(favorite: favorite)
                                     } else {
+                                        print("Save")
                                         favoriteViewModel.saveFavorite(favorite: favorite)
                                     }
-                                    favoriteViewModel.checkIfFavorite(name: gameDetail.name ?? "")
+//                                    favoriteViewModel.checkIfFavorite(name: gameDetail.name ?? "")
 //
                                 
                             }) {
@@ -248,7 +250,7 @@ struct DetailsView: View {
                         }
                     }
                     
-                    if homeViewModel.gameSeries != nil {
+                    if let similarGames = homeViewModel.gameSeries {
                         Text("More Games Like \(gameDetail.name?.capitalizedFirstLetterOfEachWord ?? "")")
                             .customFont(CustomFont.orbitronSemiBold.copyWith(size: 14))
                             .foregroundColor(.theme.primaryTextColor)
