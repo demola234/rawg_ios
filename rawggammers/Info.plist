@@ -6,6 +6,44 @@
 	<string>https://api.rawg.io/api/</string>
 	<key>API_KEY</key>
 	<string>9dcf90cb8a5345c38a4af3771fa6c29b</string>
+	<key>CFBundleIcons</key>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>Default</string>
+			</array>
+			<key>CFBundleIconName</key>
+			<string>Default</string>
+			<key>UIPrerenderedIcon</key>
+			<false/>
+		</dict>
+        
+    <key>CFBundleAlternateIcons</key>
+    <dict>
+        <key>Gamify</key>
+        <dict>
+            <key>CFBundleIconFiles</key>
+            <array>
+                <string>Gamify</string>
+            </array>
+            <key>UIPrerenderedIcon</key>
+            <false/>
+        </dict>
+
+        <key>Strom</key>
+        <dict>
+            <key>CFBundleIconFiles</key>
+            <array>
+                <string>Strom</string>
+            </array>
+            <key>UIPrerenderedIcon</key>
+            <false/>
+        </dict>
+    </dict>
+        
+	</dict>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

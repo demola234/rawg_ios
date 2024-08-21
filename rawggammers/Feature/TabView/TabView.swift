@@ -6,43 +6,54 @@
 //
 
 import SwiftUI
-
 struct FancyTabView: View {
     @Environment(\.hideTabBar) var hideTabBar
-    @ObservedObject var authViewModel = AuthenticationViewModel()
+    @StateObject var authViewModel = AuthenticationViewModel()
 
     @State private var selectedTab = 0
     let tabBarImageNames = ["home", "search", "favorite", "person.fill"]
     let tabBarTitles = ["Home", "Search", "Favourites", "Profile"]
 
-
     var body: some View {
-        VStack {
-            ZStack {
-                switch selectedTab {
-                case 0:
-                    HomeView()
-                        .environmentObject(HomeViewModel())
-                case 1:
-                    SearchView()
-                case 2:
-                    FavoriteScreen()
-                        .environmentObject(FavoriteViewModel())
-                case 3:
-                    ProfileView()
-                       
-                default:
-                    HomeView()
-                }
+        ZStack {
+            // TabView to manage the views
+            TabView(selection: $selectedTab) {
+                HomeView()
+                    .tag(0)
+
+                SearchView()
+                    .tag(1)
+
+                FavoriteScreen()
+                    .tag(2)
+
+                ProfileView()
+                    .tag(3)
             }
-            Spacer()
-            CustomTabBar(selectedTab: $selectedTab, userDetails: authViewModel.userDetails ?? UsersDataEntity(), tabBarImageNames: tabBarImageNames, tabBarTitles: tabBarTitles)
-                .frame(height: 80)
-                .background(Color.theme.background.opacity(0.2))
-            
+            .edgesIgnoringSafeArea(.all)
+
+            // Custom Tab Bar
+            VStack {
+                Spacer()
+                CustomTabBar(selectedTab: $selectedTab,
+                             userDetails: authViewModel.userDetails ?? UsersDataEntity(),
+                             tabBarImageNames: tabBarImageNames,
+                             tabBarTitles: tabBarTitles)
+                .padding(.horizontal, 10)
+                        .padding(.vertical, 10)
+                        .background(
+                            ZStack {
+                                VisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterial))
+                            }
+                               
+                        )
+                        .edgesIgnoringSafeArea(.all)
+            }
         }
-        .edgesIgnoringSafeArea(.bottom)
-        
+        .edgesIgnoringSafeArea(.all)
+        .environmentObject(FavoriteViewModel())
+        .environmentObject(SearchViewModel())
+        .environmentObject(HomeViewModel())
     }
 }
 
@@ -66,25 +77,26 @@ struct CustomTabBar: View {
                         if index != 3 {
                             Image(tabBarImageNames[index])
                                 .font(.system(size: 24, weight: .bold))
+                                
                                 .foregroundColor(selectedTab == index ? .theme.goldColor : .gray)
-                                .scaleEffect(selectedTab == index ? 1.2 : 1.0)
+                                .frame(width: 18, height: 18)
+                                .scaleEffect(selectedTab == index ? 1.0 : 1.0)
                         } else {
-                            
                             if let imageUrl = URL(string: userDetails.profileImageURL) {
                                 NetworkImageView(imageURL: imageUrl)
                                     .frame(width: 27, height: 27)
                                     .aspectRatio(contentMode: .fill)
                                     .clipShape(Circle())
                                     .padding(.all, 1)
-                                    .overlay{
-                                        selectedTab == index ? Circle().stroke(Color.theme.goldColor, lineWidth: 1) : nil}
+                                    .overlay {
+                                        selectedTab == index ? Circle().stroke(Color.theme.goldColor, lineWidth: 1) : nil
+                                    }
                             }
                         }
                         Text(tabBarTitles[index])
                             .font(.caption)
                             .foregroundColor(selectedTab == index ? .theme.goldColor : .gray)
                     }
-                   
                 }
                 Spacer()
             }
@@ -92,6 +104,10 @@ struct CustomTabBar: View {
     }
 }
 
+// Preview for SwiftUI
 #Preview {
     FancyTabView()
+        .environmentObject(FavoriteViewModel())
+        .environmentObject(SearchViewModel())
+        .environmentObject(HomeViewModel())
 }

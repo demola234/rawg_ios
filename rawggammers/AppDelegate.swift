@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let launchView = LaunchView(showLaunchView: .constant(true))
         _ = LoginView().environmentObject(AuthenticationViewModel())
+        UITabBar.appearance().isHidden = true
         
         window?.rootViewController = UIHostingController(rootView: launchView)
         window?.makeKeyAndVisible()

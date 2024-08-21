@@ -4,53 +4,61 @@
 //
 //  Created by Ademola Kolawole on 26/07/2024.
 //
+
 import SwiftUI
 
 struct FavoriteScreen: View {
     @EnvironmentObject var favoriteViewModel: FavoriteViewModel
     @State private var showDetailsView = false
     @State private var selectedDetails: ResultData?
-    @State private var showAlert = false // Add this state variable
+    @State private var showAlert = false
 
     var body: some View {
         NavigationStack {
-            VStack(alignment: .leading, spacing: 10) {
-                Text("Favorite Games")
-                    .customFont(CustomFont.orbitronSemiBold.copyWith(size: 20))
-                    .foregroundColor(.theme.primaryTextColor)
-                    .padding(.horizontal, 24)
-                    .padding(.top, 10)
-                Spacer()
-                ScrollView {
-                    ForEach(favoriteViewModel.favorites, id: \.id) { item in
-                        FavoriteCardView(favorite: item)
-                            .padding(.horizontal, 24)
-                            .onTapGesture {
-                                segue(favoriteDetails: item)
-                            }
-                            .onLongPressGesture {
-                                favoriteViewModel.selectedFavorites = item
-                                showAlert = true
-                            }
+            ZStack {
+                Color.theme.background
+                    .ignoresSafeArea() 
+
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Favorite Games")
+                        .customFont(CustomFont.orbitronSemiBold.copyWith(size: 20))
+                        .foregroundColor(.theme.primaryTextColor)
+                        .padding(.horizontal, 24)
+                        .padding(.top, 10)
+                    
+                    Spacer()
+
+                    ScrollView {
+                        ForEach(favoriteViewModel.favorites, id: \.id) { item in
+                            FavoriteCardView(favorite: item)
+                                .padding(.horizontal, 24)
+                                .onTapGesture {
+                                    segue(favoriteDetails: item)
+                                }
+                                .onLongPressGesture {
+                                    favoriteViewModel.selectedFavorites = item
+                                    showAlert = true
+                                }
+                        }
                     }
                 }
-            }
-            .navigationDestination(isPresented: $showDetailsView) {
-                if let details = selectedDetails {
-                    GameDetailsView(gameDetails: $selectedDetails)
+                .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text("Delete Favorite"),
+                        message: Text("Are you sure you want to delete \(favoriteViewModel.selectedFavorites?.name ?? "this favorite")?"),
+                        primaryButton: .destructive(Text("Delete")) {
+                            if let favorite = favoriteViewModel.selectedFavorites {
+                                favoriteViewModel.deleteFavorite(favorite: favorite)
+                            }
+                        },
+                        secondaryButton: .cancel()
+                    )
                 }
-            }
-            .alert(isPresented: $showAlert) {
-                Alert(
-                    title: Text("Delete Favorite"),
-                    message: Text("Are you sure you want to delete \(favoriteViewModel.selectedFavorites?.name ?? "this favorite")?"),
-                    primaryButton: .destructive(Text("Delete")) {
-                        if let favorite = favoriteViewModel.selectedFavorites {
-                            favoriteViewModel.deleteFavorite(favorite: favorite)
-                        }
-                    },
-                    secondaryButton: .cancel()
-                )
+                .navigationDestination(isPresented: $showDetailsView) {
+                    if selectedDetails != nil {
+                        GameDetailsView(gameDetails: $selectedDetails)
+                    }
+                }
             }
         }
     }
@@ -86,6 +94,7 @@ struct FavoriteScreen: View {
         showDetailsView.toggle()
     }
 }
+
 
 #Preview {
     FavoriteScreen()

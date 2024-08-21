@@ -53,10 +53,6 @@ class HomeViewModel: ObservableObject {
         if bestGames.isEmpty {
            getBestGames()
         }
-//        getGames()
-//        getPlatForms()
-//        getBestGames()
-       
     }
     
     func selectNewTab(tab: Tab) {
@@ -112,7 +108,7 @@ class HomeViewModel: ObservableObject {
     }
     
     func getBestGames() {
-        isGamesLoading = true
+//        isGamesLoading = true
         repository.getBestGames(year: 2023, discover: true, ordering: "-added", page: currentPage)
             .receive(on: DispatchQueue.main)
             .sink { completion in
@@ -122,7 +118,7 @@ class HomeViewModel: ObservableObject {
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")
                     self.errorMessage = error.localizedDescription
-                    self.isGamesLoading = false
+//                    self.isGamesLoading = false
                 }
             } receiveValue: { [weak self] bestGames in
                 
@@ -132,7 +128,7 @@ class HomeViewModel: ObservableObject {
                 } else {
                     self?.bestGames.append(contentsOf: bestGames.results )
                 }
-                self?.isGamesLoading = false
+//                self?.isGamesLoading = false
                 self?.canLoadMore = (bestGames.results.count ) > 0
             }
             .store(in: &cancellables)
@@ -203,7 +199,7 @@ class HomeViewModel: ObservableObject {
     
     
     func getGames() {
-        isGamesLoading = true
+//        isGamesLoading = true
         repository.getGames(discover: true, ordering: ordering, filter: true, page: currentPage)
             .receive(on: DispatchQueue.main)
             .sink { completion in
@@ -213,7 +209,7 @@ class HomeViewModel: ObservableObject {
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")
                     self.errorMessage = error.localizedDescription
-                    self.isGamesLoading = false
+//                    self.isGamesLoading = false
                     
                 }
             } receiveValue: { [weak self] games in
@@ -222,14 +218,14 @@ class HomeViewModel: ObservableObject {
                 } else {
                     self?.games.append(contentsOf: games.results )
                 }
-                self?.isGamesLoading = false
+//                self?.isGamesLoading = false
                 self?.canLoadMore = (games.results.count ) > 0
             }
             .store(in: &cancellables)
     }
     
     func getPlatForms() {
-        isPlatformsLoading = true
+//        isPlatformsLoading = true
         repository.getPlatForms()
             .receive(on: DispatchQueue.main)
             .sink { completion in
@@ -239,7 +235,7 @@ class HomeViewModel: ObservableObject {
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")
                     self.errorMessage = error.localizedDescription
-                    self.isPlatformsLoading = false
+//                    self.isPlatformsLoading = false
                 }
             } receiveValue: { [weak self] platforms in
                 self?.platforms = platforms

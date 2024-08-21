@@ -16,11 +16,10 @@ struct HomeView: View {
     @Namespace private var namespace
     
     var body: some View {
-        ZStack {
-            Color.theme.background
-                .ignoresSafeArea()
-            
-            NavigationStack {
+        NavigationStack {
+            ZStack {
+                Color.theme.background
+                    .ignoresSafeArea() 
                 VStack(alignment: .leading, spacing: 0) {
                     HomeHeaderView(userDetails: authViewModel.userDetails ?? UsersDataEntity())
                     
@@ -40,6 +39,7 @@ struct HomeView: View {
                 }
             }
         }
+        .background(Color.theme.background)
         .onAppear {
             withAnimation {
                 scrollAnimation = true

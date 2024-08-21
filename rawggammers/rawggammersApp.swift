@@ -13,6 +13,7 @@ struct rawggammersApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     @StateObject private var authViewModel = AuthenticationViewModel()
+    @StateObject private var themeManager = ThemeManager()
     @State private var isShowingLaunchView = true
     
     var body: some Scene {
@@ -29,5 +30,7 @@ struct rawggammersApp: App {
                 }
             }
         }
+        .environmentObject(themeManager)
+        
     }
 }
