@@ -119,6 +119,7 @@
 		80B50C052C78D7E10050D91A /* ChangeUserAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B50C042C78D7E10050D91A /* ChangeUserAvatar.swift */; };
 		80B50C072C78DB6A0050D91A /* AvatarPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B50C062C78DB6A0050D91A /* AvatarPreview.swift */; };
 		80B50C092C78E9850050D91A /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B50C082C78E9850050D91A /* SettingsViewModel.swift */; };
+		80B50C0B2C7903700050D91A /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B50C0A2C7903700050D91A /* UserEntity.swift */; };
 		80BC16822C5017FD00533E84 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BC16812C5017FD00533E84 /* RegistrationView.swift */; };
 		80BC168D2C50283A00533E84 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BC168C2C50283A00533E84 /* Utilities.swift */; };
 		80CD2CE12C51FFD7007BC0E7 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CD2CE02C51FFD6007BC0E7 /* LaunchView.swift */; };
@@ -269,6 +270,7 @@
 		80B50C042C78D7E10050D91A /* ChangeUserAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUserAvatar.swift; sourceTree = "<group>"; };
 		80B50C062C78DB6A0050D91A /* AvatarPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarPreview.swift; sourceTree = "<group>"; };
 		80B50C082C78E9850050D91A /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		80B50C0A2C7903700050D91A /* UserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
 		80BC16802C50113B00533E84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		80BC16812C5017FD00533E84 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		80BC168C2C50283A00533E84 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -892,6 +894,7 @@
 		80B50BFB2C789BF90050D91A /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				80B50C0A2C7903700050D91A /* UserEntity.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1383,6 +1386,7 @@
 				8099DF4F2C52956E00A9A24F /* CustomTextFieldComponent.swift in Sources */,
 				80D48CFD2C552EF900986AA4 /* FavoriteCoreData.swift in Sources */,
 				80169C6A2C5A74A900935FBA /* Toogle.swift in Sources */,
+				80B50C0B2C7903700050D91A /* UserEntity.swift in Sources */,
 				806BEF232C5B53FA00EA340F /* UsersDataEntity.swift in Sources */,
 				807B9D6C2C53FE1B0086A3C3 /* PlatformsEntity.swift in Sources */,
 				80D48CF72C552E0E00986AA4 /* FavoriterRepository.swift in Sources */,
