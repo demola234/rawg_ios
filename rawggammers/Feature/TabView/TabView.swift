@@ -59,6 +59,7 @@ struct FancyTabView: View {
 
 struct CustomTabBar: View {
     @Binding var selectedTab: Int
+    @EnvironmentObject var settingsViewModel: SettingsViewModel
     var userDetails = UsersDataEntity()
     let tabBarImageNames: [String]
     let tabBarTitles: [String]
@@ -82,8 +83,19 @@ struct CustomTabBar: View {
                                 .frame(width: 18, height: 18)
                                 .scaleEffect(selectedTab == index ? 1.0 : 1.0)
                         } else {
-                            if let imageUrl = URL(string: userDetails.profileImageURL) {
-                                NetworkImageView(imageURL: imageUrl)
+                            
+                            if (settingsViewModel.user?.photoUrl.isEmpty ?? true) {
+                                Image("Spiderman1")
+                                    .frame(width: 27, height: 27)
+                                    .aspectRatio(contentMode: .fill)
+                                    .clipShape(Circle())
+                                    .padding(.all, 1)
+                                    .overlay {
+                                        selectedTab == index ? Circle().stroke(Color.theme.goldColor, lineWidth: 1) : nil
+                                    }
+                            } 
+                            else if(settingsViewModel.isUpdating) {
+                                ProgressView()
                                     .frame(width: 27, height: 27)
                                     .aspectRatio(contentMode: .fill)
                                     .clipShape(Circle())
@@ -92,6 +104,19 @@ struct CustomTabBar: View {
                                         selectedTab == index ? Circle().stroke(Color.theme.goldColor, lineWidth: 1) : nil
                                     }
                             }
+                            else {
+                                NetworkImageView(imageURL: URL(string: settingsViewModel.user?.photoUrl ?? "")!)
+                                    .frame(width: 27, height: 27)
+                                    .aspectRatio(contentMode: .fill)
+                                    .clipShape(Circle())
+                                    .padding(.all, 1)
+                                    .overlay {
+                                        selectedTab == index ? Circle().stroke(Color.theme.goldColor, lineWidth: 1) : nil
+                                    }
+                            }
+                            
+                            
+                            
                         }
                         Text(tabBarTitles[index])
                             .font(.caption)
@@ -110,4 +135,5 @@ struct CustomTabBar: View {
         .environmentObject(FavoriteViewModel())
         .environmentObject(SearchViewModel())
         .environmentObject(HomeViewModel())
+        .environmentObject(SettingsViewModel())
 }

@@ -14,6 +14,7 @@ struct rawggammersApp: App {
     
     @StateObject private var authViewModel = AuthenticationViewModel()
     @StateObject private var themeManager = ThemeManager()
+    @StateObject private var settingsViewModel = SettingsViewModel()
     @State private var isShowingLaunchView = true
     
     var body: some Scene {
@@ -31,6 +32,7 @@ struct rawggammersApp: App {
             }
         }
         .environmentObject(themeManager)
+        .environmentObject(settingsViewModel)
         
     }
 }

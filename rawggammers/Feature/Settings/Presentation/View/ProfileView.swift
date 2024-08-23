@@ -10,6 +10,7 @@ import SwiftUI
 struct ProfileView: View {
     @EnvironmentObject var authViewModel: AuthenticationViewModel
     @EnvironmentObject var themeManager: ThemeManager
+    @EnvironmentObject var settingsViewModel: SettingsViewModel
     @StateObject var appIconManager = AppIconManager()
     
     @State private var offset: CGFloat = 0
@@ -17,6 +18,7 @@ struct ProfileView: View {
     @State private var showBottomSheetThemeSheet = false
     @State private var showAboutSheet = false
     @State private var showLogoutSheet = false
+    @State private var showAvatarSheet = false
     
     var body: some View {
         ZStack {
@@ -25,12 +27,24 @@ struct ProfileView: View {
             
             VStack(alignment: .leading, spacing: 10) {
                 // Settings Header
-                SectionHeader(title: "Settings")
+                Text("Settings")
+                    .customFont(CustomFont.orbitronSemiBold.copyWith(size: 20))
+                    .foregroundColor(.theme.primaryTextColor)
+                    .padding(.vertical, 10)
                 
                 // Personal Section
                 SectionHeader(title: "Personal")
                 AvatarSettingsView()
-                SettingsCardView(title: "Change Password", subTitle: "Modify your account Password", icon: "tag_user")
+                    .onTapGesture {
+                        withAnimation(.spring()) {
+                            showAvatarSheet.toggle()
+                        }
+                    }
+                    .environmentObject(settingsViewModel)
+                
+                if (settingsViewModel.user?.authType == "email") {
+                    SettingsCardView(title: "Change Password", subTitle: "Modify your account Password", icon: "tag_user")
+                }
                 
                 // App Customization Section
                 SectionHeader(title: "App Customization")
@@ -106,6 +120,17 @@ struct ProfileView: View {
                         .environmentObject(authViewModel)
                 }
             }
+            
+//            if showAvatarSheet {
+//                BottomSheetView(show: $showAvatarSheet, offset: $offset, height: 300 ) {
+//                    ChangeUserAvatar()
+//                        .environmentObject(settingsViewModel)
+//                }
+//            }
+        }
+        .sheet (isPresented: $showAvatarSheet) {
+            ChangeUserAvatar(showChangeAvatar: $showAvatarSheet)
+                .environmentObject(settingsViewModel)
         }
     }
 }
@@ -114,6 +139,7 @@ struct ProfileView: View {
     ProfileView()
         .environmentObject(AuthenticationViewModel())
         .environmentObject(ThemeManager())
+        .environmentObject(SettingsViewModel())
 }
 
 // Section Header View
@@ -131,6 +157,7 @@ struct SectionHeader: View {
 // Theme Selection View
 struct ThemeSelectionView: View {
     @EnvironmentObject var themeManager: ThemeManager
+
     
     var body: some View {
         VStack {
@@ -149,6 +176,7 @@ struct ThemeSelectionView: View {
                     ThemeButtonSelection(mode: Theme.light, RightBg: Color.theme.accentTextColor, RightFg: Color.white, BottomBg: Color.theme.accentTextColor, BottomFg: Color.white)
                 }
                 
+                
                 Button(action: {
                     withAnimation(.spring()) {
                         themeManager.switchTheme(to: .dark)
@@ -156,6 +184,7 @@ struct ThemeSelectionView: View {
                 }) {
                     ThemeButtonSelection(mode: Theme.dark, RightBg: Color.theme.accentTextColor, RightFg: Color.black, BottomBg: Color.black, BottomFg: Color.theme.accentTextColor)
                 }
+                    
                 
                 Button(action: {
                     withAnimation(.spring()) {

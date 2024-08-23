@@ -8,14 +8,32 @@
 import SwiftUI
 
 struct AvatarSettingsView: View {
+    @EnvironmentObject var settingsViewModel: SettingsViewModel
+    
     var body: some View {
             HStack {
-                Image("Games")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-                    .frame(width: 49, height: 49)
-                    .clipped()
+                if (settingsViewModel.user?.photoUrl.isEmpty ?? true) {
+                    Image("Spiderman1")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                        .frame(width: 49, height: 49)
+                        .clipped()
+                } else if(settingsViewModel.isUpdating) {
+                    ProgressView()
+                        .frame(width: 49, height: 49)
+                        .aspectRatio(contentMode: .fill)
+                        .clipShape(Circle())
+                        .padding(.all, 1)
+                        
+                }
+                else {
+                    NetworkImageView(imageURL: URL(string: settingsViewModel.user?.photoUrl ?? "")!)
+                        .aspectRatio(contentMode: .fill)
+                        .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                        .frame(width: 49, height: 49)
+                        .clipped()
+                }
                 
                 VStack(alignment: .leading, spacing: 5) {
                     Text("Change Avatar")
@@ -46,4 +64,5 @@ struct AvatarSettingsView: View {
 
 #Preview {
     AvatarSettingsView()
+        .environmentObject(SettingsViewModel())
 }

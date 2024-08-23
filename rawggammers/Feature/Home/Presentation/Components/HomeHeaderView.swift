@@ -9,19 +9,30 @@ import SwiftUI
 
 struct HomeHeaderView: View {
     var userDetails = UsersDataEntity()
+    @EnvironmentObject var settingsViewModel: SettingsViewModel
     var body: some View {
         HStack {
-            if let imageUrl = URL(string: userDetails.profileImageURL) {
-                NetworkImageView(imageURL: imageUrl)
-                    .frame(width: 38, height: 38)
-                    .aspectRatio(contentMode: .fill)
-                    .clipShape(Circle())
-                    .padding(.trailing, 7)
-            } else {
-                Image("Games")
+            
+            if (settingsViewModel.user?.photoUrl.isEmpty ?? true) {
+                Image("Spiderman1")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 38, height: 38)
+                    .clipShape(Circle())
+                    .padding(.trailing, 7)
+            }   else if(settingsViewModel.isUpdating) {
+                ProgressView()
+                    .frame(width: 38, height: 38)
+                    .aspectRatio(contentMode: .fill)
+                    .clipShape(Circle())
+                    .padding(.all, 1)
+                    
+            }
+            
+            else {
+                NetworkImageView(imageURL: URL(string: settingsViewModel.user?.photoUrl ?? "")!)
+                    .frame(width: 38, height: 38)
+                    .aspectRatio(contentMode: .fill)
                     .clipShape(Circle())
                     .padding(.trailing, 7)
             }

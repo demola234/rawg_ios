@@ -80,8 +80,27 @@ struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
         Task {
             do {
                 let signInCredentials = try await signInGoogle()
-                let authDataResult = try await Auth.auth().signIn(with: signInCredentials)
-                print("User signed in with Google successfully: \(authDataResult.user.uid)")
+                let userDetails = try await Auth.auth().signIn(with: signInCredentials)
+                
+               UserManager.shared.createNewUser(
+                    id: userDetails.user.uid,
+                    email: userDetails.user.email ?? "",
+                    name: userDetails.user.displayName ?? "",
+                    authType: "google.com",
+                    photoUrl: userDetails.user.photoURL?.absoluteString ?? "", completion: { result in
+                        switch result {
+                        case .success:
+                            print("User signed in with Google successfully: \(userDetails.user.uid)")
+                            completion(.success(()))
+                        case .failure(let error):
+                            completion(.failure(error))
+                        }
+                    }
+                )
+                
+                print("User signed in with Google successfully: \(userDetails.user.uid)")
+//                save users Info to FireStore
+                
                 completion(.success(()))
             } catch {
                 print("Google sign in error: \(error.localizedDescription)")
@@ -126,20 +145,40 @@ struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
         Task {
             let signInWithAppleHelper = await AppleSignInHelper()
             do {
-                _ = try await signInWithAppleHelper.startSignWithAppleFlow()
+               
+                let userDetails = try await signInWithAppleHelper.startSignWithAppleFlow()
+                
+               
+               UserManager.shared.createNewUser(
+                    id: userDetails.uid,
+                    email: userDetails.email,
+                    name: userDetails.fullName,
+                    authType: "apple.com",
+                    photoUrl: userDetails.photoURL?.absoluteString ?? "", completion: { result in
+                        switch result {
+                        case .success:
+                            print("User signed in with Apple successfully")
+                            completion(.success(()))
+                        case .failure(let error):
+                            completion(.failure(error))
+                        }
+                    }
+                )
+                
                 print("User signed in with Apple successfully")
                 completion(.success(()))
             } catch {
-                print("Apple sign in error: \(error.localizedDescription)")
+                print("Apple sign-in error: \(error.localizedDescription)")
                 completion(.failure(error))
             }
         }
     }
-    
+            
     func login(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void) {
         Task {
             do {
                 let authDataResult = try await Auth.auth().signIn(withEmail: email, password: password)
+                
                 print("User logged in successfully: \(authDataResult.user.uid)")
                 completion(.success(()))
             } catch {
@@ -153,6 +192,24 @@ struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
         Task {
             do {
                 let authDataResult = try await Auth.auth().createUser(withEmail: email, password: password)
+                
+               UserManager.shared.createNewUser(
+                    id: authDataResult.user.uid,
+                    email: email,
+                    name: "",
+                    authType: "email",
+                    photoUrl: "", 
+                    completion: { result in
+                        switch result {
+                        case .success:
+                            print("User registered successfully: \(authDataResult.user.uid)")
+                            completion(.success(()))
+                        case .failure(let error):
+                            completion(.failure(error))
+                        }
+                    }
+                )
+                
                 print("User registered successfully: \(authDataResult.user.uid)")
                 completion(.success(()))
             } catch {
@@ -245,7 +302,26 @@ struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
             let twitterSignInHelper = await XSignInHelper()
             
             do {
-                _ = try await twitterSignInHelper.signInWithTwitter()
+                let userDetails = try await twitterSignInHelper.signInWithTwitter()
+                
+      UserManager.shared.createNewUser(
+                    id: userDetails.id,
+                    email: userDetails.email,
+                    name: userDetails.fullName,
+                    authType: "twitter.com",
+                    photoUrl: userDetails.photoURL?.absoluteString ?? "",
+                    completion: { result in
+                        switch result {
+                        case .success:
+                            print("User signed in with Twitter successfully")
+                            completion(.success(()))
+                        case .failure(let error):
+                            completion(.failure(error))
+                        }
+                    }
+                )
+                        
+                
                 print("User signed in with Twitter successfully")
                 completion(.success(()))
             } catch {

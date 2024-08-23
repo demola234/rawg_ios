@@ -51,7 +51,7 @@ struct DetailsView: View {
             
             if homeViewModel.isDetailsLoading {
                 ProgressView("Loading...")
-            } else if let gameDetails = homeViewModel.gameDetails {
+            } else if homeViewModel.gameDetails != nil {
                 GeometryReader { geometry in
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack {

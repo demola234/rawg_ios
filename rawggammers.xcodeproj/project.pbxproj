@@ -100,6 +100,7 @@
 		809E0E852C53CA9400F59101 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E0E842C53CA9400F59101 /* ProfileView.swift */; };
 		809E0E872C53CAE600F59101 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E0E862C53CAE500F59101 /* FavoriteView.swift */; };
 		809E0E892C53CB3C00F59101 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809E0E882C53CB3C00F59101 /* SearchView.swift */; };
+		80A1473B2C786B0700AE9BA4 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A1473A2C786B0700AE9BA4 /* UserManager.swift */; };
 		80AC73F52C564D6700BC8E65 /* GamesCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AC73F42C564D6700BC8E65 /* GamesCardView.swift */; };
 		80AC73F92C56577E00BC8E65 /* UnevenRoundedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AC73F82C56577E00BC8E65 /* UnevenRoundedRectangle.swift */; };
 		80AC73FC2C56597B00BC8E65 /* PlatformCardDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AC73FB2C56597B00BC8E65 /* PlatformCardDetails.swift */; };
@@ -112,6 +113,12 @@
 		80ADC1992C75BB6B00EECCA9 /* AboutUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ADC1982C75BB6B00EECCA9 /* AboutUsView.swift */; };
 		80ADC19B2C75BBA400EECCA9 /* LogoutConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80ADC19A2C75BBA400EECCA9 /* LogoutConfirmationView.swift */; };
 		80B3C1EE2C592A2B00F15254 /* HomeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B3C1ED2C592A2A00F15254 /* HomeHeaderView.swift */; };
+		80B50BFF2C78C3060050D91A /* SettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B50BFE2C78C3050050D91A /* SettingsRepository.swift */; };
+		80B50C012C78C3280050D91A /* SettingsRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B50C002C78C3280050D91A /* SettingsRepositoryImpl.swift */; };
+		80B50C032C78C33A0050D91A /* SettingsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B50C022C78C33A0050D91A /* SettingsDataSource.swift */; };
+		80B50C052C78D7E10050D91A /* ChangeUserAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B50C042C78D7E10050D91A /* ChangeUserAvatar.swift */; };
+		80B50C072C78DB6A0050D91A /* AvatarPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B50C062C78DB6A0050D91A /* AvatarPreview.swift */; };
+		80B50C092C78E9850050D91A /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B50C082C78E9850050D91A /* SettingsViewModel.swift */; };
 		80BC16822C5017FD00533E84 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BC16812C5017FD00533E84 /* RegistrationView.swift */; };
 		80BC168D2C50283A00533E84 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80BC168C2C50283A00533E84 /* Utilities.swift */; };
 		80CD2CE12C51FFD7007BC0E7 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CD2CE02C51FFD6007BC0E7 /* LaunchView.swift */; };
@@ -243,6 +250,7 @@
 		809E0E842C53CA9400F59101 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		809E0E862C53CAE500F59101 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		809E0E882C53CB3C00F59101 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		80A1473A2C786B0700AE9BA4 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		80AC73F42C564D6700BC8E65 /* GamesCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesCardView.swift; sourceTree = "<group>"; };
 		80AC73F82C56577E00BC8E65 /* UnevenRoundedRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnevenRoundedRectangle.swift; sourceTree = "<group>"; };
 		80AC73FB2C56597B00BC8E65 /* PlatformCardDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformCardDetails.swift; sourceTree = "<group>"; };
@@ -255,6 +263,12 @@
 		80ADC1982C75BB6B00EECCA9 /* AboutUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsView.swift; sourceTree = "<group>"; };
 		80ADC19A2C75BBA400EECCA9 /* LogoutConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutConfirmationView.swift; sourceTree = "<group>"; };
 		80B3C1ED2C592A2A00F15254 /* HomeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeaderView.swift; sourceTree = "<group>"; };
+		80B50BFE2C78C3050050D91A /* SettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRepository.swift; sourceTree = "<group>"; };
+		80B50C002C78C3280050D91A /* SettingsRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRepositoryImpl.swift; sourceTree = "<group>"; };
+		80B50C022C78C33A0050D91A /* SettingsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDataSource.swift; sourceTree = "<group>"; };
+		80B50C042C78D7E10050D91A /* ChangeUserAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUserAvatar.swift; sourceTree = "<group>"; };
+		80B50C062C78DB6A0050D91A /* AvatarPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarPreview.swift; sourceTree = "<group>"; };
+		80B50C082C78E9850050D91A /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		80BC16802C50113B00533E84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		80BC16812C5017FD00533E84 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		80BC168C2C50283A00533E84 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -369,6 +383,8 @@
 		801E5A4E2C5F6B4D00F11106 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				80B50BFD2C789C0F0050D91A /* DataSource */,
+				80B50BFC2C789C030050D91A /* Repository */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -376,6 +392,8 @@
 		801E5A4F2C5F6B5500F11106 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				80B50BFB2C789BF90050D91A /* Entity */,
+				80B50BFA2C789BF00050D91A /* Repository */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -394,6 +412,7 @@
 			isa = PBXGroup;
 			children = (
 				809E0E842C53CA9400F59101 /* ProfileView.swift */,
+				80B50C042C78D7E10050D91A /* ChangeUserAvatar.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -401,6 +420,7 @@
 		801E5A522C5F6B7300F11106 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				80B50C082C78E9850050D91A /* SettingsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -679,6 +699,7 @@
 		809AAE302C4C1876001FD6C2 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				80A147392C786AE800AE9BA4 /* Firestore */,
 				806BEF2B2C5B6DA100EA340F /* Services */,
 				80D48D042C55341600986AA4 /* Analytics */,
 				807B9D612C53E5680086A3C3 /* Error */,
@@ -852,6 +873,45 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		80A147392C786AE800AE9BA4 /* Firestore */ = {
+			isa = PBXGroup;
+			children = (
+				80A1473A2C786B0700AE9BA4 /* UserManager.swift */,
+			);
+			path = Firestore;
+			sourceTree = "<group>";
+		};
+		80B50BFA2C789BF00050D91A /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				80B50BFE2C78C3050050D91A /* SettingsRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		80B50BFB2C789BF90050D91A /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		80B50BFC2C789C030050D91A /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				80B50C002C78C3280050D91A /* SettingsRepositoryImpl.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		80B50BFD2C789C0F0050D91A /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				80B50C022C78C33A0050D91A /* SettingsDataSource.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
 		80BC168B2C50281500533E84 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -890,6 +950,7 @@
 				8099DF4B2C52936F00A9A24F /* PlaceHolder.swift */,
 				8099DF422C524D3600A9A24F /* String.swift */,
 				806BEF302C5C071B00EA340F /* TabBar.swift */,
+				80B50C062C78DB6A0050D91A /* AvatarPreview.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1253,6 +1314,7 @@
 				80AC73FC2C56597B00BC8E65 /* PlatformCardDetails.swift in Sources */,
 				807B9D632C53E57A0086A3C3 /* NetworkError.swift in Sources */,
 				807B9D8B2C54A10F0086A3C3 /* SearchLocalDataSource.swift in Sources */,
+				80B50C032C78C33A0050D91A /* SettingsDataSource.swift in Sources */,
 				80CD42572C4FDB0600CA9416 /* AuthenticationViewModel.swift in Sources */,
 				8099DF4C2C52936F00A9A24F /* PlaceHolder.swift in Sources */,
 				807B9D7E2C54331F0086A3C3 /* SearchEntity.swift in Sources */,
@@ -1267,6 +1329,7 @@
 				806BEF272C5B6D3200EA340F /* ImageManager.swift in Sources */,
 				806BEF252C5B6CFF00EA340F /* ImageDownloadManager.swift in Sources */,
 				80D48CE42C55232200986AA4 /* SearchData.xcdatamodeld in Sources */,
+				80A1473B2C786B0700AE9BA4 /* UserManager.swift in Sources */,
 				80CD2CE12C51FFD7007BC0E7 /* LaunchView.swift in Sources */,
 				80ADC1992C75BB6B00EECCA9 /* AboutUsView.swift in Sources */,
 				80CD425B2C4FDC7C00CA9416 /* LoginView.swift in Sources */,
@@ -1282,6 +1345,7 @@
 				80ADC1952C75A9E100EECCA9 /* ThemeButtonView.swift in Sources */,
 				80D48CE72C55274200986AA4 /* SearchCoreDataImpl.swift in Sources */,
 				80D118E82C57981400C5FE4A /* RatingView.swift in Sources */,
+				80B50BFF2C78C3060050D91A /* SettingsRepository.swift in Sources */,
 				807B9D662C53ECB00086A3C3 /* HomeViewModel.swift in Sources */,
 				807B9D5C2C53DF9B0086A3C3 /* HomeRepositoryImpl.swift in Sources */,
 				807B9D5E2C53E0120086A3C3 /* HomeRemoteDataSource.swift in Sources */,
@@ -1293,6 +1357,7 @@
 				807B9D862C543B920086A3C3 /* SearchViewModel.swift in Sources */,
 				80CFB3AF2C5DE239009D8F26 /* SearchCardComponent.swift in Sources */,
 				807B9D6F2C54075C0086A3C3 /* MoviesEntity.swift in Sources */,
+				80B50C092C78E9850050D91A /* SettingsViewModel.swift in Sources */,
 				80CFB3AA2C5DAE3A009D8F26 /* GameScreenShotsEntity.swift in Sources */,
 				80CD42512C4FD44A00CA9416 /* AuthenticationRepositoryImpl.swift in Sources */,
 				80E91EB82C71CD9200508862 /* ThemeManager.swift in Sources */,
@@ -1327,6 +1392,7 @@
 				80D48CF22C552CA000986AA4 /* FavoriteEntity.swift in Sources */,
 				8056143B2C513C3500FBDFE7 /* AppleSignInHelper.swift in Sources */,
 				802951382C55DF960061B38B /* XSignInHelper.swift in Sources */,
+				80B50C012C78C3280050D91A /* SettingsRepositoryImpl.swift in Sources */,
 				8099DF512C529D0000A9A24F /* CustomBotton.swift in Sources */,
 				807B9D602C53E25F0086A3C3 /* NetworkManager.swift in Sources */,
 				80BC16822C5017FD00533E84 /* RegistrationView.swift in Sources */,
@@ -1334,10 +1400,12 @@
 				806BEF312C5C071B00EA340F /* TabBar.swift in Sources */,
 				80AC73F92C56577E00BC8E65 /* UnevenRoundedRectangle.swift in Sources */,
 				80AC73F52C564D6700BC8E65 /* GamesCardView.swift in Sources */,
+				80B50C052C78D7E10050D91A /* ChangeUserAvatar.swift in Sources */,
 				807B9D7C2C5433030086A3C3 /* SearchRepository.swift in Sources */,
 				80ADC18D2C74F89C00EECCA9 /* AvatarSettingsView.swift in Sources */,
 				8099DF532C52A8F900A9A24F /* SignInWithAppleButton.swift in Sources */,
 				809E0E812C53C8DD00F59101 /* TabView.swift in Sources */,
+				80B50C072C78DB6A0050D91A /* AvatarPreview.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

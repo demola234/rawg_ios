@@ -15,17 +15,37 @@ final class XSignInHelper {
     
     init() {}
     
-    func signInWithTwitter() async throws {
+    struct TwitterUserDetails {
+        let id: String
+        let email: String
+        let fullName: String
+        let photoURL: URL?
+    }
+
+    func signInWithTwitter() async throws -> TwitterUserDetails {
         let provider = OAuthProvider(providerID: "twitter.com")
         
+        return try await withCheckedThrowingContinuation { continuation in
             provider.getCredentialWith(nil) { credential, error in
-                if error != nil {
+                if let error = error {
+                    continuation.resume(throwing: error)
                 } else if let credential = credential {
-                Auth.auth().signIn(with: credential)
-                   
-                    print("Twitter OAuth credential: \(credential)")
-                    
+                    Auth.auth().signIn(with: credential) { authResult, error in
+                        if let error = error {
+                            continuation.resume(throwing: error)
+                        } else {
+                            let user = authResult!.user
+                            let id = user.uid
+                            let email = user.email ?? ""
+                            let fullName = user.displayName ?? ""
+                            let photoURL = user.photoURL
+                            
+                            let userDetails = TwitterUserDetails(id: id, email: email, fullName: fullName, photoURL: photoURL)
+                            continuation.resume(returning: userDetails)
+                        }
+                    }
                 }
             }
         }
+    }
 }
