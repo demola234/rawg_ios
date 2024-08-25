@@ -50,6 +50,7 @@ class AuthenticationViewModel: ObservableObject {
     }
     
     func getUserIsLoggedIn() {
+        
         repository.getUserIsLoggedIn()
             .receive(on: DispatchQueue.main)
             .sink { completion in
@@ -184,21 +185,21 @@ class AuthenticationViewModel: ObservableObject {
                 switch completion {
                 case .finished:
                     self.isLoading = false
-                    self.isLogged = true
                     break
                 case .failure(let error):
                     self.isLoading = false
-                    self.isLogged = false
                     self.errorMessage = error.localizedDescription
                     break
                 }
             } receiveValue: { message in
+                self.isLogged = true
                 print("Message: \(message)")
             }
             .store(in: &cancellables)
     }
     
     func logout() {
+        print("Logging out...")
         repository.logout()
             .receive(on: DispatchQueue.main)
             .sink { completion in

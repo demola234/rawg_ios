@@ -85,7 +85,10 @@ class SettingsViewModel: ObservableObject {
                     self.isUpdating = false
                     self.isUpdated = true
                 }
-            } receiveValue: { _ in }
+            } receiveValue: { _ in
+                self.user = nil
+                self.getProfileImage()
+            }
             .store(in: &cancellables)
     }
 }

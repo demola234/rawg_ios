@@ -10,6 +10,7 @@ import Combine
 
 class HomeViewModel: ObservableObject {
     @Published var games: [ResultData] = []
+    @Published var platformGames: [ResultData] = []
     @Published var bestGames: [ResultData] = []
     @Published var platforms: PlatformsEntity?
     @Published var movies: MoviesEntity?
@@ -31,10 +32,11 @@ class HomeViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     
-    init(repository: HomeRepository = HomeRepositoryImpl.shared, errorMessage: String = "", games: [ResultData] = [], isGamesLoading: Bool = false, platforms: PlatformsEntity? = nil, isPlatformsLoading: Bool = false, movies: MoviesEntity? = nil, gameDetails: ResultData? = nil, bestGames: [ResultData] = [], selectedTab: Tab = .trending, isDetailsLoading: Bool = false) {
+    init(repository: HomeRepository = HomeRepositoryImpl.shared, errorMessage: String = "", games: [ResultData] = [], platformGames: [ResultData] = [], isGamesLoading: Bool = false, platforms: PlatformsEntity? = nil, isPlatformsLoading: Bool = false, movies: MoviesEntity? = nil, gameDetails: ResultData? = nil, bestGames: [ResultData] = [], selectedTab: Tab = .trending, isDetailsLoading: Bool = false) {
         self.repository = repository
         self.errorMessage = errorMessage
         self.games = games
+        self.platformGames = platformGames
         self.platforms = platforms
         self.isGamesLoading = isGamesLoading
         self.isPlatformsLoading = isPlatformsLoading
@@ -78,9 +80,6 @@ class HomeViewModel: ObservableObject {
             getGames()
         }
     }
-    
-    
-    
     
     func getLastDays() {
         isGamesLoading = true
@@ -192,7 +191,7 @@ class HomeViewModel: ObservableObject {
                     self.errorMessage = error.localizedDescription
                 }
             } receiveValue: { [weak self] games in
-                self?.games = games.results
+                self?.platformGames = games.results
             }
             .store(in: &cancellables)
     }

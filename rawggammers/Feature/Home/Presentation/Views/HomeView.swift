@@ -12,7 +12,9 @@ struct HomeView: View {
     @State private var scrollAnimation: Bool = false
     @State private var showScrollToTopButton: Bool = false
     @State private var selectedDetails: ResultData? = nil
+    @State private var selectedPlatform: PlatformResult? = nil
     @State private var showDetailsView = false
+    @State private var showPlatform = false
     @Namespace private var namespace
     
     var body: some View {
@@ -35,6 +37,11 @@ struct HomeView: View {
                 .navigationDestination(isPresented: $showDetailsView) {
                     if selectedDetails != nil {
                         GameDetailsView(gameDetails: $selectedDetails)
+                    }
+                }
+                .navigationDestination(isPresented: $showPlatform) {
+                    if selectedPlatform != nil {
+                        PlatformsDetailsView(platform: $selectedPlatform)
                     }
                 }
             }
@@ -72,6 +79,9 @@ struct HomeView: View {
             sectionTitle("Platforms")
             horizontalScrollView(items: homeViewModel.platforms?.results ?? [], id: \.id) { platform in
                 PlatformCardDetails(platformDetails: platform)
+                    .onTapGesture {
+                        seguePlatform(platform: platform)
+                    }
             }
             
             sectionTitle("Latest Games")
@@ -99,14 +109,16 @@ struct HomeView: View {
         }
     }
     
-    private func fetchDataIfNeeded() {
-       
-    }
-    
     private func segue(gameDetails: ResultData) {
         HepticManager().impact(style: .medium)
         selectedDetails = gameDetails
         showDetailsView.toggle()
+    }
+    
+    private func seguePlatform(platform: PlatformResult) {
+        HepticManager().impact(style: .medium)
+        selectedPlatform = platform
+        showPlatform.toggle()
     }
     
     private func sectionTitle(_ title: String) -> some View {

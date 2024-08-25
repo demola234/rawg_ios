@@ -121,12 +121,6 @@ struct ProfileView: View {
                 }
             }
             
-//            if showAvatarSheet {
-//                BottomSheetView(show: $showAvatarSheet, offset: $offset, height: 300 ) {
-//                    ChangeUserAvatar()
-//                        .environmentObject(settingsViewModel)
-//                }
-//            }
         }
         .sheet (isPresented: $showAvatarSheet) {
             ChangeUserAvatar(showChangeAvatar: $showAvatarSheet)

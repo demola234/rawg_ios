@@ -51,6 +51,8 @@ struct ForgetPasswordView: View {
                     }, title: "Reset Password", isEnable: !email.isEmpty, backgroundColor: Color.theme.primaryTextColor)
                     .padding(.horizontal, 24)
                     
+                    
+                    
                     Spacer()
                 }
                 .padding(.horizontal, 24)

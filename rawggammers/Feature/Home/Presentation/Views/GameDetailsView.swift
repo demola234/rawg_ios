@@ -13,7 +13,6 @@ struct GameDetailsView: View {
     
     init(gameDetails: Binding<ResultData?>) {
         self._gameDetails = gameDetails
-        
     }
     
     var body: some View {
@@ -29,7 +28,7 @@ struct GameDetailsView: View {
 }
 
 struct DetailsView: View {
-    let gameDetail: ResultData
+    var gameDetail: ResultData
     @EnvironmentObject var homeViewModel: HomeViewModel
     @ObservedObject private var favoriteViewModel = FavoriteViewModel()
     @State private var showFullDescription: Bool = false
@@ -55,22 +54,22 @@ struct DetailsView: View {
                 GeometryReader { geometry in
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack {
-                            GeometryReader { innerGeometry in
-                                let minY = innerGeometry.frame(in: .global).minY
-                                Color.clear
-                                    .preference(key: ScrollOffsetPreferenceKey.self, value: minY)
-                                    .onAppear {
-                                        scrollOffset = minY
-                                    }
-                                    .onChange(of: minY) { newValue in
-                                        scrollOffset = newValue
-                                        withAnimation {
-                                            hideHeader = scrollOffset < -100
-                                            showAppBar = scrollOffset < -150
-                                        }
-                                    }
-                            }
-                            .frame(height: 0)
+//                            GeometryReader { innerGeometry in
+//                                let minY = innerGeometry.frame(in: .global).minY
+//                                Color.clear
+//                                    .preference(key: ScrollOffsetPreferenceKey.self, value: minY)
+//                                    .onAppear {
+//                                        scrollOffset = minY
+//                                    }
+//                                    .onChange(of: minY) { newValue in
+//                                        scrollOffset = newValue
+//                                        withAnimation {
+//                                            hideHeader = scrollOffset < -100
+//                                            showAppBar = scrollOffset < -150
+//                                        }
+//                                    }
+//                            }
+//                            .frame(height: 0)
                             
                             ZStack {
                                 if let imageUrl = URL(string: gameDetail.backgroundImage ?? "") {
@@ -203,7 +202,7 @@ struct DetailsView: View {
                                                             selectedScreenshot = screenshot
                                                         }
                                                     }
-                                                   
+                                                
                                             }
                                         }
                                     }
@@ -235,7 +234,7 @@ struct DetailsView: View {
                                     }
                                 }
                                 
-                                if let similarGames = homeViewModel.gameSeries {
+                                if homeViewModel.gameSeries != nil {
                                     Text("More Games Like \(gameDetail.name?.capitalizedFirstLetterOfEachWord ?? "")")
                                         .customFont(CustomFont.orbitronSemiBold.copyWith(size: 14))
                                         .foregroundColor(.theme.primaryTextColor)
@@ -264,7 +263,9 @@ struct DetailsView: View {
                         .background(Color.theme.background)
                         .ignoresSafeArea()
                         .onAppear {
+                            
                             if homeViewModel.gameDetails == nil {
+                                homeViewModel.getGameDetails(game: gameDetail.slug ?? "")
                                 homeViewModel.gameDetails = gameDetail
                                 homeViewModel.getMovies(game: gameDetail.slug ?? "")
                                 homeViewModel.getScreenshots(game: gameDetail.slug ?? "")

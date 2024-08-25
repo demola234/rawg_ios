@@ -53,6 +53,7 @@ class FavoriteViewModel: ObservableObject {
                 }
             } receiveValue: { _ in
                 self.favoritePick = true
+                self.favorites = []
                 self.getAllFavorites()
             }
             .store(in: &cancellables)
@@ -89,6 +90,7 @@ class FavoriteViewModel: ObservableObject {
                 }
             } receiveValue: { _ in
                 self.favoritePick = false
+                self.favorites = []
                 self.getAllFavorites()
             }
             .store(in: &cancellables)

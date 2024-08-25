@@ -67,7 +67,7 @@ struct GameHeaderView: View {
                 .blur(radius: 10)
                 .overlay(
                     HStack {
-                        Text(gameDetail?.name ?? "S.T.A.L.K.E.R. 2: Heart of Chornobyl")
+                        Text(gameDetail?.name ?? "")
                             .font(Font.custom("Orbitron", size: 23).weight(.medium))
                             .foregroundColor(Color.theme.primaryTextColor)
                             .padding(.horizontal, 16)

@@ -47,11 +47,17 @@ struct ChangeUserAvatar: View {
                                 
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     HStack(spacing: 10) {
+                                        
                                         ForEach(groupedAvatars[gameName] ?? [], id: \.id) { avatar in
                                             AvatarSelectionView(avatar: avatar, selectedAvatar: $selectedAvatar)
                                                 .onTapGesture {
                                                     withAnimation {
-                                                        selectedAvatar = avatar
+                                                    // Check if the selected avatar is the same as the current avatar
+                                                        if selectedAvatar == avatar {
+                                                            selectedAvatar = nil
+                                                        } else {
+                                                            selectedAvatar = avatar
+                                                        }
                                                     }
                                                 }
                                                 
@@ -63,7 +69,7 @@ struct ChangeUserAvatar: View {
                         }
                     }
                 }
-                
+
                 if let selectedAvatar = selectedAvatar {
                     CustomButton(action: {
                         HepticManager().impact(style: .medium)
@@ -71,14 +77,11 @@ struct ChangeUserAvatar: View {
                         showChangeAvatar = false
                         
                     }, title: "Select Avatar for Account", isEnable: true, backgroundColor: Color.theme.primaryTextColor)
-//                    .padding(.horizontal, 40)
-//                    .padding(.bottom, 20)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
                     .animation(.easeInOut, value: selectedAvatar)
                 }
             }
         }
-       
     }
 }
 

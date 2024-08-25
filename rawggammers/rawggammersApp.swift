@@ -16,6 +16,8 @@ struct rawggammersApp: App {
     @StateObject private var themeManager = ThemeManager()
     @StateObject private var settingsViewModel = SettingsViewModel()
     @State private var isShowingLaunchView = true
+    @State private var showChangeAvatar = false
+    @State private var showName = false
     
     var body: some Scene {
         WindowGroup {
@@ -25,6 +27,18 @@ struct rawggammersApp: App {
                 if authViewModel.isLogged {
                     FancyTabView()
                         .environmentObject(authViewModel)
+                        .onAppear {
+                            checkForAvatar()
+                            checkForName()
+                        }
+                        .sheet(isPresented: $showChangeAvatar) {
+                            ChangeUserAvatar(showChangeAvatar: $showChangeAvatar)
+                                .environmentObject(settingsViewModel)
+                        }
+                        .sheet(isPresented: $showName, content: {
+                            CreateUsernameView()
+                                .environmentObject(settingsViewModel)
+                        })
                 } else {
                     LoginView()
                         .environmentObject(authViewModel)
@@ -33,6 +47,17 @@ struct rawggammersApp: App {
         }
         .environmentObject(themeManager)
         .environmentObject(settingsViewModel)
-        
+    }
+    
+    private func checkForAvatar() {
+        if ((settingsViewModel.user?.photoUrl) == nil) {
+            showChangeAvatar = true
+        }
+    }
+    
+    private func checkForName() {
+        if (settingsViewModel.user?.name == nil) {
+            showName = true
+        }
     }
 }

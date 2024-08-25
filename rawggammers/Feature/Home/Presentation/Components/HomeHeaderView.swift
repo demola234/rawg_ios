@@ -10,6 +10,9 @@ import SwiftUI
 struct HomeHeaderView: View {
     var userDetails = UsersDataEntity()
     @EnvironmentObject var settingsViewModel: SettingsViewModel
+    @State private var showName: Bool = false
+    @State private var showChangeAvatar: Bool = false
+
     var body: some View {
         HStack {
             
@@ -35,23 +38,38 @@ struct HomeHeaderView: View {
                     .aspectRatio(contentMode: .fill)
                     .clipShape(Circle())
                     .padding(.trailing, 7)
+                    .onTapGesture {
+                        showChangeAvatar.toggle()
+                    }
             }
             
             VStack(alignment: .leading) {
-                Text("Welcome \(userDetails.username)")
+                Text("Welcome \(settingsViewModel.user?.name ?? "User")!")
                     .customFont(CustomFont.orbitronSemiBold.copyWith(size: 16))
                     .foregroundColor(Color.theme.primaryTextColor)
                     .padding(.bottom, 2)
-                Text("What event would you like to watch today?")
+                Text("What games are you looking at today?")
                     .customFont(CustomFont.poppinsRegualr.copyWith(size: 12))
                     .foregroundColor(Color.theme.accentTextColor)
                  
             }
+            .onTapGesture {
+                showName.toggle()
+            }
             Spacer()
+        }
+        .sheet(isPresented: $showName, content: {
+            CreateUsernameView()
+                .environmentObject(settingsViewModel)
+        })
+        .sheet(isPresented: $showChangeAvatar) {
+            ChangeUserAvatar(showChangeAvatar: $showChangeAvatar)
+                .environmentObject(settingsViewModel)
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 10)
     }
+       
 }
 
 #Preview {
