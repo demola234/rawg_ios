@@ -1,10 +1,15 @@
+//
 //  SearchView.swift
 //  rawggammers
 //
 //  Created by Ademola Kolawole on 26/07/2024.
 //
+
 import SwiftUI
 
+/// The main view for searching games and displaying search results or previously saved searches.
+///
+/// This view provides a search interface, displays search results, shows saved searches, and handles navigation and deletion of saved searches.
 struct SearchView: View {
     @ObservedObject var viewModel = SearchViewModel()
     @State private var selectedDetails: ResultData? = nil
@@ -17,6 +22,7 @@ struct SearchView: View {
             ZStack {
                 Color.theme.background
                     .ignoresSafeArea()
+                
                 VStack {
                     // TextField for search
                     SearchTextFieldComponent(
@@ -100,10 +106,7 @@ struct SearchView: View {
                                         .customFont(CustomFont.orbitronSemiBold.copyWith(size: 20))
                                         .foregroundColor(.theme.primaryTextColor)
                                         .padding()
-                                }
-                                
-                                
-                                else {
+                                } else {
                                     ForEach(viewModel.searchData ?? [], id: \.id) { searchResult in
                                         SearchCardComponent(searchResult: searchResult)
                                             .onTapGesture {
@@ -139,10 +142,13 @@ struct SearchView: View {
                 if viewModel.searchText.isEmpty {
                     viewModel.getAllSavedSearches()
                 }
-        }
+            }
         }
     }
 
+    /// Triggers a segue to show the details view for a selected game.
+    ///
+    /// - Parameter gameDetails: The `ResultData` object representing the game for which details are to be shown.
     private func segue(gameDetails: ResultData) {
         selectedDetails = gameDetails
         showDetailsView.toggle()

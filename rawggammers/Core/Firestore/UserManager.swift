@@ -11,14 +11,34 @@ import FirebaseAuth
 import FirebaseFirestoreSwift
 import FirebaseStorage
 
+/// `UserManager` is a singleton class responsible for managing user data within the `rawggammers` application.
+/// It interacts with Firebase Firestore and Firebase Storage to handle user creation, data retrieval, and profile updates.
 final class UserManager {
+    
+    // MARK: - Properties
+    
+    /// Firestore database instance used for accessing the Firestore services.
     private var db = Firestore.firestore()
     
+    /// Shared instance of `UserManager` to ensure only one instance is created.
     static let shared = UserManager()
     
+    // MARK: - Initializer
+    
+    /// Private initializer to prevent the creation of multiple instances.
     private init() {}
     
-    // Create a new user and store it in Firestore
+    // MARK: - User Management Methods
+    
+    /// Creates a new user and stores it in Firestore.
+    ///
+    /// - Parameters:
+    ///   - id: The unique identifier of the user.
+    ///   - email: The user's email address.
+    ///   - name: The user's name.
+    ///   - authType: The type of authentication used (e.g., "email", "google").
+    ///   - photoUrl: The URL of the user's profile photo.
+    ///   - completion: A completion handler with a `Result` containing either `Void` on success or an `Error` on failure.
     func createNewUser(id: String, email: String, name: String, authType: String, photoUrl: String, completion: @escaping (Result<Void, Error>) -> Void) {
         let user = User(id: id, email: email, name: name, authType: authType, photoUrl: photoUrl, dateCreated: Timestamp(date: Date()))
         
@@ -35,7 +55,9 @@ final class UserManager {
         }
     }
     
-    // Fetch user data from Firestore
+    /// Fetches the current user's data from Firestore.
+    ///
+    /// - Parameter completion: A completion handler with a `Result` containing either a `User` on success or an `Error` on failure.
     func getUser(completion: @escaping (Result<User, Error>) -> Void) {
         guard let id = Auth.auth().currentUser?.uid else {
             completion(.failure(FirestoreError.documentNotFoundError))
@@ -57,8 +79,12 @@ final class UserManager {
         }
     }
     
-    func updateProfileName (name: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        
+    /// Updates the user's profile name in Firestore.
+    ///
+    /// - Parameters:
+    ///   - name: The new name to update.
+    ///   - completion: A completion handler with a `Result` containing either `Void` on success or an `Error` on failure.
+    func updateProfileName(name: String, completion: @escaping (Result<Void, Error>) -> Void) {
         guard let id = Auth.auth().currentUser?.uid else {
             completion(.failure(FirestoreError.documentNotFoundError))
             return
@@ -73,8 +99,12 @@ final class UserManager {
         }
     }
     
-    func updateProfileImage (image: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        
+    /// Updates the user's profile image URL in Firestore.
+    ///
+    /// - Parameters:
+    ///   - image: The URL of the new profile image.
+    ///   - completion: A completion handler with a `Result` containing either `Void` on success or an `Error` on failure.
+    func updateProfileImage(image: String, completion: @escaping (Result<Void, Error>) -> Void) {
         guard let id = Auth.auth().currentUser?.uid else {
             completion(.failure(FirestoreError.documentNotFoundError))
             return
@@ -89,24 +119,29 @@ final class UserManager {
         }
     }
     
+    /// Uploads an image to Firebase Storage and updates the user's profile image URL in Firestore.
+    ///
+    /// - Parameters:
+    ///   - image: The name of the image to upload from the app's assets.
+    ///   - completion: A completion handler with a `Result` containing either the image URL as `String` on success or an `Error` on failure.
     func uploadImageToFirebase(image: String, completion: @escaping (Result<String, Error>) -> Void) {
-        //        Load the image from assets
+        // Load the image from assets
         guard let image = UIImage(named: image) else {
             print("Failed to load image from assets")
             return
         }
         
-        //        Convert image to data
+        // Convert image to data
         guard let imageData = image.jpegData(compressionQuality: 0.5) else {
             print("Failed to convert image to data")
             return
         }
         
-        //        Get a reference to Firebase Storage
+        // Get a reference to Firebase Storage
         let storage = Storage.storage()
         let storageRef = storage.reference()
         
-        //        Upload the image data
+        // Upload the image data
         let imageRef = storageRef.child("images/\(UUID().uuidString).jpg")
         imageRef.putData(imageData, metadata: nil) { metadata, error in
             if let error = error {
@@ -118,7 +153,7 @@ final class UserManager {
                         completion(.failure(error))
                         print("Failed to get download url")
                     } else {
-                        //        upload url to firestore
+                        // Update the user's profile image URL in Firestore
                         guard let id = Auth.auth().currentUser?.uid else {
                             completion(.failure(FirestoreError.documentNotFoundError))
                             return
@@ -127,25 +162,23 @@ final class UserManager {
                         self.db.collection("users").document(id).updateData(["photoUrl": url?.absoluteString ?? ""]) { error in
                             if let error = error {
                                 completion(.failure(error))
-                                print("Failed to update firestore")
+                                print("Failed to update Firestore")
                             } else {
                                 completion(.success(url?.absoluteString ?? ""))
                             }
-                            completion(.success(url?.absoluteString ?? ""))
                         }
                     }
                 }
             }
         }
-        
     }
 }
 
+// MARK: - FirestoreError Enum
 
-
-// Custom error enum for handling Firestore errors
+/// `FirestoreError` is a custom error enum used for handling specific Firestore errors within the `UserManager`.
 enum FirestoreError: Error {
-    case decodeError
-    case documentNotFoundError
-    case unknownError
+    case decodeError       // Error when failing to decode data from Firestore
+    case documentNotFoundError // Error when the requested document is not found
+    case unknownError      // Error for any unknown issues
 }

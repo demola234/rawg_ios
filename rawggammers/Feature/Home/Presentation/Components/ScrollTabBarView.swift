@@ -7,9 +7,18 @@
 
 import SwiftUI
 
+/// A view that displays a horizontally scrollable tab bar with selectable tabs.
+///
+/// This view is used to navigate between different sections of content in the app by selecting different tabs.
+/// The selected tab updates the `selectedTab` binding and triggers a tab change in the `HomeViewModel`.
 struct ScrollTabBarView: View {
+    /// A binding to the currently selected tab.
     @Binding var selectedTab: Tab
+    
+    /// An array of widths for the text of each tab.
     @State private var textWidths: [CGFloat] = Array(repeating: 0, count: Tab.allCases.count)
+    
+    /// An environment object providing the `HomeViewModel` for managing tab selection.
     @EnvironmentObject var homeViewModel: HomeViewModel
     
     var body: some View {
@@ -42,8 +51,6 @@ struct ScrollTabBarView: View {
                                 withAnimation(.spring) {
                                     selectedTab = tab
                                     homeViewModel.selectNewTab(tab: selectedTab)
-                                   
-                                    
                                 }
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                     withAnimation {
@@ -59,7 +66,7 @@ struct ScrollTabBarView: View {
                 DispatchQueue.main.async {
                     textWidths = textWidths.map { $0 == 0 ? (textWidths.max() ?? 0) : $0 }
                 }
-        }
+            }
         }
     }
 }
@@ -70,6 +77,7 @@ struct ScrollTabBarView: View {
         .padding()
 }
 
+/// Enumeration representing different tabs in the `ScrollTabBarView`.
 enum Tab: String, CaseIterable {
     case trending = "Trending"
     case lastDays = "Last 30 days"

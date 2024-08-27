@@ -132,7 +132,6 @@
 		80D118DC2C578CF900C5FE4A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 80D118DB2C578CF900C5FE4A /* FirebaseAuth */; };
 		80D118DE2C578CF900C5FE4A /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 80D118DD2C578CF900C5FE4A /* FirebaseAuthCombine-Community */; };
 		80D118E62C57976B00C5FE4A /* GameHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D118E52C57976B00C5FE4A /* GameHeaderView.swift */; };
-		80D118E82C57981400C5FE4A /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D118E72C57981400C5FE4A /* RatingView.swift */; };
 		80D118EA2C57983F00C5FE4A /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D118E92C57983F00C5FE4A /* DescriptionView.swift */; };
 		80D118EC2C57986900C5FE4A /* GameInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D118EB2C57986900C5FE4A /* GameInfoView.swift */; };
 		80D118EE2C57989600C5FE4A /* InfoRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D118ED2C57989600C5FE4A /* InfoRowView.swift */; };
@@ -268,7 +267,6 @@
 		80CFB3AB2C5DD91E009D8F26 /* SearchTextFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextFieldComponent.swift; sourceTree = "<group>"; };
 		80CFB3AE2C5DE239009D8F26 /* SearchCardComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCardComponent.swift; sourceTree = "<group>"; };
 		80D118E52C57976B00C5FE4A /* GameHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHeaderView.swift; sourceTree = "<group>"; };
-		80D118E72C57981400C5FE4A /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		80D118E92C57983F00C5FE4A /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
 		80D118EB2C57986900C5FE4A /* GameInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoView.swift; sourceTree = "<group>"; };
 		80D118ED2C57989600C5FE4A /* InfoRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoRowView.swift; sourceTree = "<group>"; };
@@ -409,7 +407,6 @@
 				80AC73F42C564D6700BC8E65 /* GamesCardView.swift */,
 				80B3C1ED2C592A2A00F15254 /* HomeHeaderView.swift */,
 				80D118E52C57976B00C5FE4A /* GameHeaderView.swift */,
-				80D118E72C57981400C5FE4A /* RatingView.swift */,
 				80D118E92C57983F00C5FE4A /* DescriptionView.swift */,
 				80D118EB2C57986900C5FE4A /* GameInfoView.swift */,
 				80535A2F2C7B4C6700049ACC /* PlatformCardView.swift */,
@@ -1266,7 +1263,6 @@
 				806BEF292C5B6D6900EA340F /* NetworkImageView.swift in Sources */,
 				80ADC1952C75A9E100EECCA9 /* ThemeButtonView.swift in Sources */,
 				80D48CE72C55274200986AA4 /* SearchCoreDataImpl.swift in Sources */,
-				80D118E82C57981400C5FE4A /* RatingView.swift in Sources */,
 				80B50BFF2C78C3060050D91A /* SettingsRepository.swift in Sources */,
 				807B9D662C53ECB00086A3C3 /* HomeViewModel.swift in Sources */,
 				807B9D5C2C53DF9B0086A3C3 /* HomeRepositoryImpl.swift in Sources */,

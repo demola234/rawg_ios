@@ -11,18 +11,22 @@ import AuthenticationServices
 import FirebaseAuth
 import SwiftUI
 
+/// A struct representing the result of a sign-in with Apple.
 struct SignInWithAppleResult {
     let token: String
     let nonce: String
 }
 
-
 @MainActor
 final class AppleSignInHelper: NSObject {
+    
     private var currentNonce: String?
     private var completionHandler: ((Result<SignInWithAppleResult, Error>) -> Void)? = nil
     
-    
+    /// Initiates the sign-in flow with Apple and returns user authentication data.
+    ///
+    /// - Returns: An `AuthDataModel` containing user information.
+    /// - Throws: An error if the sign-in process fails.
     func startSignWithAppleFlow() async throws -> AuthDataModel {
         return try await withCheckedThrowingContinuation { continuation in
             startSignInWithAppleFlow { result in
@@ -48,12 +52,15 @@ final class AppleSignInHelper: NSObject {
         }
     }
     
+    /// Starts the sign-in flow with Apple.
+    ///
+    /// - Parameter completion: A closure that is called with the result of the sign-in attempt.
     func startSignInWithAppleFlow(completion: @escaping (Result<SignInWithAppleResult, Error>) -> Void) {
         guard let topVC = Utilities.shared.topViewController() else {
-        completion(.failure(SignInWithAppleError.noViewController))
+            completion(.failure(SignInWithAppleError.noViewController))
             return
         }
-            
+        
         let nonce = randomNonceString()
         currentNonce = nonce
         completionHandler = completion
@@ -68,6 +75,10 @@ final class AppleSignInHelper: NSObject {
         authorizationController.performRequests()
     }
     
+    /// Generates a random nonce string.
+    ///
+    /// - Parameter length: The length of the nonce string. Default is 32.
+    /// - Returns: A random nonce string.
     private func randomNonceString(length: Int = 32) -> String {
         precondition(length > 0)
         var randomBytes = [UInt8](repeating: 0, count: length)
@@ -86,6 +97,10 @@ final class AppleSignInHelper: NSObject {
         return String(nonce)
     }
     
+    /// Hashes a string using SHA-256.
+    ///
+    /// - Parameter input: The string to be hashed.
+    /// - Returns: The SHA-256 hash of the input string, represented as a hexadecimal string.
     @available(iOS 13, *)
     private func sha256(_ input: String) -> String {
         let inputData = Data(input.utf8)
@@ -96,12 +111,15 @@ final class AppleSignInHelper: NSObject {
         
         return hashString
     }
-    
-    
 }
 
 extension AppleSignInHelper: ASAuthorizationControllerDelegate {
     
+    /// Handles successful completion of Apple Sign-In.
+    ///
+    /// - Parameters:
+    ///   - controller: The `ASAuthorizationController` that completed authorization.
+    ///   - authorization: The `ASAuthorization` containing the credential information.
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         
         guard
@@ -118,6 +136,11 @@ extension AppleSignInHelper: ASAuthorizationControllerDelegate {
         completionHandler?(.success(tokens))
     }
     
+    /// Handles errors that occur during Apple Sign-In.
+    ///
+    /// - Parameters:
+    ///   - controller: The `ASAuthorizationController` that encountered an error.
+    ///   - error: The error that occurred.
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         // Handle error.
         print("Sign in with Apple errored: \(error)")
@@ -132,25 +155,24 @@ extension UIViewController: ASAuthorizationControllerPresentationContextProvidin
 }
 
 private enum SignInWithAppleError: LocalizedError {
-     case noViewController
-     case invalidCredential
-     case badResponse
-     case unableToFindNonce
-     
-     var errorDescription: String? {
-         switch self {
-         case .noViewController:
-             return "Could not find top view controller."
-         case .invalidCredential:
-             return "Invalid sign in credential."
-         case .badResponse:
-             return "Apple Sign In had a bad response."
-         case .unableToFindNonce:
-             return "Apple Sign In token expired."
-         }
-     }
- }
-
+    case noViewController
+    case invalidCredential
+    case badResponse
+    case unableToFindNonce
+    
+    var errorDescription: String? {
+        switch self {
+        case .noViewController:
+            return "Could not find top view controller."
+        case .invalidCredential:
+            return "Invalid sign in credential."
+        case .badResponse:
+            return "Apple Sign In had a bad response."
+        case .unableToFindNonce:
+            return "Apple Sign In token expired."
+        }
+    }
+}
 
 struct AuthDataModel {
     let uid: String

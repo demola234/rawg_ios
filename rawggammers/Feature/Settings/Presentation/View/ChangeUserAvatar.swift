@@ -6,6 +6,18 @@
 //
 import SwiftUI
 
+/// View for selecting and changing the user's avatar.
+///
+/// This view allows users to choose from a list of avatars grouped by game. Users can select an avatar, and the selected avatar can be applied to their account.
+///
+/// - Environment Objects:
+///   - `settingsViewModel`: Manages user profile settings and updates.
+/// - Binding:
+///   - `showChangeAvatar`: Controls the visibility of this view.
+/// - State:
+///   - `selectedAvatar`: Tracks the currently selected avatar.
+///   - `avatars`: List of available avatars fetched from `AvatarPreview`.
+///   - `groupedAvatars`: Avatars grouped by their game name.
 struct ChangeUserAvatar: View {
     @EnvironmentObject var settingsViewModel: SettingsViewModel
     @Binding var showChangeAvatar: Bool
@@ -34,7 +46,6 @@ struct ChangeUserAvatar: View {
                 
                 Spacer()
                 
-                
                 // Iterate over each game group
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 40) {
@@ -52,7 +63,7 @@ struct ChangeUserAvatar: View {
                                             AvatarSelectionView(avatar: avatar, selectedAvatar: $selectedAvatar)
                                                 .onTapGesture {
                                                     withAnimation {
-                                                    // Check if the selected avatar is the same as the current avatar
+                                                        // Check if the selected avatar is the same as the current avatar
                                                         if selectedAvatar == avatar {
                                                             selectedAvatar = nil
                                                         } else {
@@ -85,6 +96,13 @@ struct ChangeUserAvatar: View {
     }
 }
 
+/// View for displaying a single avatar option.
+///
+/// This view represents an individual avatar and highlights it when selected.
+///
+/// - Parameters:
+///   - avatar: The avatar to display.
+///   - selectedAvatar: The currently selected avatar, used to highlight the selected avatar.
 struct AvatarSelectionView: View {
     let avatar: GameAvatar
     @Binding var selectedAvatar: GameAvatar?

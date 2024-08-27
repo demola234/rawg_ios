@@ -7,14 +7,25 @@
 
 import SwiftUI
 
+/// A view that allows users to create a new account by entering their email and password.
+/// It provides feedback through alerts and transitions to the login view if the user already has an account.
 struct RegistrationView: View {
+    /// The view model responsible for authentication-related actions and state management.
     @EnvironmentObject var authViewModel: AuthenticationViewModel
+    
+    /// The current color scheme of the environment, used for styling.
     @Environment(\.colorScheme) var colorScheme: ColorScheme
+    
+    /// A boolean value indicating whether to show an alert.
     @State private var showAlert = false
+    
+    /// The message to be displayed in the alert.
     @State private var alertMessage = ""
+    
+    /// The title to be displayed in the alert.
     @State private var alertTitle = ""
     
-    
+    /// A focus state indicating whether the email field is currently focused.
     @FocusState private var emailFieldIsFocused: Bool
     
     var body: some View {
@@ -82,29 +93,22 @@ struct RegistrationView: View {
                             }
                             .padding(.horizontal, 24)
                             
-                            
                             Spacer()
                             
-                          
-                                NavigationLink {
-                                    LoginView()
-                                } label: {
-                                    HStack (alignment: .center) {
-                                        Text("Already have a Rawg Account?")
-                                            .customFont(CustomFont.orbitronMedium.copyWith(size: 16))
-                                        
-                                            .foregroundColor(.theme.primaryTextColor)
-                                        Text("Sign in")
-                                            .customFont(CustomFont.orbitronBold.copyWith(size: 16))
-                                            .foregroundColor(.theme.goldColor)
-                                        
+                            NavigationLink {
+                                LoginView()
+                            } label: {
+                                HStack (alignment: .center) {
+                                    Text("Already have a Rawg Account?")
+                                        .customFont(CustomFont.orbitronMedium.copyWith(size: 16))
                                     
+                                    Text("Sign in")
+                                        .customFont(CustomFont.orbitronBold.copyWith(size: 16))
+                                        .foregroundColor(.theme.goldColor)
                                 }
                             }
                             .padding(.horizontal, 24)
                             .padding(.bottom, 20)
-                            
-                            
                             
                             HStack {
                                 AuthButton(action: {
@@ -116,7 +120,6 @@ struct RegistrationView: View {
                                 AuthButton(action: {
                                     authViewModel.twitterSignIn()
                                 }, imageName: "TwitterLogo")
-                                
                                 
                                 Spacer()
                                 

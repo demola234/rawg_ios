@@ -7,17 +7,22 @@
 
 import SwiftUI
 
+/// A view that displays a card for a game, showcasing its background image, rating, and name.
+///
+/// The `GamesCardView` presents a card with a background image of a game and overlays additional information, including platform icons and the game's rating and name. The card features a rounded rectangle shape with a custom bottom overlay.
 struct GamesCardView: View {
+    /// The data model containing information about the game to be displayed.
     var gameData: ResultData
     
     var body: some View {
         ZStack {
+            // Display the background image if available
             if let imageUrl = URL(string: gameData.backgroundImage ?? "") {
                 NetworkImageView(imageURL: imageUrl)
                     .aspectRatio(contentMode: .fill)
                     .scaledToFill()
                     .clipShape(.rect(cornerRadius: 20))
-                    .overlay (alignment: .bottom) {
+                    .overlay(alignment: .bottom) {
                         UnevenRoundedRectangle(bottomLeadingRadius: 20, bottomTrailingRadius: 20)
                             .foregroundColor(.theme.cardColor)
                             .frame(height: 93)
@@ -37,7 +42,7 @@ struct GamesCardView: View {
                                             }
                                         }
                                         
-                                        // Display the images in a ForEach loop
+                                        // Display the platform images in a ForEach loop
                                         ForEach(platformImages.keys.sorted(), id: \.self) { platformName in
                                             if let platformImage = platformImages[platformName] {
                                                 Image(platformImage)
@@ -45,9 +50,9 @@ struct GamesCardView: View {
                                                     .scaledToFit()
                                                     .frame(width: 15, height: 15)
                                             }
-                                            
                                         }
                                         Spacer()
+                                        // Display the game's rating in a rounded rectangle
                                         RoundedRectangle(cornerRadius: 5)
                                             .foregroundColor(.clear)
                                             .frame(width: 35, height: 35)
@@ -58,23 +63,19 @@ struct GamesCardView: View {
                                                 Text("\(gameData.rating ?? 0.0, specifier: "%.1f")")
                                                     .customFont(CustomFont.orbitronSemiBold.copyWith(size: 14))
                                                     .foregroundColor(.theme.primaryTextColor)
-                                                
-                                                
                                             }
                                     }
                                     .padding(.horizontal, 10)
                                     .frame(maxWidth: 200, alignment: .leading)
                                     
-                                    
-                                    Text("\(gameData.name ?? "")" )
+                                    // Display the game's name
+                                    Text("\(gameData.name ?? "")")
                                         .customFont(CustomFont.orbitronSemiBold.copyWith(size: 12))
                                         .foregroundColor(.theme.primaryTextColor)
                                         .frame(maxWidth: 180, alignment: .leading)
                                         .lineLimit(2)
                                         .multilineTextAlignment(.leading)
                                         .padding(.horizontal, 10)
-                                    
-                                    
                                 }
                                 .padding(.horizontal, 10)
                                 .padding(.vertical, 5)
@@ -83,11 +84,8 @@ struct GamesCardView: View {
                     .frame(width: 210, height: 250)
                     .background(Color.theme.cardColor)
                     .cornerRadius(20)
-                
             }
         }
-        
-        
     }
 }
 

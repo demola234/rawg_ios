@@ -12,8 +12,8 @@ struct ShimmerView: View {
 
     var body: some View {
         ZStack {
-            Color.gray.opacity(0.3) // Base color of the placeholder
-            Color.white.opacity(0.6) // Shimmer color
+            Color.gray.opacity(0.3)
+            Color.white.opacity(0.6)
                 .mask(
                     Rectangle()
                         .fill(LinearGradient(gradient: Gradient(colors: [.clear, .white, .clear]), startPoint: .topLeading, endPoint: .bottomTrailing))

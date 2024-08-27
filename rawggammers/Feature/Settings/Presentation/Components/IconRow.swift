@@ -7,13 +7,20 @@
 
 import SwiftUI
 
+/// A view representing an individual icon in a row, used for selecting app icons.
+///
+/// This view displays an icon image and its associated name. It highlights the icon with a border if it is currently selected.
+///
+/// - Parameters:
+///   - icon: An `Icon` object representing the icon to display.
+///   - appIconManager: An `EnvironmentObject` managing the current app icon selection.
 struct IconRow: View {
     public let icon: Icon
     @EnvironmentObject var appIconManager: AppIconManager
     
     var body: some View {
         VStack(alignment: .center) {
-            
+            // Display the icon image with a border if selected
             VStack {
                 Image(uiImage: icon.image ?? UIImage())
                     .resizable()
@@ -31,6 +38,8 @@ struct IconRow: View {
                     }
                 }
             )
+            
+            // Display the icon's name with styling
             Text(icon.displayName)
                 .foregroundStyle(Color.theme.primaryTextColor)
                 .customFont(CustomFont.poppinsRegualr.copyWith(size: 15))
@@ -41,4 +50,3 @@ struct IconRow: View {
         .padding(8)
     }
 }
-

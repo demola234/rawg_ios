@@ -7,6 +7,19 @@
 
 import SwiftUI
 
+/// View for creating or updating the user's username.
+///
+/// This view allows users to enter and update their username. It includes a text field for input and a button to submit the new username. An alert is shown upon successful update.
+///
+/// - Environment Objects:
+///   - `settingsViewModel`: Manages user profile updates.
+/// - State:
+///   - `username`: The new username entered by the user.
+///   - `showAlert`: Controls the display of the alert.
+///   - `alertMessage`: The message to display in the alert.
+///
+/// - Navigation:
+///   - Uses `NavigationView` to enable navigation and dismissal.
 struct CreateUsernameView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var settingsViewModel: SettingsViewModel
@@ -36,8 +49,6 @@ struct CreateUsernameView: View {
                         label: "Username",
                         keyboardType: .default,
                         border: true
-                        
-                        
                     )
                     .submitLabel(.done)
                     .padding(.bottom, 1)
@@ -49,7 +60,6 @@ struct CreateUsernameView: View {
                     }, title: "Update Username", isEnable: !username.isEmpty, backgroundColor: Color.theme.primaryTextColor)
                     .padding(.horizontal, 24)
                     
-                   
                     Spacer()
                 }
                 .padding(.horizontal, 24)

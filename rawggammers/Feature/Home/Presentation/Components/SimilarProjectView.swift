@@ -7,17 +7,22 @@
 
 import SwiftUI
 
+/// A view that displays a card for similar projects or games.
+///
+/// The `SimilarProjectView` presents a card with a background image and information about similar games, including a name and a placeholder for additional information. The card features a rounded rectangle shape with a bottom overlay.
 struct SimilarProjectView: View {
+    /// The genre or game data to be displayed.
     var similarGames: Genre
     
     var body: some View {
         ZStack {
+            // Display the background image if available
             if let imageUrl = URL(string: similarGames.imageBackground ?? "") {
                 NetworkImageView(imageURL: imageUrl)
                     .aspectRatio(contentMode: .fill)
                     .scaledToFill()
                     .clipShape(RoundedRectangle(cornerRadius: 20))
-                    .overlay (alignment: .bottom) {
+                    .overlay(alignment: .bottom) {
                         bottomOverlayView
                     }
                     .frame(width: 210, height: 250)
@@ -29,6 +34,7 @@ struct SimilarProjectView: View {
         .cornerRadius(20)
     }
     
+    /// A view displayed at the bottom of the card overlay.
     private var bottomOverlayView: some View {
         UnevenRoundedRectangle(bottomLeadingRadius: 20, bottomTrailingRadius: 20)
             .foregroundColor(.theme.cardColor)
@@ -36,7 +42,7 @@ struct SimilarProjectView: View {
             .alignmentGuide(.bottom) { d in d[.bottom] }
             .overlay {
                 VStack(alignment: .leading, spacing: 5) {
-//                    platformIconsView
+                    // Placeholder for additional content, e.g., platform icons
                     nameView
                 }
                 .padding(.horizontal, 10)
@@ -44,36 +50,7 @@ struct SimilarProjectView: View {
             }
     }
     
-//    private var platformIconsView: some View {
-//        HStack {
-//            ForEach(getPlatformImages(), id: \.self) { platformImage in
-//                Image(platformImage)
-//                    .resizable()
-//                    .scaledToFit()
-//                    .frame(width: 15, height: 15)
-//            }
-//            
-//            Spacer()
-//            
-//            ratingView
-//        }
-//        .padding(.horizontal, 10)
-//        .frame(maxWidth: 200, alignment: .leading)
-//    }
-    
-    private var ratingView: some View {
-        RoundedRectangle(cornerRadius: 5)
-            .foregroundColor(.clear)
-            .frame(width: 35, height: 35)
-            .background(Color.theme.background)
-            .cornerRadius(5)
-            .overlay {
-                Text("\(similarGames.gamesCount ?? 0, specifier: "%.1f")")
-                    .customFont(CustomFont.orbitronSemiBold.copyWith(size: 14))
-                    .foregroundColor(.theme.primaryTextColor)
-            }
-    }
-    
+    /// A view that displays the name of the genre or game.
     private var nameView: some View {
         Text("\(similarGames.name ?? "")")
             .customFont(CustomFont.orbitronSemiBold.copyWith(size: 12))
@@ -83,19 +60,4 @@ struct SimilarProjectView: View {
             .multilineTextAlignment(.leading)
             .padding(.horizontal, 10)
     }
-    
-//    private func getPlatformImages() -> [String] {
-//        // Extract unique platform names and limit to the first 5
-//        let uniquePlatformNames = Array(Set(similarGames?.?.compactMap { $0.platform?.name?.lowercased().split(separator: " ").first } ?? []).prefix(5))
-//        
-//        // Map the platform names to their corresponding images
-//        let platformImages: [String] = uniquePlatformNames.compactMap { platformName in
-//            if let platform = similarGames?.platforms?.first(where: { $0.platform?.name?.lowercased().split(separator: " ").first == platformName }) {
-//                return platform.platform?.getImages(platform: String(platformName))
-//            }
-//            return nil
-//        }
-//        
-//        return platformImages
-//    }
 }

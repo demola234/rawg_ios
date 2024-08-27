@@ -1,5 +1,5 @@
 //
-//  CustomBotton.swift
+//  CustomButton.swift
 //  rawggammers
 //
 //  Created by Ademola Kolawole on 25/07/2024.
@@ -7,14 +7,34 @@
 
 import SwiftUI
 
+/// `CustomButton` is a versatile and customizable button component for SwiftUI.
+/// It supports text labels, optional icons, custom colors, and enables/disables functionality.
 struct CustomButton: View {
+    
+    // MARK: - Properties
+    
+    /// The action to perform when the button is tapped.
     var action: () -> Void
+    
+    /// The text label displayed on the button.
     var title: String
+    
+    /// Boolean indicating whether the button is enabled. Default is `true`.
     var isEnable: Bool = true
+    
+    /// The name of an optional image to display on the button.
     var imageName: String? = nil
+    
+    /// The background color of the button.
     var backgroundColor: Color
+    
+    /// The border color of the button. Default is `Color.clear`.
     var borderColor: Color? = Color.clear
+    
+    /// The text color of the button label. Default is `.theme.textFieldColor`.
     var textColor: Color = .theme.textFieldColor
+    
+    // MARK: - Body
     
     var body: some View {
         Button(action: isEnable ? action : {}) {
@@ -37,11 +57,13 @@ struct CustomButton: View {
             .cornerRadius(10)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(borderColor ?? Color.clear, lineWidth: 1) // Use Color.clear if borderColor is nil
+                    .stroke(borderColor ?? Color.clear, lineWidth: 1) 
             )
         }
     }
 }
+
+// MARK: - Preview
 
 struct CustomButton_Previews: PreviewProvider {
     static var previews: some View {

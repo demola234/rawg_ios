@@ -9,21 +9,67 @@ import Foundation
 import FirebaseAuth
 import GoogleSignIn
 
-
+/// Protocol defining methods for remote authentication operations.
 protocol AuthenticationRemoteDataSource {
+    
+    /// Logs in a user with the specified email and password.
+    /// - Parameters:
+    ///   - email: The email address of the user.
+    ///   - password: The password for the user.
+    ///   - completion: A closure to be executed once the login attempt completes, containing a `Result` with either `Void` on success or an `Error` on failure.
     func login(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void)
+    
+    /// Registers a new user with the specified email and password.
+    /// - Parameters:
+    ///   - email: The email address of the new user.
+    ///   - password: The password for the new user.
+    ///   - completion: A closure to be executed once the registration attempt completes, containing a `Result` with either `Void` on success or an `Error` on failure.
     func register(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void)
+    
+    /// Logs out the current user.
+    /// - Parameter completion: A closure to be executed once the logout attempt completes, containing a `Result` with either `Void` on success or an `Error` on failure.
     func logout(completion: @escaping (Result<Void, Error>) -> Void)
+    
+    /// Sends a password reset email to the specified email address.
+    /// - Parameters:
+    ///   - email: The email address of the user requesting a password reset.
+    ///   - completion: A closure to be executed once the password reset attempt completes, containing a `Result` with either `Void` on success or an `Error` on failure.
     func resetPassword(email: String, completion: @escaping (Result<Void, Error>) -> Void)
+    
+    /// Updates the email address of the currently authenticated user.
+    /// - Parameters:
+    ///   - email: The new email address for the user.
+    ///   - completion: A closure to be executed once the email update attempt completes, containing a `Result` with either `Void` on success or an `Error` on failure.
     func updateEmail(email: String, completion: @escaping (Result<Void, Error>) -> Void)
+    
+    /// Updates the password of the currently authenticated user.
+    /// - Parameters:
+    ///   - password: The new password for the user.
+    ///   - completion: A closure to be executed once the password update attempt completes, containing a `Result` with either `Void` on success or an `Error` on failure.
     func updatePassword(password: String, completion: @escaping (Result<Void, Error>) -> Void)
+    
+    /// Initiates Google Sign-In.
+    /// - Parameter completion: A closure to be executed once the Google Sign-In attempt completes, containing a `Result` with either `Void` on success or an `Error` on failure.
     func googleSignIn(completion: @escaping (Result<Void, Error>) -> Void)
+    
+    /// Initiates Apple Sign-In.
+    /// - Parameter completion: A closure to be executed once the Apple Sign-In attempt completes, containing a `Result` with either `Void` on success or an `Error` on failure.
     func appleSignIn(completion: @escaping (Result<Void, Error>) -> Void)
+    
+    /// Retrieves the registration type of the currently authenticated user.
+    /// - Parameter completion: A closure to be executed once the registration type retrieval completes, containing a `Result` with either a `String` registration type or an `Error` on failure.
     func getUserRegistrationType(completion: @escaping (Result<String, Error>) -> Void)
+    
+    /// Retrieves the current user's login status and details.
+    /// - Parameter completion: A closure to be executed once the user details retrieval completes, containing a `Result` with either a `UsersDataEntity` on success or an `Error` on failure.
     func getUserIsLoggedIn(completion: @escaping (Result<UsersDataEntity, Error>) -> Void)
+    
+    /// Initiates Twitter Sign-In.
+    /// - Parameter completion: A closure to be executed once the Twitter Sign-In attempt completes, containing a `Result` with either `Void` on success or an `Error` on failure.
     func twitterSignIn(completion: @escaping (Result<Void, Error>) -> Void)
 }
 
+/// Implementation of the `AuthenticationRemoteDataSource` protocol.
 struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
     
     static let shared = AuthenticationRemoteDataSourceImpl()
@@ -65,7 +111,6 @@ struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
         }
     }
 
-    
     func getUserRegistrationType(completion: @escaping (Result<String, Error>) -> Void) {
         guard let user = Auth.auth().currentUser else {
             completion(.failure(NSError(domain: "AuthErrorDomain", code: -1, userInfo: [NSLocalizedDescriptionKey: "No authenticated user found."])))
@@ -74,7 +119,6 @@ struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
         
         completion(.success(user.providerData.first?.providerID ?? ""))
     }
-    
 
     func googleSignIn(completion: @escaping (Result<Void, Error>) -> Void) {
         Task {
@@ -82,7 +126,7 @@ struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
                 let signInCredentials = try await signInGoogle()
                 let userDetails = try await Auth.auth().signIn(with: signInCredentials)
                 
-               UserManager.shared.createNewUser(
+                UserManager.shared.createNewUser(
                     id: userDetails.user.uid,
                     email: userDetails.user.email ?? "",
                     name: userDetails.user.displayName ?? "",
@@ -99,8 +143,6 @@ struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
                 )
                 
                 print("User signed in with Google successfully: \(userDetails.user.uid)")
-//                save users Info to FireStore
-                
                 completion(.success(()))
             } catch {
                 print("Google sign in error: \(error.localizedDescription)")
@@ -145,11 +187,9 @@ struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
         Task {
             let signInWithAppleHelper = await AppleSignInHelper()
             do {
-               
                 let userDetails = try await signInWithAppleHelper.startSignWithAppleFlow()
                 
-               
-               UserManager.shared.createNewUser(
+                UserManager.shared.createNewUser(
                     id: userDetails.uid,
                     email: userDetails.email,
                     name: userDetails.fullName,
@@ -173,7 +213,7 @@ struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
             }
         }
     }
-            
+    
     func login(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void) {
         Task {
             do {
@@ -193,12 +233,12 @@ struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
             do {
                 let authDataResult = try await Auth.auth().createUser(withEmail: email, password: password)
                 
-               UserManager.shared.createNewUser(
+                UserManager.shared.createNewUser(
                     id: authDataResult.user.uid,
                     email: email,
                     name: "",
                     authType: "email",
-                    photoUrl: "", 
+                    photoUrl: "",
                     completion: { result in
                         switch result {
                         case .success:
@@ -221,7 +261,6 @@ struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
     
     func logout(completion: @escaping (Result<Void, Error>) -> Void) {
         do {
-//            check if its oauth provider
             let user = Auth.auth().currentUser
             print("User provider: \(String(describing: user?.providerData.first?.providerID))")
             if user?.providerData.first?.providerID == "apple.com" {
@@ -229,7 +268,7 @@ struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
                 completion(.success(()))
                 return
             } else if user?.providerData.first?.providerID == "google.com" {
-                 GIDSignIn.sharedInstance.signOut()
+                GIDSignIn.sharedInstance.signOut()
                 completion(.success(()))
                 return
             } else if user?.providerData.first?.providerID == "twitter.com" {
@@ -304,7 +343,7 @@ struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
             do {
                 let userDetails = try await twitterSignInHelper.signInWithTwitter()
                 
-      UserManager.shared.createNewUser(
+                UserManager.shared.createNewUser(
                     id: userDetails.id,
                     email: userDetails.email,
                     name: userDetails.fullName,
@@ -320,7 +359,6 @@ struct AuthenticationRemoteDataSourceImpl: AuthenticationRemoteDataSource {
                         }
                     }
                 )
-                        
                 
                 print("User signed in with Twitter successfully")
                 completion(.success(()))

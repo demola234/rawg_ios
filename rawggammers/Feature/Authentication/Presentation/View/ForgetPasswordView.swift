@@ -7,10 +7,19 @@
 
 import SwiftUI
 
+/// A view that allows users to reset their password by entering their email address.
+/// It provides feedback through alerts and dismisses itself upon successful password reset request.
 struct ForgetPasswordView: View {
+    /// The presentation mode of the current view, allowing it to be dismissed.
     @Environment(\.presentationMode) var presentationMode
+    
+    /// The email address entered by the user.
     @State private var email: String = ""
+    
+    /// A boolean value indicating whether to show an alert.
     @State private var showAlert = false
+    
+    /// The message to be displayed in the alert.
     @State private var alertMessage = ""
     
     var body: some View {
@@ -51,8 +60,6 @@ struct ForgetPasswordView: View {
                     }, title: "Reset Password", isEnable: !email.isEmpty, backgroundColor: Color.theme.primaryTextColor)
                     .padding(.horizontal, 24)
                     
-                    
-                    
                     Spacer()
                 }
                 .padding(.horizontal, 24)
@@ -67,6 +74,9 @@ struct ForgetPasswordView: View {
         }
     }
     
+    /// Validates the given email address using a regular expression.
+    /// - Parameter email: The email address to be validated.
+    /// - Returns: A Boolean value indicating whether the email address is valid.
     private func isValidEmail(_ email: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)

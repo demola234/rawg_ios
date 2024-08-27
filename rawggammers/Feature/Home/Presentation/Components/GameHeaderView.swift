@@ -7,11 +7,16 @@
 
 import SwiftUI
 
+/// A view that displays the header for a game detail screen, including a background image, navigation buttons, and a title.
+///
+/// The `GameHeaderView` shows a large background image with overlaying navigation buttons and a gradient background at the bottom containing the game's title.
 struct GameHeaderView: View {
+    /// The details of the game to display in the header.
     let gameDetail: ResultData?
     
     var body: some View {
         ZStack(alignment: .bottom) {
+            // Background Image
             if let imageUrl = URL(string: gameDetail?.backgroundImage ?? "") {
                 NetworkImageView(imageURL: imageUrl)
                     .scaledToFill()
@@ -19,6 +24,7 @@ struct GameHeaderView: View {
                     .clipped()
                     .overlay(alignment: .top) {
                         HStack {
+                            // Back Button
                             Button(action: {
                                 print("Back")
                             }) {
@@ -28,29 +34,26 @@ struct GameHeaderView: View {
                                     .frame(width: 40, height: 40, alignment: .center)
                                     .background(Color(red: 0.2, green: 0.2, blue: 0.2))
                                     .clipShape(Circle())
-                                
-                                
                             }
                             Spacer()
+                            // Bookmark Button
                             Button {
-                                
+                                // Action for bookmark button
                             } label: {
                                 Image(systemName: "bookmark")
                                     .font(.system(size: 24, weight: .bold))
-                                    .foregroundColor(.white)
                                     .foregroundColor(.white)
                                     .frame(width: 40, height: 40, alignment: .center)
                                     .background(Color(red: 0.2, green: 0.2, blue: 0.2))
                                     .clipShape(Circle())
                             }
-                            
                         }
                         .padding(.horizontal, 16)
                         .padding(.top, 30)
                     }
             }
-           
             
+            // Gradient Overlay with Title
             Rectangle()
                 .foregroundColor(.clear)
                 .frame(height: 144)

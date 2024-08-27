@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// View for user login, allowing users to sign in with email, Google, Twitter, or Apple.
+/// Displays fields for email and password, and provides options for password recovery and account creation.
 struct LoginView: View {
     @EnvironmentObject var authViewModel: AuthenticationViewModel
     @Environment(\.colorScheme) var colorScheme: ColorScheme
@@ -24,7 +26,6 @@ struct LoginView: View {
                     ProgressView()
                 } else {
                     VStack {
-                        
                         VStack(alignment: .leading, spacing: 12) {
                             Text("Sign In")
                                 .customFont(CustomFont.orbitronBold.copyWith(size: 24))
@@ -106,7 +107,6 @@ struct LoginView: View {
                         
                         Spacer()
                         
-                        
                         NavigationLink {
                             RegistrationView()
                         } label: {
@@ -114,15 +114,12 @@ struct LoginView: View {
                                 Text("New to Rawg?")
                                     .customFont(CustomFont.orbitronMedium.copyWith(size: 16))
                                 
-                                    .foregroundColor(.theme.primaryTextColor)
                                 Text("Sign up")
                                     .customFont(CustomFont.orbitronBold.copyWith(size: 16))
                                     .foregroundColor(.theme.goldColor)
-                                
                             }
                         }
                         .padding(.bottom, 20)
-                        
                         
                         HStack {
                             AuthButton(action: {
@@ -134,7 +131,6 @@ struct LoginView: View {
                             AuthButton(action: {
                                 authViewModel.twitterSignIn()
                             }, imageName: "TwitterLogo")
-                            
                             
                             Spacer()
                             
@@ -151,7 +147,6 @@ struct LoginView: View {
                         }, title: "Login with Email", isEnable: !authViewModel.email.isEmpty && !authViewModel.password.isEmpty, backgroundColor: Color.theme.primaryTextColor)
                         .padding(.horizontal, 24)
                         .padding(.bottom, 20)
-                        
                     }
                     .alert(isPresented: $showAlert) {
                         Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))

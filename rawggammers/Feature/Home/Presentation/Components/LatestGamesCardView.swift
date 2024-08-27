@@ -4,13 +4,19 @@
 //
 //  Created by Ademola Kolawole on 28/07/2024.
 //
+
 import SwiftUI
 
+/// A view that displays a card for the latest games.
+///
+/// The `LatestGamesCardView` presents a card with a background image, the game's name, and platform images. The card has a rounded corner design and displays a shadow for a polished appearance.
 struct LatestGamesCardView: View {
+    /// The details of the game to be displayed.
     var gameDetails: ResultData
     
     var body: some View {
         ZStack {
+            // Display the background image if available
             if let imageUrl = URL(string: gameDetails.backgroundImage ?? "") {
                 NetworkImageView(imageURL: imageUrl)
                     .scaledToFill()
@@ -25,9 +31,9 @@ struct LatestGamesCardView: View {
                         VStack {
                             Spacer()
                             HStack {
-                                Text("\(gameDetails.name ?? "")" )
+                                // Display the game name
+                                Text("\(gameDetails.name ?? "")")
                                     .customFont(CustomFont.orbitronSemiBold.copyWith(size: 14))
-                                    
                                     .foregroundColor(.theme.primaryTextColor)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .lineLimit(2)
@@ -37,6 +43,7 @@ struct LatestGamesCardView: View {
                                 
                                 Spacer()
                                 
+                                // Display platform images
                                 HStack {
                                     let uniquePlatformNames = Array(Set(gameDetails.platforms?.compactMap { $0.platform?.name?.lowercased().split(separator: " ").first } ?? []).prefix(5))
                                     
@@ -57,7 +64,6 @@ struct LatestGamesCardView: View {
                                                 .scaledToFit()
                                                 .frame(width: 15, height: 15)
                                         }
-                                        
                                     }
                                 }
                                 .padding(.horizontal, 10)
@@ -92,6 +98,11 @@ struct RoundedCorner: Shape {
 }
 
 extension View {
+    /// Applies a corner radius to specific corners of a view.
+    /// - Parameters:
+    ///   - radius: The radius of the rounded corners.
+    ///   - corners: The corners to round.
+    /// - Returns: A view with rounded corners.
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape(RoundedCorner(radius: radius, corners: corners))
     }

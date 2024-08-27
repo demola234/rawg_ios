@@ -7,6 +7,23 @@
 
 import SwiftUI
 
+/// View for displaying and managing user profile settings.
+///
+/// This view includes options for changing the avatar, app icon, theme, and more. It also provides
+/// access to various settings and allows users to log out of their account.
+///
+/// - Environment Objects:
+///   - `authViewModel`: Manages authentication-related tasks and user sessions.
+///   - `themeManager`: Manages the app's theme settings.
+///   - `settingsViewModel`: Manages user profile settings and interactions.
+/// - State:
+///   - `appIconManager`: Manages the app icon selection.
+///   - `offset`: Tracks the vertical offset for bottom sheet animations.
+///   - `showBottomSheet`: Controls the visibility of the bottom sheet for app icon selection.
+///   - `showBottomSheetThemeSheet`: Controls the visibility of the bottom sheet for theme selection.
+///   - `showAboutSheet`: Controls the visibility of the bottom sheet for the about section.
+///   - `showLogoutSheet`: Controls the visibility of the bottom sheet for logout confirmation.
+///   - `showAvatarSheet`: Controls the visibility of the sheet for changing the user avatar.
 struct ProfileView: View {
     @EnvironmentObject var authViewModel: AuthenticationViewModel
     @EnvironmentObject var themeManager: ThemeManager
@@ -136,7 +153,9 @@ struct ProfileView: View {
         .environmentObject(SettingsViewModel())
 }
 
-// Section Header View
+/// View for displaying a section header.
+///
+/// - Parameter title: The title of the section.
 struct SectionHeader: View {
     var title: String
     
@@ -148,11 +167,12 @@ struct SectionHeader: View {
     }
 }
 
-// Theme Selection View
+/// View for selecting the app theme.
+///
+/// Allows users to choose between Light, Dark, and System themes.
 struct ThemeSelectionView: View {
     @EnvironmentObject var themeManager: ThemeManager
 
-    
     var body: some View {
         VStack {
             Text("Select Theme")
@@ -170,7 +190,6 @@ struct ThemeSelectionView: View {
                     ThemeButtonSelection(mode: Theme.light, RightBg: Color.theme.accentTextColor, RightFg: Color.white, BottomBg: Color.theme.accentTextColor, BottomFg: Color.white)
                 }
                 
-                
                 Button(action: {
                     withAnimation(.spring()) {
                         themeManager.switchTheme(to: .dark)
@@ -179,7 +198,6 @@ struct ThemeSelectionView: View {
                     ThemeButtonSelection(mode: Theme.dark, RightBg: Color.theme.accentTextColor, RightFg: Color.black, BottomBg: Color.black, BottomFg: Color.theme.accentTextColor)
                 }
                     
-                
                 Button(action: {
                     withAnimation(.spring()) {
                         themeManager.switchTheme(to: .system)
@@ -196,10 +214,7 @@ struct ThemeSelectionView: View {
                             }
                     }
                     
-                    
                 }
-                
-                
             }
             
             Spacer()
@@ -207,7 +222,9 @@ struct ThemeSelectionView: View {
     }
 }
 
-// App Icon Selection View
+/// View for selecting the app icon.
+///
+/// Displays a list of available app icons and allows users to select one.
 struct AppIconSelectionView: View {
     @EnvironmentObject var appIconManager: AppIconManager
     
@@ -235,7 +252,9 @@ struct AppIconSelectionView: View {
         }
     }
     
-    // Change App Icon Function
+    /// Changes the app icon to the specified icon name.
+    ///
+    /// - Parameter iconName: The name of the icon to set.
     func changeAppIcon(to iconName: String?) {
         guard UIApplication.shared.supportsAlternateIcons else {
             print("App does not support alternate icons")
@@ -250,7 +269,9 @@ struct AppIconSelectionView: View {
     }
 }
 
-// Bottom Sheet Overlay View
+/// View for displaying an overlay behind the bottom sheets.
+///
+/// Provides a dimmed background and dismisses all sheets when tapped.
 struct BottomSheetOverlay: View {
     @Binding var show: Bool
     @Binding var showThemeSheet: Bool
