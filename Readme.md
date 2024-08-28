@@ -11,9 +11,9 @@
 
 ## About Rawg Gammers
 
-<p align="center">
+<!-- <p align="center">
     <img src="https://github.com/danielsaidi/OnboardingKit/releases/download/8.0.0/Demo.gif" width=350 />
-</p>
+</p> -->
 
 RawgGammers is an iOS app that uses the RAWG API to display a list of games and their details. The app is built using SwiftUI and Combine.
 
