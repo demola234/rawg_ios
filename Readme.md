@@ -29,8 +29,8 @@ RawgGammers is an iOS app that uses the RAWG API to display a list of games and 
 - [x] Filter games by tags
 - [x] Change App Icon
 - [x] Change App Theme
-- [x] Add Game to Favourites
-- [x] Select Favourites Game Avatar for Profile
+- [x] Add Game to Favorites
+- [x] Select Favorites Game Avatar for Profile
 - [x] Authentication with X OAuth
 - [x] Authentication with Apple Sign In
 - [x] Authentication with Google Sign In
@@ -71,8 +71,8 @@ open RawgGammers.xcworkspace
 4. Add your RAWG API Key to the project
 
 ```swift
-// Constants.swift
-static let rawgApiKey
+// Environment.xcconfig
+API_BASE_URL = "https://api.rawg.io/api/"
 ```
 
 5. Add your Firebase configuration file to the project
