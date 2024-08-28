@@ -15,11 +15,11 @@
     <img src ="screenshots/Cover.png" alt="Rawg Cover" title="RawgCover" />
 </p>
 
-<p align="center">
-    <img src="https://github.com/demola234/rawg_gammers_ios/screenshots/Cover.png" width=350 />
-</p>
-
 RawgGammers is an iOS app that uses the RAWG API to display a list of games and their details. The app is built using SwiftUI and Combine.
+
+## Demo Video
+
+<img src="https://raw.githubusercontent.com/demola234/rawg_gammers_ios/main/screenshots/RawgHome.gif" width="270" height="600"> <img src="https://raw.githubusercontent.com/demola234/rawg_gammers_ios/main/screenshots/RawgAuth.gif" width="270" height="600"> <img src="https://raw.githubusercontent.com/demola234/rawg_gammers_ios/main/screenshots/RawgSearch.gif" width="270" height="600"> <img src="https://raw.githubusercontent.com/demola234/rawg_gammers_ios/main/screenshots/RawgSettings.gif" width="270" height="600"> 
 
 ## Features
 
