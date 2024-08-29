@@ -21,6 +21,12 @@ RawgGammers is an iOS app that uses the RAWG API to display a list of games and 
 
 <img src="https://raw.githubusercontent.com/demola234/rawg_gammers_ios/main/screenshots/RawgHome.gif" width="270" height="600"> <img src="https://raw.githubusercontent.com/demola234/rawg_gammers_ios/main/screenshots/RawgAuth.gif" width="270" height="600"> <img src="https://raw.githubusercontent.com/demola234/rawg_gammers_ios/main/screenshots/RawgSearch.gif" width="270" height="600"> <img src="https://raw.githubusercontent.com/demola234/rawg_gammers_ios/main/screenshots/RawgSettings.gif" width="270" height="600"> 
 
+## Screen Shots
+
+<img src="screenshots/RawgHomeScreen.png" width="270" height="600"> <img src="screenshots/RawgDetails.png" width="270" height="600"> <img src="screenshots/RawgSearch.png" width="270" height="600"> 
+
+<img src="screenshots/RawgCategory.png" width="270" height="600"> <img src="screenshots/RawgIcons.png" width="270" height="600"> <img src="screenshots/RawgTheme.png" width="270" height="600"> 
+
 ## Features
 
 <!-- List of Features -->
